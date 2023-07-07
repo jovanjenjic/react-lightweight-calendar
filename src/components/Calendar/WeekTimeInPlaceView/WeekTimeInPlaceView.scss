@@ -1,0 +1,57 @@
+@import '../../../styles/_mixins';
+@import '../../../styles/_components';
+
+.week-time-in-place-view-inside {
+  background-color: var(--gs-50);
+  border: 1px solid var(--gs-200);
+  border-radius: 4px;
+  position: relative;
+}
+
+@include days-component;
+@include vertical-borders-container;
+  
+.week-in-place-row {
+  z-index: 10;
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(24, minmax(40px, auto));
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--gs-200);
+  }
+
+  &__hour-cell {
+    &--border-bottom {
+      min-width: 0px;
+      border-bottom: 1px solid var(--gs-200);
+    }
+
+    &-hour-number {
+      position: relative;
+      left: -35px;
+      top: -13px;
+      color: var(--gs-600);
+      font-size: 10px;
+    }
+  }
+}
+
+.week-in-place-header {
+  display: flex;
+  border-bottom: 1px solid var(--gs-200);
+  align-items: center;
+}
+
+.week-in-place-cell-header {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  
+  @include number;
+
+  @include color-dot;
+}

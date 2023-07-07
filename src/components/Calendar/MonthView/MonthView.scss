@@ -1,0 +1,56 @@
+@import '../../../styles/_mixins';
+@import '../../../styles/_components';
+
+.month-view-inside {
+  background-color: var(--gs-50);
+  border: 1px solid var(--gs-200);
+  border-radius: 4px;
+  position: relative;
+}
+
+@include days-component;
+@include vertical-borders-container;
+  
+.month-week-row {
+  position: relative;
+  width: 100%;
+  min-height: 140px;
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(7, 1fr);
+
+  @include breakpoint('xl') {
+    min-height: 220px;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--gs-200);
+  }
+
+  &__day-cell {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  
+    &:not(:last-of-type) {
+      border-bottom: 1px solid var(--gs-200);
+    }
+
+    &--cover {
+      position: absolute;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.month-cell-header {
+  position: relative;
+  height: max-content;
+  width: 100%;
+  
+  @include number;
+
+  @include color-dot;
+}

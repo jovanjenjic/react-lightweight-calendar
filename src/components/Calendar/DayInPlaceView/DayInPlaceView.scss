@@ -1,0 +1,53 @@
+@import '../../../styles/_mixins';
+@import '../../../styles/_components';
+
+.day-view-inside {
+  background-color: var(--gs-50);
+  border: 1px solid var(--gs-200);
+  border-radius: 4px;
+  position: relative;
+}
+
+@include days-component;
+
+.day-in-place-hour-row {
+  z-index: 10;
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(24, minmax(40px, auto));
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--gs-200);
+  }
+
+  &__hour-cell {
+    min-width: 0px;
+
+  
+    &:not(:last-of-type) {
+      border-bottom: 1px solid var(--gs-200);
+    }
+
+    &-hour-number {
+      height: 1px;
+      position: relative;
+      left: -35px;
+      top: -13px;
+      color: var(--gs-600);
+      font-size: 10px;
+    }
+  }
+}
+
+.day-in-place-cell-header {
+  z-index: 10;
+  height: max-content;
+  border-bottom: 1px solid var(--gs-200);
+
+  @include number;
+
+  @include color-dot;
+}

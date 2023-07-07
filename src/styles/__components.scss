@@ -1,0 +1,116 @@
+@import '../styles//_mixins';
+
+@mixin days-component {
+    .days-component {
+        cursor: default;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-bottom: var(--spacing);
+    
+        &__day {
+            font: var(--font-c-3);
+            text-transform: uppercase;
+            color: var(--gs-500);
+            width: calc(var(--spacing) * 4);
+            display: flex;
+            justify-content: center;
+
+            @include breakpoint('md') {
+                font: var(--font-c-1);
+            }
+        }
+    }
+}
+
+@mixin vertical-borders-container {
+    .vertical-borders-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+      
+        &__border {
+          height: 100%;
+          width: 100%;
+          position: relative;
+          &:not(:last-of-type) {
+            border-right: 1px solid var(--gs-200);
+          }
+        }
+      }
+}
+
+@mixin number {
+    &__number {
+        position: relative;
+        cursor: default;
+        z-index: 20;
+        font: var(--font-a-3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30px;
+        width: 30px;
+        color: var(--gs-700);
+        margin: calc(var(--spacing) * 0.5) auto !important;
+
+        @include breakpoint('md') {
+            font: var(--font-a-2);
+        }
+
+        &--disabled {
+            color: var(--gs-300);
+        }
+
+        &--current-day {
+            background: var(--o-100);
+            border-radius: 50%;
+            color: var(--gs-0);
+            height: 26px;
+            width: 26px;
+        }
+    }
+}
+
+@mixin color-dot {
+    &__color-dot {
+        z-index: 20;
+        width: 8px;
+        height: 8px;
+        display: flex;
+        border-radius: 50%;
+
+        position: absolute;
+        top: 5px;
+        right: 5px;
+
+        @include breakpoint('md') {
+            width: 10px;
+            height: 10px;
+        }
+    }   
+}
+
+@mixin current-minute-line {
+    .current-minute-line {
+        width: 100%;
+        height: 2px;
+        position: relative;
+        background: var(--o-100);
+        z-index: 10,
+    }
+    
+    .current-minute-line::before {
+        content: "";
+        width: 13px;
+        height: 13px;
+        background: var(--o-100);
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(-50%, -50%);
+    }
+}

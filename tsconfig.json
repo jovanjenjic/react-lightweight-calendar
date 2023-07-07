@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "outDir": "dist",
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "jsx": "react-jsx"
+  },
+  "include": ["src", "cypress", "**/*.ts", "cypress.config.js"]
+}
