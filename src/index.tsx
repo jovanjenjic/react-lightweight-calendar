@@ -63,7 +63,6 @@ const Playground = () => {
     });
   };
 
-
   const dataView = dataViewConfig(
     currentDate,
     setCurrentDate,

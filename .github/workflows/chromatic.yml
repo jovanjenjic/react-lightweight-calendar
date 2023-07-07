@@ -1,4 +1,3 @@
-
 # Workflow name
 name: 'Chromatic Deployment'
 
@@ -17,9 +16,12 @@ jobs:
           fetch-depth: 0
       - run: yarn
         #👇 Adds Chromatic as a step in the workflow
-      - uses: chromaui/action@v1
+      - name: Chromatic
+        uses: chromaui/action@v1
         # Options required for Chromatic's GitHub Action
         with:
           #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/en/deploy/ to obtain it
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          #👇 Output directory path
+          outputDir: ./tmp/chromatic--1805-FMQFLFAfvptq
