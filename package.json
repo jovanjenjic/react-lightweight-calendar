@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build -- --static-dir ./tmp"
+    "build-storybook": "storybook build --exit-zero-on-changes -d storybook-static/"
   },
   "eslintConfig": {
     "extends": [
