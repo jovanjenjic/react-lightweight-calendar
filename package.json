@@ -1,7 +1,12 @@
 {
   "name": "react-calendar-timeline",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "React Calendar component...",
+  "main": "src/components/Calendar/CalendarWrapper.tsx",
+  "bin": "src/components/Calendar/CalendarWrapper.tsx",
+  "keywords": ["react-calendar", "react-timeline-calendar", "react-google-calendar"],
+  "author": "Jovan Jenjic",
+  "license": "MIT",
   "dependencies": {
     "@cypress/react18": "^2.0.0",
     "classnames": "^2.3.2",
