@@ -1,6 +1,6 @@
 {
-  "name": "react-calendar-timeline",
-  "version": "1.0.0",
+  "name": "react-lightweight-calendar",
+  "version": "0.0.3",
   "description": "React Calendar component...",
   "main": "src/components/Calendar/CalendarWrapper.tsx",
   "bin": "src/components/Calendar/CalendarWrapper.tsx",
