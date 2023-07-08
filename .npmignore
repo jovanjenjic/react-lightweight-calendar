@@ -1,0 +1,6 @@
+.storybook/
+build/
+cypress/
+node_modules/
+public/
+src/
