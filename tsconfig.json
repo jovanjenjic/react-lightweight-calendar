@@ -16,5 +16,5 @@
     "module": "esnext",
     "jsx": "react-jsx"
   },
-  "include": ["src", "cypress", "**/*.ts", "cypress.config.js"]
+  "include": ["src", "cypress", "**/*.ts", "**/*.tsx", "**/*.js", "cypress.config.js"]
 }
