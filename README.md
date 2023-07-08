@@ -1,5 +1,7 @@
 The Calendar component allows displaying a calendar with a time schedule and interactive capabilities. In this documentation, all the props that can be passed to the component to customize its appearance and behavior will be described.
 
+**Live demo with examples: _https://64a7f9553a2478c46491aea9-hawmjlzeay.chromatic.com/?path=/story/ui-components-calendar--calendar_**
+
 Props:
 
 - data (Required): An array of objects representing the event data to be displayed on the calendar. Each object in the array should contain the following fields:
