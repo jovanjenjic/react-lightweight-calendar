@@ -1,4 +1,3 @@
-import './Calendar.scss';
 import React, { FC, useMemo } from 'react';
 import { CalendarProps, ColorDotFull, CurrentView } from './Calendar.types';
 import MonthView from './MonthView/MonthView';

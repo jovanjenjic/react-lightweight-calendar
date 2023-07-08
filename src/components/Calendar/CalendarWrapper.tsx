@@ -1,4 +1,3 @@
-import '../Calendar/Calendar.scss';
 import React, { ReactElement } from 'react';
 import cn from 'classnames';
 import {
@@ -25,6 +24,8 @@ import {
   initializeProps,
 } from './Calendar.helper';
 import CalendarComponent from './CalendarComponent';
+import Styleguide from '../StyleGuide/StyleGuide';
+import '../../styles/styles.scss';
 
 const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   data,
@@ -341,20 +342,23 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   ]);
 
   return (
-    <CalendarComponent
-      renderItems={renderItems}
-      renderHeaderItems={renderHeaderItems}
-      setCurrentDate={setCurrentDate}
-      currentView={currentView}
-      colorDots={colorDots}
-      currentDate={currentDate}
-      onDayNumberClick={onDayNumberClickModified}
-      onDayStringClick={onDayStringClickModified}
-      onHourClick={onHourClickModified}
-      onColorDotClick={onColorDotClickModified}
-      onCellClick={onCellClickModified}
-      timeDateFormat={timeDateFormatModified}
-    />
+    <>
+      <Styleguide />
+      <CalendarComponent
+        renderItems={renderItems}
+        renderHeaderItems={renderHeaderItems}
+        setCurrentDate={setCurrentDate}
+        currentView={currentView}
+        colorDots={colorDots}
+        currentDate={currentDate}
+        onDayNumberClick={onDayNumberClickModified}
+        onDayStringClick={onDayStringClickModified}
+        onHourClick={onHourClickModified}
+        onColorDotClick={onColorDotClickModified}
+        onCellClick={onCellClickModified}
+        timeDateFormat={timeDateFormatModified}
+      />
+    </>
   );
 };
 

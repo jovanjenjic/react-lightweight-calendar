@@ -1,4 +1,3 @@
-import './DayView.scss';
 import React, { useMemo, FC } from 'react';
 import cn from 'classnames';
 import {

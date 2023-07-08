@@ -83,7 +83,7 @@ const dataProp = (
   data: testData,
   currentDate,
   setCurrentDate,
-  currentView: CurrentView.MONTH,
+  currentView: CurrentView.DAY,
   cellDisplayMode,
   setCellDisplayMode,
   timeDateFormat: {
