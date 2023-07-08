@@ -1,4 +1,3 @@
-import './DayInPlaceView.scss';
 import React, { useMemo, FC } from 'react';
 import { getDate, getMonth, getYear, isToday, format } from 'date-fns';
 import cn from 'classnames';

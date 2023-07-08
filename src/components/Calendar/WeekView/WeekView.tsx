@@ -1,4 +1,3 @@
-import './WeekVIew.scss';
 import cn from 'classnames';
 import React, { useMemo, FC } from 'react';
 import {

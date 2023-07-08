@@ -1,6 +1,4 @@
 import React from 'react';
-import './StyleGuide.scss';
-
 export const orangeColor = () => {
   return `
       --o-300: #fcb35b;

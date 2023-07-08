@@ -1,4 +1,3 @@
-import './MonthView.scss';
 import cn from 'classnames';
 import React, { useMemo, FC, useState, useLayoutEffect, useRef } from 'react';
 import {

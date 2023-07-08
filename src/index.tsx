@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import CalendarView from './components/Calendar/CalendarWrapper';
+import CalendarWrapper from './components/Calendar/CalendarWrapper';
 import dataViewConfig from './dataProps';
-import Styleguide from './components/StyleGuide/StyleGuide';
 import {
   CellDisplayMode,
   CellDisplayModeState,
@@ -71,8 +70,7 @@ const Playground = () => {
   );
   return (
     <div style={{ padding: '30px' }}>
-      <Styleguide />
-      <CalendarView
+      <CalendarWrapper
         {...dataView}
         enableHoverEffect={true}
         onDayNumberClick={onDayNumberClick}

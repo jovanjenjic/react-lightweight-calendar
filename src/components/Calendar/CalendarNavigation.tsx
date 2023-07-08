@@ -1,4 +1,3 @@
-import './Calendar.scss';
 import React from 'react';
 import { formatFullDate } from '../../utils/index';
 import { add, sub, format } from 'date-fns';
