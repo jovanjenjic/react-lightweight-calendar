@@ -1,9 +1,10 @@
 {
   "name": "react-lightweight-calendar",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "description": "React Calendar component...",
-  "main": "src/components/Calendar/CalendarWrapper.tsx",
-  "bin": "src/components/Calendar/CalendarWrapper.tsx",
+  "main": "/dist/src/components/Calendar/CalendarWrapper.js",
+  "bin": "/dist/src/components/Calendar/CalendarWrapper.js",
+  "types": "/dist/src/components/Calendar/Calendar.types.d.ts",
   "keywords": ["react-calendar", "react-timeline-calendar", "react-google-calendar"],
   "author": "Jovan Jenjic",
   "license": "MIT",
@@ -21,7 +22,7 @@
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "node-sass src/styles/styles.scss -o src/styles && react-scripts build && tsc",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
