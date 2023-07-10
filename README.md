@@ -13,17 +13,10 @@ The plan is to continue developing additional views and functionalities. The pri
 
 ### Images
 
-[WEEK_TIME](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/968d19ca-b686-4e33-88e1-98b3d2b2cbe9)
+| WEEK_TIME | DAY | MONTH | WEEK  | WEEK_IN_PLACE | DAY_IN_PLACE |
+| :---:         |     :---:      |         :---: | :---: | :---:         | :---:         |
+| [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/968d19ca-b686-4e33-88e1-98b3d2b2cbe9)   | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/44bd12e4-2ffc-4a76-ba0d-839b0b11be29)     | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/df153b60-91d1-4779-89df-686cb7b448f8)    |   [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/c213d380-d07b-4499-90c2-7781c1b74e51)    |    [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/b3038a0a-d747-48d7-9509-77cba4610b39)           |     [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/0b90189f-11af-450e-90bd-97f065e05752)         |
 
-[DAY](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/44bd12e4-2ffc-4a76-ba0d-839b0b11be29)
-
-[MONTH](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/df153b60-91d1-4779-89df-686cb7b448f8)
-
-[WEEK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/c213d380-d07b-4499-90c2-7781c1b74e51)
-
-[WEEK_IN_PLACE](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/b3038a0a-d747-48d7-9509-77cba4610b39)
-
-[DAY_IN_PLACE](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/0b90189f-11af-450e-90bd-97f065e05752)
 
 ### Props
 
