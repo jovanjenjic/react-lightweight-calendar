@@ -33,7 +33,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   renderItemText,
   renderHeaderItem,
   renderHeaderItemText,
-  enableHoverEffect,
+  disableHoverEffect,
   currentDate,
   setCurrentDate,
   activeTimeDateField,
@@ -99,8 +99,8 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   }, [data, activeTimeDateField, currentView, weekStartsOn]);
 
   // A method that will render elements for four views
-  // MONTH, WEEK, WEEK_IN_PLACE, DAY_IN_PLACE
-  const renderItemsWithoutTimeOrInPlace = ({
+  // MONTH, WEEK, WEEK_IN_PLACE and DAY_IN_PLACE views
+  const renderMonthWeekDayInPlaceWeekInPlaceItems = ({
     dateInfo,
     idx,
     hour,
@@ -129,6 +129,10 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
         preparedData,
         currentDate,
       );
+      const rightMargin = [
+        CurrentView.DAY_IN_PLACE,
+        CurrentView.WEEK_IN_PLACE,
+      ].includes(currentView);
       return shoudShow ? (
         <div
           key={`${index}-${dateInfo.date}`}
@@ -138,12 +142,13 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
             }`,
           }}
           onMouseEnter={() =>
-            enableHoverEffect && setHoveredElement(preparedDataItem?.id)
+            !disableHoverEffect && setHoveredElement(preparedDataItem?.id)
           }
-          onMouseLeave={() => enableHoverEffect && setHoveredElement(0)}
+          onMouseLeave={() => !disableHoverEffect && setHoveredElement(0)}
           className={cn(
             'item',
             hoveredElement === preparedDataItem.id && 'item--hovered',
+            rightMargin && 'item--right-margin',
           )}
         >
           {renderItem ? (
@@ -196,8 +201,8 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   };
 
   // A method that will render elements for two views
-  // DAY, WEEK_TIME
-  const renderItemsWithTime = ({
+  // DAY and WEEK_TIME views
+  const renderDayWeekTimeItems = ({
     dateInfo,
   }: DateInfoFunction): ReactElement[] => {
     const key = formatFullDate(new Date(dateInfo.date));
@@ -215,9 +220,9 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
               marginRight: '4%',
             }}
             onMouseEnter={() =>
-              enableHoverEffect && setHoveredElement(preparedDataItem?.id)
+              !disableHoverEffect && setHoveredElement(preparedDataItem?.id)
             }
-            onMouseLeave={() => enableHoverEffect && setHoveredElement(0)}
+            onMouseLeave={() => !disableHoverEffect && setHoveredElement(0)}
             className={cn(
               'item',
               hoveredElement === preparedDataItem.id && 'item--hovered',
@@ -327,21 +332,21 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     switch (currentView) {
       case CurrentView.DAY:
       case CurrentView.WEEK_TIME:
-        return renderItemsWithTime;
+        return renderDayWeekTimeItems;
       case CurrentView.MONTH:
       case CurrentView.WEEK:
       case CurrentView.WEEK_IN_PLACE:
       case CurrentView.DAY_IN_PLACE:
-        return renderItemsWithoutTimeOrInPlace;
+        return renderMonthWeekDayInPlaceWeekInPlaceItems;
       default:
-        return renderItemsWithoutTimeOrInPlace;
+        return renderMonthWeekDayInPlaceWeekInPlaceItems;
     }
   }, [
     currentView,
     cellDisplayMode,
     hoveredElement,
     activeTimeDateField,
-    enableHoverEffect,
+    disableHoverEffect,
     weekStartsOn,
   ]);
 

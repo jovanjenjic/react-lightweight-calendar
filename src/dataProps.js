@@ -77,17 +77,17 @@ export const testData = [
 const colorDots = [
   {
     color: 'orange',
-    text: 'Text about blue color',
+    text: 'Orange color text',
     date: '2023-06-02',
   },
   {
     color: 'red',
-    text: 'Text about red color',
+    text: 'Red color text',
     date: '2023-06-03',
   },
   {
     color: 'green',
-    text: 'Text about green color',
+    text: 'Green color text',
     date: '2023-06-04',
   },
 ];
@@ -101,7 +101,7 @@ const dataProp = (
   data: testData,
   currentDate,
   setCurrentDate,
-  currentView: CurrentView.DAY,
+  currentView: CurrentView.WEEK,
   cellDisplayMode,
   setCellDisplayMode,
   timeDateFormat: {

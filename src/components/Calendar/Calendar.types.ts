@@ -134,7 +134,7 @@ export interface CalendarWrapperProps {
   ) => JSX.Element;
   // eslint-disable-next-line
   renderHeaderItemText?: (data: Record<string, any>) => JSX.Element;
-  enableHoverEffect?: boolean;
+  disableHoverEffect?: boolean;
   currentDate: string | Date;
   setCurrentDate?: (date: string | Date) => void;
   activeTimeDateField: string;

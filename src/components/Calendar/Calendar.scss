@@ -70,9 +70,15 @@
   z-index: 20;
   grid-column: 1 / 3;
   min-width: 0px;
+  text-align: left;
+  
   &--hovered {
     z-index: 25;
     transition: background-color 0.3s ease;
+  }
+
+  &--right-margin {
+    margin-right: calc(var(--spacing) * 2);
   }
 }
 
@@ -83,6 +89,7 @@
   border: 1px solid var(--gs-50);
   height: 100%;
   width: 100%;
+  transition: filter 0.3s ease;
 
   padding: var(--spacing);
   font: var(--font-a-3);
@@ -96,23 +103,23 @@
 
   &--hovered {
     z-index: 10;
-    background-color: var(--o-300);
-    transition: background-color 0.3s ease;
+    filter: brightness(1.05);
   }
   
   &--right-arrow {
-    border-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     border-left: none;
     border-right: none;
     &::after {
+      content: "";
       position: absolute;
       top: 0;
-      right: 0px;
+      right: 1px;
       width: 10px;
       height: 100%;
       background-color: inherit;
       clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-      content: "";
     }
     width: calc(100% - 20px);
     margin: auto;
@@ -124,7 +131,8 @@
   }
 
   &--left-arrow {   
-    border-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
     border-left: none;
     border-right: none;
 
@@ -132,12 +140,11 @@
       content: "";
       position: absolute;
       top: 0;
-      left: 0px;
-      transform: scaleX(-1);
+      left: 1px;
       width: 10px;
       height: 100%;
       background-color: inherit;
-      clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+      clip-path: polygon(100% 100%, 0% 50%, 100% 0%);
     }
     width: calc(100% - 20px);
     margin: auto;

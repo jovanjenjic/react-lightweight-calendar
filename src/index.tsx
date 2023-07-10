@@ -72,7 +72,7 @@ const Playground = () => {
     <div style={{ padding: '30px' }}>
       <CalendarWrapper
         {...dataView}
-        enableHoverEffect={true}
+        disableHoverEffect={false}
         onDayNumberClick={onDayNumberClick}
         onDayStringClick={onDayStringClick}
         onHourClick={onHourClick}
