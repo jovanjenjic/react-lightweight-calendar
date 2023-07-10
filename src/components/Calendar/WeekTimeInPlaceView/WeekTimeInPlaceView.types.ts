@@ -1,10 +1,10 @@
 import {
   ColorDot,
   ColorDotFull,
-  CurrentView,
   DateInfo,
   DateInfoExtendedFunction,
   TimeFormat,
+  WeekStartsOn,
 } from '../Calendar.types';
 
 export interface WeekInPlaceViewProps {
@@ -21,4 +21,5 @@ export interface WeekInPlaceViewProps {
   timeDateFormat: TimeFormat;
   preparedColorDots: ColorDotFull;
   onHourClick: (value: DateInfo | number) => void;
+  weekStartsOn: WeekStartsOn;
 }

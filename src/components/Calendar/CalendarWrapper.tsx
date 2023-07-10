@@ -47,6 +47,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   onItemClick,
   onCellClick,
   timeDateFormat,
+  weekStartsOn,
 }) => {
   const {
     cellDisplayModeModified,
@@ -57,6 +58,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     onColorDotClickModified,
     onItemClickModified,
     onCellClickModified,
+    weekStartsOnModified,
   } = initializeProps({
     cellDisplayMode,
     timeDateFormat,
@@ -66,6 +68,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     onColorDotClick,
     onItemClick,
     onCellClick,
+    weekStartsOn,
   });
 
   const [hoveredElement, setHoveredElement] = React.useState(0);
@@ -87,13 +90,13 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
         return prepareCalendarData(
           data,
           activeTimeDateField,
-          timeDateFormatModified?.weekStartsOn ?? 1,
+          weekStartsOnModified,
         );
       case CurrentView.DAY_IN_PLACE:
       case CurrentView.WEEK_IN_PLACE:
         return prepareCalendarDataInPlace(data, activeTimeDateField);
     }
-  }, [data, activeTimeDateField, currentView]);
+  }, [data, activeTimeDateField, currentView, weekStartsOn]);
 
   // A method that will render elements for four views
   // MONTH, WEEK, WEEK_IN_PLACE, DAY_IN_PLACE
@@ -274,7 +277,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
         endDate || startDate,
         preparedDataItem[startIntervalKey],
         preparedDataItem[endIntervalKey],
-        timeDateFormatModified.weekStartsOn ?? 1,
+        weekStartsOnModified,
       );
 
       if (!gridColumn) {
@@ -339,6 +342,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     hoveredElement,
     activeTimeDateField,
     enableHoverEffect,
+    weekStartsOn,
   ]);
 
   return (
@@ -357,6 +361,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
         onColorDotClick={onColorDotClickModified}
         onCellClick={onCellClickModified}
         timeDateFormat={timeDateFormatModified}
+        weekStartsOn={weekStartsOnModified}
       />
     </>
   );

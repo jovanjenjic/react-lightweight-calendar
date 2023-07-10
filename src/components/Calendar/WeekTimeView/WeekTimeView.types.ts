@@ -4,6 +4,7 @@ import {
   DateInfo,
   DateInfoFunction,
   TimeFormat,
+  WeekStartsOn,
 } from '../Calendar.types';
 
 export interface WeekTimeViewProps {
@@ -20,4 +21,5 @@ export interface WeekTimeViewProps {
   timeDateFormat: TimeFormat;
   preparedColorDots: ColorDotFull;
   onHourClick: (value: DateInfo | number) => void;
+  weekStartsOn: WeekStartsOn;
 }

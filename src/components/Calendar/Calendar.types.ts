@@ -95,7 +95,6 @@ export interface TimeFormat {
   day: string;
   hour: string;
   monthYear: string;
-  weekStartsOn?: WeekStartsOn;
 }
 
 export interface CalendarProps {
@@ -114,6 +113,7 @@ export interface CalendarProps {
   onColorDotClick: (value: ColorDot) => void;
   onCellClick: (value: DateInfo) => void;
   timeDateFormat: TimeFormat;
+  weekStartsOn: WeekStartsOn;
 }
 
 export interface CalendarWrapperProps {
@@ -149,6 +149,7 @@ export interface CalendarWrapperProps {
   onItemClick?: (item: Record<string, any>) => void;
   onCellClick?: (value: DateInfo) => void;
   timeDateFormat?: TimeFormat;
+  weekStartsOn?: WeekStartsOn;
 }
 
 export interface CalendarHeaderProps {
@@ -179,6 +180,7 @@ export interface InitializePropsFunc {
   // eslint-disable-next-line
   onItemClick: ((item: Record<string, any>) => void) | undefined;
   onCellClick: ((value: DateInfo) => void) | undefined;
+  weekStartsOn: WeekStartsOn | undefined;
 }
 export interface InitializePropsRetFunc {
   cellDisplayModeModified: CellDisplayMode;
@@ -190,4 +192,5 @@ export interface InitializePropsRetFunc {
   onItemClickModified: (item: Record<string, any>) => void;
   onCellClickModified: (value: DateInfo) => void;
   timeDateFormatModified: TimeFormat;
+  weekStartsOnModified: WeekStartsOn;
 }
