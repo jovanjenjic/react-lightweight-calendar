@@ -11,6 +11,15 @@ It can be designed for displaying various entities such as events, orders, activ
 The component is written in TypeScript and is covered by over 60 tests. The calendar was developed using pure html, css and js (ts). The only library the calendar relies on during development is `date-fns`. 
 The plan is to continue developing additional views and functionalities. The priority for developing other features is based on the emerging needs.
 
+### Images
+
+WEEK_TIME: [IMAGE](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/968d19ca-b686-4e33-88e1-98b3d2b2cbe9).
+DAY: [IMAGE](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/44bd12e4-2ffc-4a76-ba0d-839b0b11be29).
+MONTH: [IMAGE](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/df153b60-91d1-4779-89df-686cb7b448f8).
+WEEK: [IMAGE](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/c213d380-d07b-4499-90c2-7781c1b74e51).
+WEEK_IN_PLACE: [IMAGE](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/b3038a0a-d747-48d7-9509-77cba4610b39).
+DAY_IN_PLACE: [IMAGE](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/0b90189f-11af-450e-90bd-97f065e05752).
+
 ### Props
 
 The `Calendar` component accepts the following props:
