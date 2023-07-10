@@ -38,7 +38,7 @@ export const dayInWeekBasedOnWeekStarts = (
   timeDate: string,
   weekStartsOn = 1,
 ): number => {
-  return (getDay(new Date(timeDate)) - (weekStartsOn || 0) + 7) % 7;
+  return (getDay(new Date(timeDate)) - weekStartsOn + 7) % 7;
 };
 
 export const getAllDaysInMonth = (month) => {
@@ -106,7 +106,7 @@ export const prepareCalendarData = (
       const isStartInterval: boolean = key === formatFullDate(startDate);
 
       // If the interval is large enough to continue in the next week. day() returns serial number of day in week
-      const isNextWeek: boolean = getDay(nextDay) === (weekStartsOn ?? 1);
+      const isNextWeek: boolean = getDay(nextDay) === weekStartsOn;
 
       if (isStartInterval || isNextWeek) {
         const res = {

@@ -36,11 +36,11 @@ const MonthView: FC<MonthViewProps> = ({
   onCellClick,
   timeDateFormat,
   preparedColorDots,
+  weekStartsOn,
 }) => {
   // It is necessary to render the rows (weeks) that are visible in the viewport
   const [visibleWeeks, setVisibleWeeks] = useState<number[]>([0]);
   const weekRefs = useRef<HTMLDivElement[]>([]);
-  const weekStartsOn = timeDateFormat.weekStartsOn ?? 1;
 
   useLayoutEffect(() => {
     setVisibleWeeks([0]);

@@ -39,8 +39,8 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
   onCellClick,
   timeDateFormat,
   preparedColorDots,
+  weekStartsOn,
 }) => {
-  const weekStartsOn = timeDateFormat.weekStartsOn ?? 1;
   // Returns every day of the week
   const getCurrentWeek = useMemo(() => {
     const startOfWeekOptions = { weekStartsOn } as const;

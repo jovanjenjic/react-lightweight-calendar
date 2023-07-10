@@ -161,6 +161,7 @@ export const calculateStartAndEndMinute = (
 export const initializeProps = ({
   cellDisplayMode,
   timeDateFormat,
+  weekStartsOn,
   onDayNumberClick,
   onDayStringClick,
   onHourClick,
@@ -179,8 +180,8 @@ export const initializeProps = ({
     day: timeDateFormat?.day || TimeDateFormat.SHORT_WEEKDAY,
     hour: timeDateFormat?.hour || TimeDateFormat.HOUR,
     monthYear: timeDateFormat?.monthYear || TimeDateFormat.MONTH_YEAR,
-    weekStartsOn: timeDateFormat?.weekStartsOn ?? WeekStartsOn.MONDAY,
   };
+  const weekStartsOnModified = weekStartsOn ?? WeekStartsOn.MONDAY;
 
   const cellDisplayModeConst = {
     MONTH: {
@@ -212,6 +213,7 @@ export const initializeProps = ({
     onColorDotClickModified,
     onItemClickModified,
     onCellClickModified,
+    weekStartsOnModified,
   };
 };
 

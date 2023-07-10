@@ -8,7 +8,7 @@ import {
 } from './components/Calendar/Calendar.types';
 
 const Playground = () => {
-  const [currentDate, setCurrentDate] = React.useState('2023-06-03');
+  const [currentDate, setCurrentDate] = React.useState('2023-06-02');
   const [cellDisplayMode, setCellDisplayMode] = React.useState<CellDisplayMode>(
     {
       MONTH: {
