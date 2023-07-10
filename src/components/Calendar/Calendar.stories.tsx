@@ -32,7 +32,7 @@ export default {
       options: ['startTime', 'endTime', 'startTime-endTime'],
     },
     currentDate: { type: 'date' },
-    enableHoverEffect: { type: 'boolean' },
+    disableHoverEffect: { type: 'boolean' },
     weekStartsOn: {
       control: 'select',
       options: [0, 1, 2, 3, 4, 5, 6],
@@ -66,7 +66,7 @@ const codeSnippet = Prism.highlight(
         isFromNext: 'boolean'; // Is the element from the next week or day. Based on this field, you can add indicator (for example arrows) that say the element comes from the next week or day
       }) => JSX.Element} 
     renderHeaderItemText={(data: Record<string, any>) => JSX.Element} // Callback for custom rendering header element text (can be applied to WEEK_TIME and DAY views)
-    enableHoverEffect='boolean' // It will add a 'hovered' className to each hovered element. In the default preview it will add a darker color and z-index
+    disableHoverEffect='boolean' // It will add a 'hovered' className to each hovered element. In the default preview it will add a darker color and z-index
     colorDots={[
         {
             color: 'string', // Dot color
@@ -127,8 +127,10 @@ const Template: Story<CalendarWrapperProps> = (args) => {
           setArgsData({ ...args, currentDate: newDate })
         }
         weekStartsOn={argsData.weekStartsOn}
-        enableHoverEffect={argsData.enableHoverEffect}
+        disableHoverEffect={argsData.disableHoverEffect}
         colorDots={argsData.colorDots}
+        timeDateFormat={argsData.timeDateFormat}
+        cellDisplayMode={argsData.cellDisplayMode}
       />
 
       <br />
@@ -144,10 +146,10 @@ export const Calendar = Template.bind({});
 
 Calendar.args = {
   data: testData,
-  currentView: CurrentView.MONTH,
+  currentView: CurrentView.WEEK_TIME,
   currentDate: '2023-06-02',
   activeTimeDateField: 'startTime-endTime',
-  enableHoverEffect: true,
+  disableHoverEffect: false,
   weekStartsOn: WeekStartsOn.MONDAY,
   timeDateFormat: {
     day: 'EEE',
