@@ -6,7 +6,7 @@ The `Calendar` component is a versatile calendar display component that allows y
 
 It can be designed for displaying various entities such as events, orders, activity calendars, reservations, bookings, rentals etc. It can be used for any entity that has at least one field in the ISO 8601 format. Each element on the calendar can be positioned based on a single field, based on any field that the data array contains, or based on any interval defined by separating two time date fields with a `-`.
 
-**Storybook usage example:** _https://64a7f9553a2478c46491aea9-hawmjlzeay.chromatic.com/?path=/story/ui-components-calendar--calendar&args=currentView:WEEK_TIME_
+**Storybook usage example:** https://64a7f9553a2478c46491aea9-jtifepzimr.chromatic.com/?path=/story/ui-components-calendar--calendar
 
 The component is written in TypeScript and is covered by over 60 tests. The calendar was developed using pure html, css and js (ts). The only library the calendar relies on during development is `date-fns`. 
 The plan is to continue developing additional views and functionalities. The priority for developing other features is based on the emerging needs.
