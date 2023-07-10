@@ -4,3 +4,9 @@ cypress/
 node_modules/
 public/
 src/
+dist/cypress
+dist/cypress.config.d.ts
+dist/cypress.config.js
+dist/static
+**/*.cy.*
+**/*.stories.*
