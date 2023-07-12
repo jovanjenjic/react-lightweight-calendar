@@ -137,17 +137,14 @@ const MyCalendar = () => {
       // renderItemText={(data) => {
         // Custom rendering of event element text
         // return <p>{data.title}</p>;
-        // console.log(data);
       // }}
       // renderHeaderItem={(data, extras) => {
         // Custom rendering of header element
         // return <div>{data.startTime}-{date.endTime}</div>;
-        // console.log(data, extras);
       // }}
       // renderHeaderItemText={(data) => {
         // Custom rendering of header element text
         // return <p>{data.title}</p>;
-        // console.log(data);
       // }}
       enableHoverEffect={true}
       colorDots={[
