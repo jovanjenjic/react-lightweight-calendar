@@ -10,6 +10,9 @@ dist/cypress.config.js
 dist/static
 dist/build
 dist/src/index.js
+dist/src/index.d.ts
 dist/src/dataProps.js
+dist/src/dataProps.d.ts
+storybook-static/
 **/*.cy.*
 **/*.stories.*

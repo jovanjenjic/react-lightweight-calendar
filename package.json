@@ -1,7 +1,7 @@
 {
   "name": "react-lightweight-calendar",
-  "version": "1.0.2",
-  "description": "The Calendar component is a versatile calendar display component that allows you to visualize entities. It provides various customization options to tailor the appearance and behavior of the calendar to your needs.",
+  "version": "1.0.6",
+  "description": "The Calendar component is a calendar display component that allows you to visualize entities. It provides various customization options to tailor the appearance and behavior of the calendar to your needs.",
   "main": "/dist/src/components/Calendar/CalendarWrapper.js",
   "types": "/dist/src/components/Calendar/Calendar.types.d.ts",
   "keywords": ["react-calendar", "react-timeline-calendar", "react-event-calendar", "react-google-calendar"],
