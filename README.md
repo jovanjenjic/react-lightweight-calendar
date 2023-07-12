@@ -6,7 +6,7 @@ The `Calendar` component is a versatile calendar display component that allows y
 
 It can be designed for displaying various entities such as events, orders, activity calendars, reservations, bookings, rentals etc. It can be used for any entity that has at least one field in the ISO 8601 format. Each element on the calendar can be positioned based on a single field, based on any field that the data array contains, or based on any interval defined by separating two time date fields with a `-`.
 
-**Storybook usage example:** https://64a7f9553a2478c46491aea9-bxqjbhyqlp.chromatic.com/?path=/story/ui-components-calendar--calendar
+**Storybook usage example:** https://64a7f9553a2478c46491aea9-irakdchkma.chromatic.com/?path=/story/ui-components-calendar--calendar
 
 The component is written in TypeScript and is covered by over 60 tests. The calendar was developed using pure html, css and js (ts). The only library the calendar relies on during development is `date-fns`. 
 The plan is to continue developing additional views and functionalities. The priority for developing other features is based on the emerging needs.
@@ -15,8 +15,7 @@ The plan is to continue developing additional views and functionalities. The pri
 
 | WEEK_TIME | DAY | MONTH | WEEK  | WEEK_IN_PLACE | DAY_IN_PLACE |
 | :---:         |     :---:      |         :---: | :---: | :---:         | :---:         |
-| [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/968d19ca-b686-4e33-88e1-98b3d2b2cbe9)   | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/44bd12e4-2ffc-4a76-ba0d-839b0b11be29)     | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/df153b60-91d1-4779-89df-686cb7b448f8)    |   [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/c213d380-d07b-4499-90c2-7781c1b74e51)    |    [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/b3038a0a-d747-48d7-9509-77cba4610b39)           |     [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/0b90189f-11af-450e-90bd-97f065e05752)         |
-
+| [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/a0ed5178-73d3-4e2f-ad10-b2fa7e1c0d31)   | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/130776e2-437a-4335-a759-ea94f5784a6c)     | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/6a1612b3-f5d3-494c-9776-2f0c791a1ff1)    |   [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/4648f562-8841-4751-b246-e06ffdb82020)    |    [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/17af45bb-1ef7-471b-bc64-6094d4849933)           |     [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/cf27dfec-2b31-4dd5-9631-e61e3b5a7e58)         |
 
 ### Props
 
