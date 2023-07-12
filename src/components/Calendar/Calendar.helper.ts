@@ -168,6 +168,10 @@ export const initializeProps = ({
   onColorDotClick,
   onItemClick,
   onCellClick,
+  currentDate,
+  currentView,
+  activeTimeDateField,
+  data,
 }: InitializePropsFunc): InitializePropsRetFunc => {
   const onDayNumberClickModified = onDayNumberClick || (() => null);
   const onDayStringClickModified = onDayStringClick || (() => null);
@@ -182,7 +186,10 @@ export const initializeProps = ({
     monthYear: timeDateFormat?.monthYear || TimeDateFormat.MONTH_YEAR,
   };
   const weekStartsOnModified = weekStartsOn ?? WeekStartsOn.MONDAY;
-
+  const currentDateModified = currentDate || formatFullDate(new Date());
+  const currentViewModified = currentView || CurrentView.MONTH;
+  const activeTimeDateFieldModified = activeTimeDateField || '';
+  const dataModified = data || [];
   const cellDisplayModeConst = {
     MONTH: {
       inactiveCells: [],
@@ -214,6 +221,10 @@ export const initializeProps = ({
     onItemClickModified,
     onCellClickModified,
     weekStartsOnModified,
+    currentDateModified,
+    currentViewModified,
+    activeTimeDateFieldModified,
+    dataModified,
   };
 };
 

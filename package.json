@@ -7,6 +7,10 @@
   "keywords": ["react-calendar", "react-timeline-calendar", "react-event-calendar", "react-google-calendar"],
   "author": "Jovan Jenjic",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jovanjenjic/react-lightweight-calendar"
+  },  
   "dependencies": {
     "@cypress/react18": "^2.0.0",
     "classnames": "^2.3.2",
