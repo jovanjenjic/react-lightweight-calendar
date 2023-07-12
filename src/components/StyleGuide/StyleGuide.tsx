@@ -1,9 +1,9 @@
 import React from 'react';
-export const orangeColor = () => {
+
+export const blueColor = () => {
   return `
-      --o-300: #fcb35b;
-      --o-200: #ffc681;
-      --o-100: #f08300;
+      --b-100: #bcdaff;
+      --b-200: #139bff;
     `;
 };
 
@@ -50,7 +50,7 @@ const Styleguide = () => {
       dangerouslySetInnerHTML={{
         __html: minifyCssString(`:root {
           ${grayScaleColorVariations()}
-          ${orangeColor()}
+          ${blueColor()}
           ${fonts()}
             --spacing: 8px;
           }

@@ -51,7 +51,7 @@ export const testData = [
     startTime: '2023-06-02T01:10:00Z',
     endTime: '2023-06-02T02:00:00Z',
     title: 'Pause',
-    bgColor: 'rgb(97, 189, 255)',
+    bgColor: 'rgb(247 123 123)',
     textColor: 'white',
   },
   {
@@ -76,17 +76,12 @@ export const testData = [
 
 const colorDots = [
   {
-    color: 'orange',
-    text: 'Orange color text',
-    date: '2023-06-02',
-  },
-  {
-    color: 'red',
+    color: '#71d3a5',
     text: 'Red color text',
     date: '2023-06-03',
   },
   {
-    color: 'green',
+    color: '#71d3a5',
     text: 'Green color text',
     date: '2023-06-04',
   },
@@ -101,7 +96,7 @@ const dataProp = (
   data: testData,
   currentDate,
   setCurrentDate,
-  currentView: CurrentView.WEEK_TIME,
+  currentView: CurrentView.MONTH,
   cellDisplayMode,
   setCellDisplayMode,
   timeDateFormat: {
