@@ -192,11 +192,14 @@ const MyCalendar = () => {
 export default MyCalendar;
 ```
 
+### Licence
+
+The MIT License.
 
 ### Contact info
 
 For more information or questions, you can contact me via:
 
 - email: jovan.jenjic@gmail.com
-- Linkedin profile: _https://www.linkedin.com/in/jovan-jenji%C4%87/_
+- Linkedin profile: https://www.linkedin.com/in/jovan-jenji%C4%87/
      
