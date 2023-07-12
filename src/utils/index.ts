@@ -264,10 +264,9 @@ export const prepareCalendarDataWithTime = (
     if (numberOfMinutes > 24 * 60) {
       result.week = [...(result.week || []), res];
       // In case it is not longer than 24 hours but is on 2 different days
-    } else if (differenceInMinutes(endDate, startOfDay(startDate)) > 24 * 60) {
+    } else if (differenceInMinutes(endDate, startOfDay(startDate)) >= 24 * 60) {
+      // First day
       const firstDayEnd = endOfDay(startDate);
-      const secondDayStart = startOfDay(endDate);
-
       const { startMinute, endMinute } = calculateStartAndEndMinute(
         startDate,
         firstDayEnd,
@@ -277,22 +276,27 @@ export const prepareCalendarDataWithTime = (
         startMinute,
         endMinute,
       };
-
-      const startAndEndMinutSecondItem = calculateStartAndEndMinute(
-        secondDayStart,
-        endDate,
-      );
-      const secondDayKey: string = formatFullDate(secondDayStart);
-      const secondDayRes = {
-        ...res,
-        startMinute: startAndEndMinutSecondItem.startMinute,
-        endMinute: startAndEndMinutSecondItem.endMinute,
-      };
       result.day[key] = [...(result.day[key] || []), firstDayRes];
-      result.day[secondDayKey] = [
-        ...(result.day[secondDayKey] || []),
-        secondDayRes,
-      ];
+
+      // Next day
+      const secondDayStart = startOfDay(endDate);
+      // To avoid the case when it is until the beginning of the next day (00:00)
+      if (formatFullDateTime(secondDayStart) !== formatFullDateTime(endDate)) {
+        const startAndEndMinutSecondItem = calculateStartAndEndMinute(
+          secondDayStart,
+          endDate,
+        );
+        const secondDayKey: string = formatFullDate(secondDayStart);
+        const secondDayRes = {
+          ...res,
+          startMinute: startAndEndMinutSecondItem.startMinute,
+          endMinute: startAndEndMinutSecondItem.endMinute,
+        };
+        result.day[secondDayKey] = [
+          ...(result.day[secondDayKey] || []),
+          secondDayRes,
+        ];
+      }
       // In case if it is in one day
     } else {
       const { startMinute, endMinute } = calculateStartAndEndMinute(
