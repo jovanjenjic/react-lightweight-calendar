@@ -40,7 +40,7 @@ The `Calendar` component accepts the following props:
 
 - `currentDate` _(REQUIRED, DEFAULT: now)_: The current date displayed on the calendar in the format 'YYYY-MM-DD'.
 
-- `setCurrentDate`: A callback function that is called when the current date is changed. It receives the new date as a parameter. If not sent, the navigation will not be visible
+- `setCurrentDate`: A callback function that is called when the current date is changed. It receives the new date as a parameter. If not sent, the **navigation** will not be visible
 
 - `activeTimeDateField` _(required)_: The field based on which the events will be positioned on the calendar. It can be any time date field from the `data` array. It can also be an interval separated by a '-'. (`startTime`, `endTime`, `createdAt`, `updatedAt`, `startTime-endTime`, `createdAt-updated`...)
 
