@@ -49,6 +49,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   timeDateFormat,
   weekStartsOn,
 }) => {
+  // Preparing the data to work for all cases
   const {
     cellDisplayModeModified,
     timeDateFormatModified,
@@ -59,6 +60,10 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     onItemClickModified,
     onCellClickModified,
     weekStartsOnModified,
+    currentDateModified,
+    currentViewModified,
+    dataModified,
+    activeTimeDateFieldModified,
   } = initializeProps({
     cellDisplayMode,
     timeDateFormat,
@@ -69,10 +74,14 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     onItemClick,
     onCellClick,
     weekStartsOn,
+    currentDate,
+    currentView,
+    activeTimeDateField,
+    data,
   });
 
   const [hoveredElement, setHoveredElement] = React.useState(0);
-  const [startIntervalKey, endIntervalKey] = (activeTimeDateField ?? '')
+  const [startIntervalKey, endIntervalKey] = (activeTimeDateFieldModified ?? '')
     .split('-')
     .map((str) => str.replace(/\s/g, '')) as [string, string];
 
@@ -81,22 +90,33 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     | PreparedDataWithTimeFull
     | Record<string, PreparedDataWithoutTime[]>[]
     | PreparedDataWithTimeInPlace = React.useMemo(() => {
-    switch (currentView) {
+    switch (currentViewModified) {
       case CurrentView.DAY:
       case CurrentView.WEEK_TIME:
-        return prepareCalendarDataWithTime(data, activeTimeDateField);
+        return prepareCalendarDataWithTime(
+          dataModified,
+          activeTimeDateFieldModified,
+        );
       case CurrentView.MONTH:
       case CurrentView.WEEK:
         return prepareCalendarData(
-          data,
-          activeTimeDateField,
+          dataModified,
+          activeTimeDateFieldModified,
           weekStartsOnModified,
         );
       case CurrentView.DAY_IN_PLACE:
       case CurrentView.WEEK_IN_PLACE:
-        return prepareCalendarDataInPlace(data, activeTimeDateField);
+        return prepareCalendarDataInPlace(
+          dataModified,
+          activeTimeDateFieldModified,
+        );
     }
-  }, [data, activeTimeDateField, currentView, weekStartsOn]);
+  }, [
+    dataModified,
+    activeTimeDateFieldModified,
+    currentViewModified,
+    weekStartsOnModified,
+  ]);
 
   // A method that will render elements for four views
   // MONTH, WEEK, WEEK_IN_PLACE and DAY_IN_PLACE views
@@ -111,7 +131,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
 
     const isCollapsed = shouldCollapse(
       cellDisplayModeModified,
-      currentView,
+      currentViewModified,
       key,
     );
 
@@ -125,14 +145,14 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
         preparedDataItem,
         key,
         cellDisplayModeModified,
-        currentView,
+        currentViewModified,
         preparedData,
-        currentDate,
+        currentDateModified,
       );
       const rightMargin = [
         CurrentView.DAY_IN_PLACE,
         CurrentView.WEEK_IN_PLACE,
-      ].includes(currentView);
+      ].includes(currentViewModified);
       return shoudShow ? (
         <div
           key={`${index}-${dateInfo.date}`}
@@ -328,7 +348,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   };
 
   const renderItems = React.useMemo(() => {
-    switch (currentView) {
+    switch (currentViewModified) {
       case CurrentView.DAY:
       case CurrentView.WEEK_TIME:
         return renderDayWeekTimeItems;
@@ -341,10 +361,10 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
         return renderMonthWeekDayInPlaceWeekInPlaceItems;
     }
   }, [
-    currentView,
+    currentViewModified,
     cellDisplayMode,
     hoveredElement,
-    activeTimeDateField,
+    activeTimeDateFieldModified,
     disableHoverEffect,
     weekStartsOn,
   ]);
@@ -356,9 +376,9 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
         renderItems={renderItems}
         renderHeaderItems={renderHeaderItems}
         setCurrentDate={setCurrentDate}
-        currentView={currentView}
+        currentView={currentViewModified}
         colorDots={colorDots}
-        currentDate={currentDate}
+        currentDate={currentDateModified}
         onDayNumberClick={onDayNumberClickModified}
         onDayStringClick={onDayStringClickModified}
         onHourClick={onHourClickModified}

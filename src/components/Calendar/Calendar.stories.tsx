@@ -52,10 +52,10 @@ const codeSnippet = Prism.highlight(
             textColor: 'white', // If we do not pass the color, color will be the default one
         },
     ]}
-    currentView='string' // (REQUIRED) WEEK_TIME, DAY, MONTH, WEEK, WEEK_IN_PLACE or DAY_IN_PLACE 
-    currentDate='string' // (REQUIRED) The current date displayed on the calendar ('2023-06-01')
+    currentView='string' // (DEFAULT: MONTH) WEEK_TIME, DAY, MONTH, WEEK, WEEK_IN_PLACE or DAY_IN_PLACE 
+    currentDate='string' // (REQUIRED, DEFAULT: now) The current date displayed on the calendar ('2023-06-01')
     setCurrentDate={(date: string) => void} // The current date is being changed. If this field is not sent, the calendar navigation will be hidden
-    activeTimeDateField='string' // (REQUIRED) The field based on which the elements will be positioned. It can be any time date field from the 'data' array. It can also be an interval separated by a '-'. ('startTime', 'endTime', 'createdAt', 'updatedAt', 'startTime-endTime'...)
+    activeTimeDateField='string' // The field based on which the elements will be positioned. It can be any time date field from the 'data' array. It can also be an interval separated by a '-'. ('startTime', 'endTime', 'createdAt', 'updatedAt', 'startTime-endTime'...)
     weekStartsOn: 'number'// It regulates from which day the week will start. These are numbers from 0 to 6. (0 - SUNDAY, 1 - MONDAY, 2 - TUESDAY, 3 - WEDNESDAY, 4 - THURSDAY, 5 - FRIDAY, 6 - SATURDAY)
     renderItem={(data: Record<string, any>, isHovered: boolean) => JSX.Element} // Callback for custom rendering element
     renderItemText={(data: Record<string, any>) => JSX.Element} // Callback for custom rendering element text
@@ -122,7 +122,7 @@ const Template: Story<CalendarWrapperProps> = (args) => {
         data={argsData.data}
         activeTimeDateField={argsData.activeTimeDateField}
         currentView={argsData.currentView}
-        currentDate={formatFullDate(new Date(argsData.currentDate))}
+        currentDate={argsData.currentDate}
         setCurrentDate={(newDate) =>
           setArgsData({ ...args, currentDate: newDate })
         }

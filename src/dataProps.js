@@ -18,14 +18,14 @@ export const testData = [
   },
   {
     id: 3333,
-    startTime: '2023-06-02T06:45:06.628591Z',
+    startTime: '2023-06-02T05:45:06.628591Z',
     endTime: '2023-06-03T04:15:00Z',
     title: 'Codeday',
   },
   {
     id: 4444,
     startTime: '2023-06-02T03:30:00Z',
-    endTime: '2023-06-02T04:00:00Z',
+    endTime: '2023-06-02T04:30:00Z',
     title: 'Meet up',
   },
   {
@@ -42,8 +42,8 @@ export const testData = [
   },
   {
     id: 7777,
-    startTime: '2023-06-02T03:00:00Z',
-    endTime: '2023-06-02T03:30:00Z',
+    startTime: '2023-06-02T02:15:00Z',
+    endTime: '2023-06-02T03:00:00Z',
     title: 'Conference',
   },
   {
@@ -68,8 +68,8 @@ export const testData = [
   },
   {
     id: 2,
-    startTime: '2023-06-02T07:00:00Z',
-    endTime: '2023-06-02T08:00:00Z',
+    startTime: '2023-06-02T08:30:00Z',
+    endTime: '2023-06-02T10:00:00Z',
     title: 'Business trip',
   },
 ];
