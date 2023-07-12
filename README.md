@@ -137,7 +137,7 @@ const MyCalendar = () => {
       // renderItemText={(data) => {
         // Custom rendering of event element text
         // return <p>{data.title}</p>;
-        console.log(data);
+        // console.log(data);
       // }}
       // renderHeaderItem={(data, extras) => {
         // Custom rendering of header element
