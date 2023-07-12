@@ -128,38 +128,85 @@ export const prepareCalendarData = (
 
 // This is a helper method that, based on the number of
 // elements and their position, will determine the width, position and margin for better visibility
-const processMatchingItems = (
-  result: PreparedDataWithTimeFull,
-  secondDayKey: string,
-  secondDayRes: PreparedDataWithTime,
-): void => {
-  // If there is any item that is 30 pixels above or below
-  const matchingItems = result.day[secondDayKey]?.filter((item) => {
-    return (
-      +item.startMinute >= +secondDayRes.startMinute - 50 &&
-      +item.startMinute <= +secondDayRes.startMinute + 50
+// TODO: Switch it to work as recursion
+const processMatchingItems = (dayElements: PreparedDataWithTime[]): void => {
+  const calculateWidth = (numberInRow) => {
+    return `${(2 / (numberInRow * 1.25 + 0.78)) * 100}%`;
+  };
+
+  const calculateLeft = (numberInRow, index) => {
+    return `${(1 / (numberInRow + 1)) * 100 * index}%`;
+  };
+
+  let processedIds: number[] = [];
+  let processedObjects = {};
+
+  // Iterate through all the passed elements
+  for (let i = 0; i < dayElements.length; i++) {
+    const dayItem = dayElements[i];
+    // If an element is processed, we skip it
+    if (processedIds.includes(dayItem.id)) {
+      continue;
+    }
+
+    // Elements that are in the range of the current element
+    const matchingItems = dayElements.filter(
+      (item) =>
+        +item.startMinute > +dayItem.startMinute - 30 &&
+        +item.startMinute < +dayItem.startMinute + 30,
     );
-  });
 
-  if (matchingItems && matchingItems.length > 1) {
-    const numberInRow = matchingItems.length;
+    let matchingItemsWithNeighbors: PreparedDataWithTime[] = [];
+    // The elements that are in range of each of the elements that are in range.
+    // It is necessary to find all neighbors that are in range
+    for (let i = 0; i < matchingItems.length; i++) {
+      const item = matchingItems[i];
+      // Neighbors that are in range
+      const neighbors = dayElements.filter(
+        (neighbor) =>
+          +neighbor.startMinute > +item.startMinute - 30 &&
+          +neighbor.startMinute < +item.startMinute + 30,
+      );
+      // If an element does not exist in the array being processed, this element must added and consider its neighbors as well
+      neighbors.forEach((o) => {
+        if (!matchingItems.find((v) => v.id === o.id)) {
+          matchingItems.push(o);
+        }
+      });
 
-    const calculateWidth = () => {
-      return (2 / (numberInRow + 1)) * 100 + '%';
+      matchingItemsWithNeighbors = [
+        ...matchingItemsWithNeighbors,
+        ...neighbors,
+      ];
+    }
+
+    // Deleting duplicates that may be found because some elements may have the same neighbors in the range
+    const withoutDuplicates = matchingItemsWithNeighbors.filter(
+      (value, index, self) =>
+        index === self.findIndex((t) => t.id === value.id),
+    );
+
+    const numberInRow = withoutDuplicates.length;
+    // We detect the elements that have been processed so that we do not process an element more than once
+    processedIds = [
+      ...processedIds,
+      ...withoutDuplicates.map((item) => item.id),
+    ];
+    // The sequential number of elements per group should be remembered so that each subsequent group is indented
+    processedObjects = {
+      ...processedObjects,
+      [numberInRow]: (processedObjects[numberInRow] || 0) + 1,
     };
-
-    const calculateLeft = (index) => {
-      return (1 / (numberInRow + 1)) * 100 * index + '%';
-    };
-
-    matchingItems.forEach((item, index) => {
+    // Calculation of width and moving
+    withoutDuplicates.forEach((item, index) => {
       item.numberInRow = numberInRow;
-      item.width = `calc(${calculateWidth()} - ${numberInRow * 3}%)`;
-      item.left = calculateLeft(index);
+      item.width = `calc(${calculateWidth(numberInRow)} - ${
+        processedObjects[numberInRow]
+      }% - 5px)`;
+      item.left = calculateLeft(numberInRow, index);
     });
   }
 };
-
 /**
  * Based on the currently selected field in the configuration (eg `startTime` or `startTime-endTime`),
  * a corresponding array is formed that will be displayed on the calendar.
@@ -246,8 +293,6 @@ export const prepareCalendarDataWithTime = (
         ...(result.day[secondDayKey] || []),
         secondDayRes,
       ];
-      processMatchingItems(result, secondDayKey, secondDayRes);
-      processMatchingItems(result, key, firstDayRes);
       // In case if it is in one day
     } else {
       const { startMinute, endMinute } = calculateStartAndEndMinute(
@@ -260,8 +305,11 @@ export const prepareCalendarDataWithTime = (
         endMinute: endMinute == startMinute ? endMinute + 30 : endMinute,
       };
       result.day[key] = [...(result.day[key] || []), expendedRes];
-      processMatchingItems(result, key, expendedRes);
     }
+  });
+
+  Object.keys(result.day).forEach((key) => {
+    processMatchingItems(result.day[key]);
   });
 
   return result;

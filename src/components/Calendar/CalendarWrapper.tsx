@@ -217,7 +217,6 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
               width: preparedDataItem.width,
               left: preparedDataItem.left,
               margin: preparedDataItem.margin,
-              marginRight: '4%',
             }}
             onMouseEnter={() =>
               !disableHoverEffect && setHoveredElement(preparedDataItem?.id)
