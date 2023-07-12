@@ -25,7 +25,7 @@ export const testData = [
   {
     id: 4444,
     startTime: '2023-06-02T03:30:00Z',
-    endTime: '2023-06-02T05:00:00Z',
+    endTime: '2023-06-02T04:00:00Z',
     title: 'Meet up',
   },
   {
@@ -36,20 +36,20 @@ export const testData = [
   },
   {
     id: 6666,
-    startTime: '2023-06-02T04:00:00Z',
-    endTime: '2023-06-02T05:00:00Z',
+    startTime: '2023-06-02T06:00:00Z',
+    endTime: '2023-06-02T07:00:00Z',
     title: 'Daily',
   },
   {
     id: 7777,
-    startTime: '2023-06-02T02:00:00Z',
-    endTime: '2023-06-02T02:45:00Z',
+    startTime: '2023-06-02T03:00:00Z',
+    endTime: '2023-06-02T03:30:00Z',
     title: 'Conference',
   },
   {
     id: 8888,
     startTime: '2023-06-02T01:10:00Z',
-    endTime: '2023-06-02T02:10:00Z',
+    endTime: '2023-06-02T02:00:00Z',
     title: 'Pause',
     bgColor: 'rgb(97, 189, 255)',
     textColor: 'white',
@@ -57,7 +57,7 @@ export const testData = [
   {
     id: 9999,
     startTime: '2023-06-02T03:30:00Z',
-    endTime: '2023-06-02T05:00:00Z',
+    endTime: '2023-06-02T04:30:00Z',
     title: 'Introduction',
   },
   {
@@ -101,7 +101,7 @@ const dataProp = (
   data: testData,
   currentDate,
   setCurrentDate,
-  currentView: CurrentView.WEEK,
+  currentView: CurrentView.WEEK_TIME,
   cellDisplayMode,
   setCellDisplayMode,
   timeDateFormat: {

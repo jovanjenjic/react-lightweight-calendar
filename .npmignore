@@ -8,5 +8,8 @@ dist/cypress
 dist/cypress.config.d.ts
 dist/cypress.config.js
 dist/static
+dist/build
+dist/src/index.js
+dist/src/dataProps.js
 **/*.cy.*
 **/*.stories.*
