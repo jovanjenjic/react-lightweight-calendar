@@ -113,7 +113,7 @@ const MyCalendar = () => {
         },
       ]}
       currentView='WEEK_TIME'
-      currentDate={currentDate]
+      currentDate={currentDate}
       setCurrentDate={setCurrentDate}
       activeTimeDateField='startTime-endTime' // Or just startTime or just endTime
       weekStartsOn={1} // Monday
