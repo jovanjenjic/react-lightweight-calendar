@@ -22,7 +22,7 @@ The plan is to continue developing additional views and functionalities. The pri
 
 The `Calendar` component accepts the following props:
 
-- `data` _(required)_: An array of item (for example event) objects that will be displayed on the calendar. Each item object should have the following properties:
+- `data` (_REQUIRED_): An array of item (for example event) objects that will be displayed on the calendar. Each item object should have the following properties:
   - `id`: A unique identifier for the item.
   - `startTime`: The start time of the item in ISO 8601 format.
   - `endTime`: The end time of the item in ISO 8601 format.
@@ -30,7 +30,7 @@ The `Calendar` component accepts the following props:
   - `bgColor`: The background color of the item (optional).
   - `textColor`: The text color of the item (optional).
 
-- `currentView` _(required)_: A string indicating the current view of the calendar. It can be one of the following options:
+- `currentView` _(DEFAULT: MONTH)_: A string indicating the current view of the calendar. It can be one of the following options:
   - `WEEK_TIME`: Display the calendar in a week view with a timeline.
   - `DAY`: Display the calendar in a day view with a timeline.
   - `MONTH`: Display the calendar in a month view with a timeline.
@@ -38,9 +38,9 @@ The `Calendar` component accepts the following props:
   - `WEEK_IN_PLACE`: Display the calendar in a week view without a timeline. It is intended for grouping elements based on the start time interval. It can only be used to show the schedule of elements by hours
   - `DAY_IN_PLACE`: Display the calendar in a day view without a timeline. It is intended for grouping elements based on the start time interval. It can only be used to show the schedule of elements by hours
 
-- `currentDate` _(required)_: The current date displayed on the calendar in the format 'YYYY-MM-DD'.
+- `currentDate` _(REQUIRED, DEFAULT: now)_: The current date displayed on the calendar in the format 'YYYY-MM-DD'.
 
-- `setCurrentDate`: A callback function that is called when the current date is changed. It receives the new date as a parameter.
+- `setCurrentDate`: A callback function that is called when the current date is changed. It receives the new date as a parameter. If not sent, the navigation will not be visible
 
 - `activeTimeDateField` _(required)_: The field based on which the events will be positioned on the calendar. It can be any time date field from the `data` array. It can also be an interval separated by a '-'. (`startTime`, `endTime`, `createdAt`, `updatedAt`, `startTime-endTime`, `createdAt-updated`...)
 
@@ -194,7 +194,7 @@ export default MyCalendar;
 
 ### Licence
 
-The MIT License.
+The MIT License. Unauthorized copying is prohibited under the MIT License.
 
 ### Contact info
 
