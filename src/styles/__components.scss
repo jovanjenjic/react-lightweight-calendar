@@ -65,7 +65,7 @@
         }
 
         &--current-day {
-            background: var(--o-100);
+            background: var(--b-200);
             border-radius: 50%;
             color: var(--gs-0);
             height: 26px;
@@ -98,7 +98,7 @@
         width: 100%;
         height: 2px;
         position: relative;
-        background: var(--o-100);
+        background: var(--b-200);
         z-index: 10,
     }
     
@@ -106,7 +106,7 @@
         content: "";
         width: 13px;
         height: 13px;
-        background: var(--o-100);
+        background: var(--b-200);
         border-radius: 50%;
         position: absolute;
         top: 50%;
