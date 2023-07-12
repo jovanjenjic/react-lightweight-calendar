@@ -100,13 +100,19 @@ const MyCalendar = () => {
         {
           id: '1',
           startTime: '2023-06-02T01:10:00Z',
-          endTime: '2023-06-02T02:10:00Z',
+          endTime: '2023-06-02T03:10:00Z',
           title: 'Conference',
         },
         {
           id: '2',
-          startTime: '2023-06-02T02:00:00Z',
-          endTime: '2023-06-02T04:00:00Z',
+          startTime: '2023-06-02T01:00:00Z',
+          endTime: '2023-06-02T02:00:00Z',
+          title: 'Meet up',
+        },
+        {
+          id: '3',
+          startTime: '2023-06-02T04:20:00Z',
+          endTime: '2023-06-02T05:20:00Z',
           title: 'Codefair',
           bgColor: 'rgb(129, 205, 242)',
           textColor: 'white',
@@ -117,7 +123,8 @@ const MyCalendar = () => {
       setCurrentDate={setCurrentDate}
       activeTimeDateField='startTime-endTime' // Or just startTime or just endTime
       weekStartsOn={1} // Monday
-      renderItem={(data, isHovered) => {
+      // If you want additional customization, uncomment the code and make the appropriate changes
+      // renderItem={(data, isHovered) => {
         // Custom rendering of event element
         // return (
               // <>
@@ -125,23 +132,23 @@ const MyCalendar = () => {
                 // <div>{data.id}</div>
               // </>
           // )
-        console.log(data, isHovered);
-      }}
-      renderItemText={(data) => {
+        // console.log(data, isHovered);
+      // }}
+      // renderItemText={(data) => {
         // Custom rendering of event element text
         // return <p>{data.title}</p>;
         console.log(data);
-      }}
-      renderHeaderItem={(data, extras) => {
+      // }}
+      // renderHeaderItem={(data, extras) => {
         // Custom rendering of header element
         // return <div>{data.startTime}-{date.endTime}</div>;
-        console.log(data, extras);
-      }}
-      renderHeaderItemText={(data) => {
+        // console.log(data, extras);
+      // }}
+      // renderHeaderItemText={(data) => {
         // Custom rendering of header element text
         // return <p>{data.title}</p>;
-        console.log(data);
-      }}
+        // console.log(data);
+      // }}
       enableHoverEffect={true}
       colorDots={[
         {
