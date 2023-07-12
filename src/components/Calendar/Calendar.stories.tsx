@@ -10,8 +10,7 @@ import {
   CurrentView,
   WeekStartsOn,
 } from './Calendar.types';
-import { testData } from '../../dataProps';
-import { formatFullDate } from '../../utils';
+import { colorDots, testData } from '../../dataProps';
 
 export default {
   title: 'UI Components/Calendar',
@@ -156,23 +155,7 @@ Calendar.args = {
     hour: 'hh a',
     monthYear: 'LLLL yyyy',
   },
-  colorDots: [
-    {
-      color: 'orange',
-      text: 'Text about yellow color',
-      date: '2023-06-02',
-    },
-    {
-      color: 'red',
-      text: 'Text about red color',
-      date: '2023-06-03',
-    },
-    {
-      color: 'green',
-      text: 'Text about green color',
-      date: '2023-06-04',
-    },
-  ],
+  colorDots: colorDots,
   cellDisplayMode: {
     MONTH: {
       inactiveCells: [],

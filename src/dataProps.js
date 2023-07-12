@@ -74,7 +74,7 @@ export const testData = [
   },
 ];
 
-const colorDots = [
+export const colorDots = [
   {
     color: '#71d3a5',
     text: 'Red color text',
@@ -96,7 +96,7 @@ const dataProp = (
   data: testData,
   currentDate,
   setCurrentDate,
-  currentView: CurrentView.MONTH,
+  currentView: CurrentView.WEEK_TIME,
   cellDisplayMode,
   setCellDisplayMode,
   timeDateFormat: {
