@@ -2,7 +2,7 @@
 
 ### Information
 
-The `Calendar` component is a versatile calendar display component that allows you to visualize entities. It provides various customization options to tailor the appearance and behavior of the calendar to your needs.
+The `Calendar` component allows you to visualize entities. It provides various customization options to tailor the appearance and behavior of the calendar to your needs.
 
 It can be designed for displaying various entities such as events, orders, activity calendars, reservations, bookings, rentals etc. It can be used for any entity that has at least one field in the ISO 8601 format. Each element on the calendar can be positioned based on a single field, based on any field that the data array contains, or based on any interval defined by separating two time date fields with a `-`.
 
@@ -23,8 +23,8 @@ The `Calendar` component accepts the following props:
 
 - `data` (_REQUIRED_): An array of item (for example event) objects that will be displayed on the calendar. Each item object should have the following properties:
   - `id`: A unique identifier for the item.
-  - `startTime`: The start time of the item in ISO 8601 format.
-  - `endTime`: The end time of the item in ISO 8601 format.
+  - `startTime`: The start time of the item in ISO 8601 format. (it doesn't have to be strictly called the _startTime_)
+  - `endTime`: The end time of the item in ISO 8601 format. (it doesn't have to be strictly called the _endTime_)
   - `title`: The title or label for the item (optional).
   - `bgColor`: The background color of the item (optional).
   - `textColor`: The text color of the item (optional).
@@ -60,7 +60,7 @@ The `Calendar` component accepts the following props:
   - `text`: Information text associated with the dot.
   - `date`: The date on which the dot will be positioned.
 
-- `timeDateFormat`: An object that defines the format of time units displayed on the calendar. It should have the following properties:
+- `timeDateFormat`: An object that defines the format of time units displayed on the calendar. More about acceptable formats: https://date-fns.org/v2.29.3/docs/format.
   - `day`: The format for displaying the day in the calendar header.
   - `hour`: The format for displaying the hour on the left side of the calendar.
   - `monthYear`: The text for displaying the month and year in the navigation.
@@ -84,6 +84,46 @@ The `Calendar` component accepts the following props:
       - `ALL_EXPANDED`: Show all cells expanded (default).
       - `ALL_COLLAPSED`: Show all cells collapsed.
       - `CUSTOM`: Use a custom display mode for cells.
+     
+### Custom Styling
+
+Access any component by **className** and apply whatever style you want
+
+#### Example
+
+```jsx
+    import './CalendarCustomStyles';
+
+    ...
+
+    <Calendar
+      data={[
+        {
+          id: '1',
+          startTime: '2023-06-02T01:10:00Z',
+          endTime: '2023-06-02T03:10:00Z',
+          title: 'Conference',
+        },
+      ]}
+      currentView='WEEK_TIME'
+      currentDate='2023-06-01'
+      activeTimeDateField='startTime-endTime'
+    />
+
+  ...
+```
+
+```css
+/* CalendarCustomStyles.css */
+
+.week-time-header__number {
+    color: #205c97
+}
+
+.week-time-view-inside {
+  background-color: #f8faff;
+}
+```
 
 ### Usage Example
 
