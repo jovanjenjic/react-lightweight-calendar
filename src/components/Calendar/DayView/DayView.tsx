@@ -9,7 +9,7 @@ import {
   getMinutes,
   getHours,
 } from 'date-fns';
-import { getTimeUnitString } from '../Calendar.helper';
+import { getKeyFromDateInfo, getTimeUnitString } from '../Calendar.helper';
 import { TimeDateFormat } from '../Calendar.constants';
 import { DayTimeViewProps } from './DayView.types';
 import { DateInfo } from '../Calendar.types';
@@ -95,12 +95,29 @@ const DayView: FC<DayTimeViewProps> = ({
                   key={hour}
                   data-cy="Hours"
                   className="day-hour-rows__border-bottom-line"
-                  onClick={() => onCellClick({ ...parsedCurrentDay, hour })}
+                  onClick={() => {
+                    const timeDate = getKeyFromDateInfo(parsedCurrentDay, hour);
+                    onCellClick({
+                      ...parsedCurrentDay,
+                      hour,
+                      timeDate,
+                      timeDateUTC: new Date(timeDate).toISOString(),
+                    });
+                  }}
                 >
                   <p
                     onClick={(e) => {
+                      const timeDate = getKeyFromDateInfo(
+                        parsedCurrentDay,
+                        hour,
+                      );
                       e.stopPropagation();
-                      onHourClick({ ...parsedCurrentDay, hour });
+                      onHourClick({
+                        ...parsedCurrentDay,
+                        hour,
+                        timeDate,
+                        timeDateUTC: new Date(timeDate).toISOString(),
+                      });
                     }}
                     className="day-hour-rows__border-bottom-hour-unit"
                   >

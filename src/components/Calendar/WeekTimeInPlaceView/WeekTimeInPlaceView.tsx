@@ -158,13 +158,15 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
                   hour !== 23 && 'week-in-place-row__hour-cell--border-bottom',
                 )}
                 key={dateInfo.date}
-                onClick={() =>
+                onClick={() => {
+                  const timeDate = getKeyFromDateInfo(dateInfo, hour);
                   onCellClick({
                     ...dateInfo,
                     hour,
-                    cellKey: getKeyFromDateInfo(dateInfo, hour),
-                  })
-                }
+                    timeDate,
+                    timeDateUTC: new Date(timeDate).toISOString(),
+                  });
+                }}
               >
                 {idx === 0 && (
                   <div
@@ -172,10 +174,7 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
                     className="week-in-place-row__hour-cell-hour-number"
                     onClick={(e) => {
                       e.stopPropagation();
-                      onHourClick({
-                        ...dateInfo,
-                        hour,
-                      });
+                      onHourClick(hour);
                     }}
                   >
                     {getTimeUnitString(hour - 1, timeDateFormat)}

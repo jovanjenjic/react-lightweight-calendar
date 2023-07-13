@@ -13,7 +13,11 @@ import {
 } from 'date-fns';
 import { DateInfo } from '../Calendar.types';
 import { formatFullDate } from '../../../utils/index';
-import { getTimeUnitString, onDayStringClickHandler } from '../Calendar.helper';
+import {
+  getKeyFromDateInfo,
+  getTimeUnitString,
+  onDayStringClickHandler,
+} from '../Calendar.helper';
 import { WeekTimeViewProps } from './WeekTimeView.types';
 
 const getDateInfo = (date: Date, currentMonth: number): DateInfo => {
@@ -153,9 +157,18 @@ const WeekTimeView: FC<WeekTimeViewProps> = ({
                 Array.from(Array(7)).map((_, day) => (
                   <div
                     key={`${day}-${hour}`}
-                    onClick={() =>
-                      onCellClick({ ...getCurrentWeek[day], hour })
-                    }
+                    onClick={() => {
+                      const timeDate = getKeyFromDateInfo(
+                        getCurrentWeek[day],
+                        hour,
+                      );
+                      onCellClick({
+                        ...getCurrentWeek[day],
+                        hour,
+                        timeDate,
+                        timeDateUTC: new Date(timeDate).toISOString(),
+                      });
+                    }}
                   />
                 )),
               )}

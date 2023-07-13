@@ -103,12 +103,14 @@ const WeekView: FC<WeekViewProps> = ({
                 style={{
                   gridColumn: `${idx + 1} / ${idx + 2}`,
                 }}
-                onClick={() =>
+                onClick={() => {
+                  const timeDate = formatFullDate(new Date(dateInfo.date));
                   onCellClick({
                     ...dateInfo,
-                    cellKey: formatFullDate(new Date(dateInfo.date)),
-                  })
-                }
+                    timeDate,
+                    timeDateUTC: new Date(timeDate).toISOString(),
+                  });
+                }}
               />
               <div className="week-view-cell-header">
                 <p

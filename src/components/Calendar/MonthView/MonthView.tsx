@@ -165,12 +165,14 @@ const MonthView: FC<MonthViewProps> = ({
                     style={{
                       gridColumn: `${idx + 1} / ${idx + 2}`,
                     }}
-                    onClick={() =>
+                    onClick={() => {
+                      const timeDate = formatFullDate(new Date(dateInfo.date));
                       onCellClick({
                         ...dateInfo,
-                        cellKey: formatFullDate(new Date(dateInfo.date)),
-                      })
-                    }
+                        timeDate,
+                        timeDateUTC: new Date(timeDate).toISOString(),
+                      });
+                    }}
                   />
                   <div className="month-cell-header">
                     <p

@@ -6,7 +6,8 @@ export interface DateInfo {
   month: number;
   year: number;
   hour?: number;
-  cellKey?: string;
+  timeDate?: string;
+  timeDateUTC?: string;
 }
 export interface DateInfoFunction {
   dateInfo: DateInfo;
