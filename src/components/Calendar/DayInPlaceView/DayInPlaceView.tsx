@@ -87,22 +87,27 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
             <div
               className="day-in-place-hour-row__hour-cell"
               key={`${parsedCurrentDay.date}-${hour}`}
-              onClick={() =>
+              onClick={() => {
+                const timeDate = getKeyFromDateInfo(parsedCurrentDay, hour);
                 onCellClick({
                   ...parsedCurrentDay,
                   hour,
-                  cellKey: getKeyFromDateInfo(parsedCurrentDay, hour),
-                })
-              }
+                  timeDate,
+                  timeDateUTC: new Date(timeDate).toISOString(),
+                });
+              }}
             >
               <div
                 data-cy="Hours"
                 className="day-in-place-hour-row__hour-cell-hour-number"
                 onClick={(e) => {
+                  const timeDate = getKeyFromDateInfo(parsedCurrentDay, hour);
                   e.stopPropagation();
                   onHourClick({
                     ...parsedCurrentDay,
                     hour,
+                    timeDate,
+                    timeDateUTC: new Date(timeDate).toISOString(),
                   });
                 }}
               >

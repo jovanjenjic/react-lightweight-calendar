@@ -38,13 +38,13 @@ const Playground = () => {
   const onCellClick = (value) => {
     console.log('onCellClick', value);
     setCellDisplayMode(() => {
-      if (cellDisplayMode['MONTH'].inactiveCells.includes(value.cellKey)) {
+      if (cellDisplayMode['MONTH'].inactiveCells.includes(value.timeDate)) {
         return {
           ...cellDisplayMode,
           MONTH: {
             ...cellDisplayMode['MONTH'],
             inactiveCells: cellDisplayMode['MONTH'].inactiveCells.filter(
-              (val) => val !== value?.cellKey,
+              (val) => val !== value?.timeDate,
             ),
           },
         };
@@ -55,7 +55,7 @@ const Playground = () => {
           ...cellDisplayMode['MONTH'],
           inactiveCells: [
             ...cellDisplayMode['MONTH'].inactiveCells,
-            value?.cellKey,
+            value?.timeDate,
           ],
         },
       };
