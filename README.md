@@ -91,6 +91,18 @@ Access any component by **className** and apply whatever style you want
 
 #### Example
 
+```css
+/* CalendarCustomStyles.css */
+
+.week-time-header__number {
+    color: #205c97
+}
+
+.week-time-view-inside {
+  background-color: #f8faff;
+}
+```
+
 ```jsx
     import './CalendarCustomStyles';
 
@@ -111,18 +123,6 @@ Access any component by **className** and apply whatever style you want
     />
 
   ...
-```
-
-```css
-/* CalendarCustomStyles.css */
-
-.week-time-header__number {
-    color: #205c97
-}
-
-.week-time-view-inside {
-  background-color: #f8faff;
-}
 ```
 
 ### Usage Example
