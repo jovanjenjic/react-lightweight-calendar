@@ -125,9 +125,10 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     idx,
     hour,
   }: DateInfoFunction): ReactElement[] => {
-    const key = hour
-      ? getKeyFromDateInfo(dateInfo, hour)
-      : formatFullDate(new Date(dateInfo.date));
+    const key =
+      hour || hour === 0
+        ? getKeyFromDateInfo(dateInfo, hour)
+        : formatFullDate(new Date(dateInfo.date));
 
     const isCollapsed = shouldCollapse(
       cellDisplayModeModified,
@@ -367,6 +368,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     activeTimeDateFieldModified,
     disableHoverEffect,
     weekStartsOn,
+    preparedData,
   ]);
 
   return (
