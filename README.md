@@ -104,7 +104,7 @@ Access any component by **className** and apply whatever style you want
 ```
 
 ```jsx
-    import './CalendarCustomStyles';
+    import './CalendarCustomStyles.css';
 
     ...
 
