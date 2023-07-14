@@ -154,7 +154,8 @@ export const calculateStartAndEndMinute = (
 
   return {
     startMinute,
-    endMinute: startMinute === endMinute ? endMinute + 30 : endMinute,
+    // Fifteen minutes is the minimum that can be shown
+    endMinute: endMinute - startMinute < 15 ? startMinute + 15 : endMinute,
   };
 };
 

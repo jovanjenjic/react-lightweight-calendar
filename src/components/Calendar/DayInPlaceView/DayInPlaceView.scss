@@ -32,7 +32,8 @@
     }
 
     &-hour-number {
-    text-align: left;
+      font: var(--font-b-1);
+      text-align: left;
       height: 1px;
       position: relative;
       left: -35px;

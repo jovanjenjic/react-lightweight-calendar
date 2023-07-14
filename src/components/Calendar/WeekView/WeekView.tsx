@@ -68,9 +68,10 @@ const WeekView: FC<WeekViewProps> = ({
           <div
             key={i}
             className="days-component__day"
-            onClick={() =>
+            onClick={(e) =>
               onDayStringClick(
                 onDayStringClickHandler(currentDate, i, weekStartsOn),
+                e,
               )
             }
           >
@@ -103,13 +104,16 @@ const WeekView: FC<WeekViewProps> = ({
                 style={{
                   gridColumn: `${idx + 1} / ${idx + 2}`,
                 }}
-                onClick={() => {
+                onClick={(e) => {
                   const timeDate = formatFullDate(new Date(dateInfo.date));
-                  onCellClick({
-                    ...dateInfo,
-                    timeDate,
-                    timeDateUTC: new Date(timeDate).toISOString(),
-                  });
+                  onCellClick(
+                    {
+                      ...dateInfo,
+                      timeDate,
+                      timeDateUTC: new Date(timeDate).toISOString(),
+                    },
+                    e,
+                  );
                 }}
               />
               <div className="week-view-cell-header">
@@ -127,7 +131,7 @@ const WeekView: FC<WeekViewProps> = ({
                     dateInfo.isCurrentDay &&
                       'week-view-cell-header__number--current-day',
                   )}
-                  onClick={() => onDayNumberClick(dateInfo.date)}
+                  onClick={(e) => onDayNumberClick(dateInfo.date, e)}
                 >
                   {dateInfo.day}
                 </p>
@@ -140,8 +144,11 @@ const WeekView: FC<WeekViewProps> = ({
                         preparedColorDots.dateKeys[dateInfo.date]?.color,
                     }}
                     className="week-view-cell-header__color-dot"
-                    onClick={() =>
-                      onColorDotClick(preparedColorDots.dateKeys[dateInfo.date])
+                    onClick={(e) =>
+                      onColorDotClick(
+                        preparedColorDots.dateKeys[dateInfo.date],
+                        e,
+                      )
                     }
                   />
                 )}

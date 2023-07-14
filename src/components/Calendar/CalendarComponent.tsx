@@ -141,8 +141,8 @@ const CalendarComponent: FC<CalendarProps> = ({
             <div
               key={color}
               className="calendar-color-dots-legend__flex"
-              onClick={() =>
-                onColorDotClick(preparedColorDots?.colorKeys[color])
+              onClick={(e) =>
+                onColorDotClick(preparedColorDots?.colorKeys[color], e)
               }
             >
               <p

@@ -14,12 +14,21 @@ export interface WeekInPlaceViewProps {
     idx,
   }: DateInfoExtendedFunction) => JSX.Element[];
   currentDate: string | Date;
-  onDayNumberClick: (day: string) => void;
-  onDayStringClick: (day: string | Date) => void;
-  onColorDotClick: (value: ColorDot) => void;
-  onCellClick: (value: DateInfo) => void;
+  onDayNumberClick: (day: string, event: React.MouseEvent<HTMLElement>) => void;
+  onDayStringClick: (
+    day: string | Date,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onColorDotClick: (
+    value: ColorDot,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onCellClick: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
   timeDateFormat: TimeFormat;
   preparedColorDots: ColorDotFull;
-  onHourClick: (value: DateInfo | number) => void;
+  onHourClick: (
+    value: DateInfo | number,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
   weekStartsOn: WeekStartsOn;
 }

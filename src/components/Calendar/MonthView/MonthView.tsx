@@ -120,9 +120,10 @@ const MonthView: FC<MonthViewProps> = ({
           <div
             key={i}
             className="days-component__day"
-            onClick={() =>
+            onClick={(e) =>
               onDayStringClick(
                 onDayStringClickHandler(currentDate, i, weekStartsOn),
+                e,
               )
             }
           >
@@ -165,13 +166,16 @@ const MonthView: FC<MonthViewProps> = ({
                     style={{
                       gridColumn: `${idx + 1} / ${idx + 2}`,
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
                       const timeDate = formatFullDate(new Date(dateInfo.date));
-                      onCellClick({
-                        ...dateInfo,
-                        timeDate,
-                        timeDateUTC: new Date(timeDate).toISOString(),
-                      });
+                      onCellClick(
+                        {
+                          ...dateInfo,
+                          timeDate,
+                          timeDateUTC: new Date(timeDate).toISOString(),
+                        },
+                        e,
+                      );
                     }}
                   />
                   <div className="month-cell-header">
@@ -189,7 +193,7 @@ const MonthView: FC<MonthViewProps> = ({
                         dateInfo.isCurrentDay &&
                           'month-cell-header__number--current-day',
                       )}
-                      onClick={() => onDayNumberClick(dateInfo.date)}
+                      onClick={(e) => onDayNumberClick(dateInfo.date, e)}
                     >
                       {dateInfo.day}
                     </p>
@@ -202,9 +206,10 @@ const MonthView: FC<MonthViewProps> = ({
                             preparedColorDots.dateKeys[dateInfo.date]?.color,
                         }}
                         className="month-cell-header__color-dot"
-                        onClick={() =>
+                        onClick={(e) =>
                           onColorDotClick(
                             preparedColorDots.dateKeys[dateInfo.date],
+                            e,
                           )
                         }
                       />

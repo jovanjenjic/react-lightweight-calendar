@@ -49,7 +49,7 @@ export const testData = [
   {
     id: 8888,
     startTime: '2023-06-02T01:10:00Z',
-    endTime: '2023-06-02T02:00:00Z',
+    endTime: '2023-06-02T02:10:00Z',
     title: 'Pause',
     bgColor: 'rgb(247 123 123)',
     textColor: 'white',
@@ -96,7 +96,7 @@ const dataProp = (
   data: testData,
   currentDate,
   setCurrentDate,
-  currentView: CurrentView.WEEK,
+  currentView: CurrentView.WEEK_TIME,
   cellDisplayMode,
   setCellDisplayMode,
   timeDateFormat: {

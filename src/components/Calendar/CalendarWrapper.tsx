@@ -171,6 +171,10 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
             hoveredElement === preparedDataItem.id && 'item--hovered',
             rightMargin && 'item--right-margin',
           )}
+          onClick={(e) => {
+            e.stopPropagation();
+            onItemClickModified(preparedDataItem, e);
+          }}
         >
           {renderItem ? (
             renderItem(preparedDataItem, hoveredElement === preparedDataItem.id)
@@ -186,12 +190,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
                 color: preparedDataItem?.textColor,
               }}
             >
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onItemClickModified(preparedDataItem);
-                }}
-              >
+              <div>
                 {renderItemText ? (
                   renderItemText(preparedDataItem)
                 ) : (
@@ -247,6 +246,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
               'item',
               hoveredElement === preparedDataItem.id && 'item--hovered',
             )}
+            onClick={(e) => onItemClickModified(preparedDataItem, e)}
           >
             {renderItem ? (
               renderItem(
@@ -263,7 +263,6 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
                   backgroundColor: preparedDataItem?.bgColor,
                   color: preparedDataItem?.textColor,
                 }}
-                onClick={() => onItemClickModified(preparedDataItem)}
               >
                 {renderItemText ? (
                   renderItemText(preparedDataItem)
@@ -330,7 +329,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
                 isFromPrevious && 'sub-item--left-arrow',
                 isFromNext && 'sub-item--right-arrow',
               )}
-              onClick={() => onItemClickModified(preparedDataItem)}
+              onClick={(e) => onItemClickModified(preparedDataItem, e)}
               style={{
                 backgroundColor: preparedDataItem?.bgColor,
                 color: preparedDataItem?.textColor,

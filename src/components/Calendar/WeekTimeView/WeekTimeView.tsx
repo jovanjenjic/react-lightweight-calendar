@@ -75,9 +75,10 @@ const WeekTimeView: FC<WeekTimeViewProps> = ({
           <div
             key={i}
             className="days-component__day"
-            onClick={() =>
+            onClick={(e) =>
               onDayStringClick(
                 onDayStringClickHandler(currentDate, i, weekStartsOn),
+                e,
               )
             }
           >
@@ -121,7 +122,7 @@ const WeekTimeView: FC<WeekTimeViewProps> = ({
                     getCurrentWeek[i].isCurrentDay &&
                       'week-time-header__number--current-day',
                   )}
-                  onClick={() => onDayNumberClick(getCurrentWeek[i].date)}
+                  onClick={(e) => onDayNumberClick(getCurrentWeek[i].date, e)}
                 >
                   {getCurrentWeek[i].day}
                 </p>
@@ -135,9 +136,10 @@ const WeekTimeView: FC<WeekTimeViewProps> = ({
                           ?.color,
                     }}
                     className="week-time-header__color-dot"
-                    onClick={() =>
+                    onClick={(e) =>
                       onColorDotClick(
                         preparedColorDots.dateKeys[getCurrentWeek[i].date],
+                        e,
                       )
                     }
                   />
@@ -157,17 +159,20 @@ const WeekTimeView: FC<WeekTimeViewProps> = ({
                 Array.from(Array(7)).map((_, day) => (
                   <div
                     key={`${day}-${hour}`}
-                    onClick={() => {
+                    onClick={(e) => {
                       const timeDate = getKeyFromDateInfo(
                         getCurrentWeek[day],
                         hour,
                       );
-                      onCellClick({
-                        ...getCurrentWeek[day],
-                        hour,
-                        timeDate,
-                        timeDateUTC: new Date(timeDate).toISOString(),
-                      });
+                      onCellClick(
+                        {
+                          ...getCurrentWeek[day],
+                          hour,
+                          timeDate,
+                          timeDateUTC: new Date(timeDate).toISOString(),
+                        },
+                        e,
+                      );
                     }}
                   />
                 )),
@@ -183,7 +188,7 @@ const WeekTimeView: FC<WeekTimeViewProps> = ({
                   <p
                     onClick={(e) => {
                       e.stopPropagation();
-                      onHourClick(hour);
+                      onHourClick(hour, e);
                     }}
                     className="week-time-week__border-bottom-hour-unit"
                   >
