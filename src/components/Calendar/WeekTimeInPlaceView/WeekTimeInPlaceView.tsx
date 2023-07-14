@@ -75,9 +75,10 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
           <div
             key={i}
             className="days-component__day"
-            onClick={() =>
+            onClick={(e) =>
               onDayStringClick(
                 onDayStringClickHandler(currentDate, i, weekStartsOn),
+                e,
               )
             }
           >
@@ -124,7 +125,7 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
                     getCurrentWeek[i].isCurrentDay &&
                       'week-in-place-cell-header__number--current-day',
                   )}
-                  onClick={() => onDayNumberClick(getCurrentWeek[i].date)}
+                  onClick={(e) => onDayNumberClick(getCurrentWeek[i].date, e)}
                 >
                   {getCurrentWeek[i].day}
                 </p>
@@ -138,9 +139,10 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
                           ?.color,
                     }}
                     className="week-in-place-cell-header__color-dot"
-                    onClick={() =>
+                    onClick={(e) =>
                       onColorDotClick(
                         preparedColorDots.dateKeys[getCurrentWeek[i].date],
+                        e,
                       )
                     }
                   />
@@ -158,14 +160,17 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
                   hour !== 23 && 'week-in-place-row__hour-cell--border-bottom',
                 )}
                 key={dateInfo.date}
-                onClick={() => {
+                onClick={(e) => {
                   const timeDate = getKeyFromDateInfo(dateInfo, hour);
-                  onCellClick({
-                    ...dateInfo,
-                    hour,
-                    timeDate,
-                    timeDateUTC: new Date(timeDate).toISOString(),
-                  });
+                  onCellClick(
+                    {
+                      ...dateInfo,
+                      hour,
+                      timeDate,
+                      timeDateUTC: new Date(timeDate).toISOString(),
+                    },
+                    e,
+                  );
                 }}
               >
                 {idx === 0 && (
@@ -174,7 +179,7 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
                     className="week-in-place-row__hour-cell-hour-number"
                     onClick={(e) => {
                       e.stopPropagation();
-                      onHourClick(hour);
+                      onHourClick(hour, e);
                     }}
                   >
                     {getTimeUnitString(hour - 1, timeDateFormat)}

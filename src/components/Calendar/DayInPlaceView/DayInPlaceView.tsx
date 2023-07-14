@@ -37,7 +37,7 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
     <>
       <div data-cy="StringDay" className="days-component">
         <div
-          onClick={() => onDayStringClick(currentDate)}
+          onClick={(e) => onDayStringClick(currentDate, e)}
           className="days-component__day"
         >
           {format(
@@ -57,7 +57,7 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
               parsedCurrentDay.isCurrentDay &&
                 'day-in-place-cell-header__number--current-day',
             )}
-            onClick={() => onDayNumberClick(parsedCurrentDay.date)}
+            onClick={(e) => onDayNumberClick(parsedCurrentDay.date, e)}
           >
             {parsedCurrentDay.day}
           </p>
@@ -70,9 +70,10 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
                   preparedColorDots.dateKeys[parsedCurrentDay.date]?.color,
               }}
               className="day-in-place-cell-header__color-dot"
-              onClick={() =>
+              onClick={(e) =>
                 onColorDotClick(
                   preparedColorDots.dateKeys[parsedCurrentDay.date],
+                  e,
                 )
               }
             />
@@ -87,14 +88,17 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
             <div
               className="day-in-place-hour-row__hour-cell"
               key={`${parsedCurrentDay.date}-${hour}`}
-              onClick={() => {
+              onClick={(e) => {
                 const timeDate = getKeyFromDateInfo(parsedCurrentDay, hour);
-                onCellClick({
-                  ...parsedCurrentDay,
-                  hour,
-                  timeDate,
-                  timeDateUTC: new Date(timeDate).toISOString(),
-                });
+                onCellClick(
+                  {
+                    ...parsedCurrentDay,
+                    hour,
+                    timeDate,
+                    timeDateUTC: new Date(timeDate).toISOString(),
+                  },
+                  e,
+                );
               }}
             >
               <div
@@ -103,12 +107,15 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
                 onClick={(e) => {
                   const timeDate = getKeyFromDateInfo(parsedCurrentDay, hour);
                   e.stopPropagation();
-                  onHourClick({
-                    ...parsedCurrentDay,
-                    hour,
-                    timeDate,
-                    timeDateUTC: new Date(timeDate).toISOString(),
-                  });
+                  onHourClick(
+                    {
+                      ...parsedCurrentDay,
+                      hour,
+                      timeDate,
+                      timeDateUTC: new Date(timeDate).toISOString(),
+                    },
+                    e,
+                  );
                 }}
               >
                 {getTimeUnitString(hour - 1, timeDateFormat)}

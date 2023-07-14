@@ -108,11 +108,20 @@ export interface CalendarProps {
   currentDate: string | Date;
   setCurrentDate?: (date: string | Date) => void;
   colorDots?: ColorDot[];
-  onDayNumberClick: (day: string) => void;
-  onDayStringClick: (day: string | Date) => void;
-  onHourClick: (value: DateInfo | number) => void;
-  onColorDotClick: (value: ColorDot) => void;
-  onCellClick: (value: DateInfo) => void;
+  onDayNumberClick: (day: string, event: React.MouseEvent<HTMLElement>) => void;
+  onDayStringClick: (
+    day: string | Date,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onHourClick: (
+    value: DateInfo | number,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onColorDotClick: (
+    value: ColorDot,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onCellClick: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
   timeDateFormat: TimeFormat;
   weekStartsOn: WeekStartsOn;
 }
@@ -142,13 +151,25 @@ export interface CalendarWrapperProps {
   currentView?: CurrentView;
   cellDisplayMode?: CellDisplayMode;
   colorDots?: ColorDot[];
-  onDayNumberClick?: (day: string) => void;
-  onDayStringClick?: (day: string | Date) => void;
-  onHourClick?: (value: DateInfo | number) => void;
-  onColorDotClick?: (value: ColorDot) => void;
+  onDayNumberClick?: (
+    day: string,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onDayStringClick?: (
+    day: string | Date,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onHourClick?: (
+    value: DateInfo | number,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onColorDotClick?: (
+    value: ColorDot,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
   // eslint-disable-next-line
-  onItemClick?: (item: Record<string, any>) => void;
-  onCellClick?: (value: DateInfo) => void;
+  onItemClick?: (item: Record<string, any>, event: React.MouseEvent<HTMLElement>) => void;
+  onCellClick?: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
   timeDateFormat?: TimeFormat;
   weekStartsOn?: WeekStartsOn;
 }
@@ -174,13 +195,25 @@ export interface GetHeaderItemInfoFunc {
 export interface InitializePropsFunc {
   cellDisplayMode?: CellDisplayMode;
   timeDateFormat?: TimeFormat;
-  onDayNumberClick?: (day: string) => void;
-  onDayStringClick?: (day: string | Date) => void;
-  onHourClick?: (value: DateInfo | number) => void;
-  onColorDotClick?: (value: ColorDot) => void;
+  onDayNumberClick?: (
+    day: string,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onDayStringClick?: (
+    day: string | Date,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onHourClick?: (
+    value: DateInfo | number,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onColorDotClick?: (
+    value: ColorDot,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
   // eslint-disable-next-line
-  onItemClick?: ((item: Record<string, any>) => void) ;
-  onCellClick?: (value: DateInfo) => void;
+  onItemClick?: ((item: Record<string, any>, event: React.MouseEvent<HTMLElement>) => void) ;
+  onCellClick?: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
   weekStartsOn?: WeekStartsOn;
   currentDate?: string | Date;
   currentView?: CurrentView;
@@ -190,13 +223,28 @@ export interface InitializePropsFunc {
 }
 export interface InitializePropsRetFunc {
   cellDisplayModeModified: CellDisplayMode;
-  onDayNumberClickModified: (day: string) => void;
-  onDayStringClickModified: (day: string | Date) => void;
-  onHourClickModified: (value: DateInfo | number) => void;
-  onColorDotClickModified: (value: ColorDot) => void;
+  onDayNumberClickModified: (
+    day: string,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onDayStringClickModified: (
+    day: string | Date,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onHourClickModified: (
+    value: DateInfo | number,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onColorDotClickModified: (
+    value: ColorDot,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
   // eslint-disable-next-line
-  onItemClickModified: (item: Record<string, any>) => void;
-  onCellClickModified: (value: DateInfo) => void;
+  onItemClickModified: (item: Record<string, any>, event: React.MouseEvent<HTMLElement>) => void;
+  onCellClickModified: (
+    value: DateInfo,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
   timeDateFormatModified: TimeFormat;
   weekStartsOnModified: WeekStartsOn;
   currentDateModified: string | Date;

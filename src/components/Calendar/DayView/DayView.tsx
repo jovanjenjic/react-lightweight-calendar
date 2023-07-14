@@ -45,7 +45,7 @@ const DayView: FC<DayTimeViewProps> = ({
     <>
       <div data-cy="StringDay" className="days-component">
         <div
-          onClick={() => onDayStringClick(currentDate)}
+          onClick={(e) => onDayStringClick(currentDate, e)}
           className="days-component__day"
         >
           {format(
@@ -64,7 +64,7 @@ const DayView: FC<DayTimeViewProps> = ({
                 parsedCurrentDay.isCurrentDay &&
                   'day-header__number--current-day',
               )}
-              onClick={() => onDayNumberClick(parsedCurrentDay.date)}
+              onClick={(e) => onDayNumberClick(parsedCurrentDay.date, e)}
             >
               {parsedCurrentDay.day}
             </p>
@@ -77,9 +77,10 @@ const DayView: FC<DayTimeViewProps> = ({
                     preparedColorDots.dateKeys[parsedCurrentDay.date]?.color,
                 }}
                 className="day-header__color-dot"
-                onClick={() =>
+                onClick={(e) =>
                   onColorDotClick(
                     preparedColorDots.dateKeys[parsedCurrentDay.date],
+                    e,
                   )
                 }
               />
@@ -95,14 +96,17 @@ const DayView: FC<DayTimeViewProps> = ({
                   key={hour}
                   data-cy="Hours"
                   className="day-hour-rows__border-bottom-line"
-                  onClick={() => {
+                  onClick={(e) => {
                     const timeDate = getKeyFromDateInfo(parsedCurrentDay, hour);
-                    onCellClick({
-                      ...parsedCurrentDay,
-                      hour,
-                      timeDate,
-                      timeDateUTC: new Date(timeDate).toISOString(),
-                    });
+                    onCellClick(
+                      {
+                        ...parsedCurrentDay,
+                        hour,
+                        timeDate,
+                        timeDateUTC: new Date(timeDate).toISOString(),
+                      },
+                      e,
+                    );
                   }}
                 >
                   <p
@@ -112,12 +116,15 @@ const DayView: FC<DayTimeViewProps> = ({
                         hour,
                       );
                       e.stopPropagation();
-                      onHourClick({
-                        ...parsedCurrentDay,
-                        hour,
-                        timeDate,
-                        timeDateUTC: new Date(timeDate).toISOString(),
-                      });
+                      onHourClick(
+                        {
+                          ...parsedCurrentDay,
+                          hour,
+                          timeDate,
+                          timeDateUTC: new Date(timeDate).toISOString(),
+                        },
+                        e,
+                      );
                     }}
                     className="day-hour-rows__border-bottom-hour-unit"
                   >

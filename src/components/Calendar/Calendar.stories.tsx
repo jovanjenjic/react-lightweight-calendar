@@ -78,12 +78,12 @@ const codeSnippet = Prism.highlight(
       hour: 'string', // Hour on the left side of the calendar
       monthYear: 'string', // Text in navigation
     }}
-    onDayNumberClick={(day: string) => void} // A callback method that is called by clicking on day number
-    onDayStringClick={(day: string | Date) => void} // A callback method that is called by clicking on day text
-    onHourClick={(value: DateInfo | number) => void} // A callback method that is called by clicking on hour on left side of Calendar
-    onColorDotClick={value: ColorDotInfo) => void} // A callback method that is called by clicking on a color
-    onItemClick={(item: Record<string, any>) => void} // A callback method that is called by clicking on an item
-    onCellClick={(value: DateInfo) => void} // A callback method that is called by clicking on a cell
+    onDayNumberClick={(day: string, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on day number
+    onDayStringClick={(day: string | Date, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on day text
+    onHourClick={(value: DateInfo | number, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on hour on left side of Calendar
+    onColorDotClick={value: ColorDotInfo, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on a color
+    onItemClick={(item: Record<string, any>, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on an item
+    onCellClick={(value: DateInfo, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on a cell
     cellDisplayMode={ // Controls whether the elements of a cell will be shown or hidden. Will not bi applied on WEEK_TIME and DAY views
         [CURRENT_VIEW]: { // WEEK_TIME, DAY, MONTH...
             inactiveCells: ['string'], // List of inactive cells. (['2023-05-29'...])

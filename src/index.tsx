@@ -30,13 +30,15 @@ const Playground = () => {
     },
   );
 
-  const onDayNumberClick = (day) => console.log('onDayNumberClick', day);
-  const onDayStringClick = (day) => console.log('onDayStringClick', day);
-  const onHourClick = (day) => console.log('onHourClick', day);
-  const onColorDotClick = (day) => console.log('onColorDotClick', day);
-  const onItemClick = (item) => console.log('onItemClick', item);
-  const onCellClick = (value) => {
-    console.log('onCellClick', value);
+  const onDayNumberClick = (day, event) =>
+    console.log('onDayNumberClick', day, event);
+  const onDayStringClick = (day, event) =>
+    console.log('onDayStringClick', day, event);
+  const onHourClick = (day, event) => console.log('onHourClick', day, event);
+  const onColorDotClick = (val, e) => console.log('onColorDotClick', val, e);
+  const onItemClick = (item, event) => console.log('onItemClick', item, event);
+  const onCellClick = (value, event) => {
+    console.log('onCellClick', value, event);
     setCellDisplayMode(() => {
       if (cellDisplayMode['MONTH'].inactiveCells.includes(value.timeDate)) {
         return {
