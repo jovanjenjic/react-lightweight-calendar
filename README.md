@@ -4,11 +4,11 @@
 
 The `Calendar` component allows you to visualize entities. It provides various customization options to tailor the appearance and behavior of the calendar to your needs.
 
-It can be designed for displaying various entities such as events, orders, activity calendars, reservations, bookings, rentals etc. It can be used for any entity that has at least one field in the ISO 8601 format. Each element on the calendar can be positioned based on a single field, based on any field that the data array contains, or based on any interval defined by separating two time date fields with a `-`.
+It can be customized for displaying various entities such as events, orders, activity calendars, reservations, bookings, rentals etc. It can be used for any entity that has at least one field in the ISO 8601 format. Each element on the calendar can be positioned based on a single field, based on any field that the data array contains, or based on any interval defined by separating two time date fields with a `-`.
 
-**Storybook usage example:** https://64a7f9553a2478c46491aea9-dpimghasum.chromatic.com/?path=/story/ui-components-calendar--calendar
+[**Storybook usage example**](https://64a7f9553a2478c46491aea9-dpimghasum.chromatic.com/?path=/story/ui-components-calendar--calendar)
 
-The component is written in TypeScript and is covered by over 60 tests. The calendar was developed using pure html, css and js (ts). The only library the calendar relies on during development is `date-fns`. 
+The component is written in TypeScript and is covered by tests. The calendar was developed using pure html, css and js (ts). The only library the calendar relies on during development is `date-fns`. 
 The plan is to continue developing additional views and functionalities. The priority for developing other features is based on the emerging needs.
 
 ### Images
@@ -39,7 +39,7 @@ The `Calendar` component accepts the following props:
 
 - `currentDate` _(REQUIRED, DEFAULT: now)_: The current date displayed on the calendar in the format 'YYYY-MM-DD'.
 
-- `setCurrentDate`: A callback function that is called when the current date is changed. It receives the new date as a parameter. If not sent, the **navigation** will not be visible
+- `setCurrentDate`: A callback function that is called when the current date is changed. It receives the new date as a parameter. If not sent, the **navigation** will not be visible. (In that case, you need to create your own navigation where only the _currentDate_ will be passed to the calendar)
 
 - `activeTimeDateField` _(required)_: The field based on which the events will be positioned on the calendar. It can be any time date field from the `data` array. It can also be an interval separated by a '-'. (`startTime`, `endTime`, `createdAt`, `updatedAt`, `startTime-endTime`, `createdAt-updated`...)
 
@@ -65,17 +65,17 @@ The `Calendar` component accepts the following props:
   - `hour`: The format for displaying the hour on the left side of the calendar.
   - `monthYear`: The text for displaying the month and year in the navigation.
 
-- `onDayNumberClick`: A callback function that is called when a day number is clicked. It receives the clicked day as a parameter.
+- `onDayNumberClick`: A callback function that is called when a day number is clicked. It receives the clicked day and _event_ as a parameter.
 
-- `onDayStringClick`: A callback function that is called when a day text is clicked. It receives the clicked day as a parameter.
+- `onDayStringClick`: A callback function that is called when a day text is clicked. It receives the clicked day and _event_ as a parameter.
 
-- `onHourClick`: A callback function that is called when an hour on the left side of the calendar is clicked. It receives the clicked hour as a parameter.
+- `onHourClick`: A callback function that is called when an hour on the left side of the calendar is clicked. It receives the clicked hour and _event_ as a parameter.
 
-- `onColorDotClick`: A callback function that is called when a color dot is clicked. It receives the clicked color dot information as a parameter.
+- `onColorDotClick`: A callback function that is called when a color dot is clicked. It receives the clicked color dot information and _event_ as a parameter.
 
-- `onItemClick`: A callback function that is called when an item is clicked. It receives the clicked item data as a parameter.
+- `onItemClick`: A callback function that is called when an item is clicked. It receives the clicked item data and _event_ as a parameter.
 
-- `onCellClick`: A callback function that is called when a cell on the calendar is clicked. It receives the clicked cell date information as a parameter.
+- `onCellClick`: A callback function that is called when a cell on the calendar is clicked. It receives the clicked cell date information and _event_ as a parameter.
 
 - `cellDisplayMode`: An object that controls the display mode of the cells in the calendar. It should have the following structure:
   - `[CURRENT_VIEW]`: The current view of the calendar (e.g., `WEEK_TIME`, `DAY`, `MONTH`, etc.).
@@ -88,8 +88,6 @@ The `Calendar` component accepts the following props:
 ### Custom Styling
 
 Access any component by **className** and apply whatever style you want
-
-#### Example
 
 ```css
 /* CalendarCustomStyles.css */
