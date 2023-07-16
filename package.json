@@ -6,7 +6,8 @@
   "types": "/dist/components/Calendar/CalendarWrapper.d.ts",
   "files": [
     "dist/components/**",
-    "dist/utils/**"
+    "dist/utils/**",
+    "dist/styles/**"
   ],
   "sideEffects": [
     "dist/*",
