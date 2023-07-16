@@ -14,7 +14,16 @@
     "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
   },
-  "include": ["src", "cypress", "**/*.ts", "**/*.tsx", "**/*.js", "cypress.config.js"]
+  "include": [
+    "src",
+    "cypress",
+    "**/*.ts",
+    "cypress.config.js",
+    "lint-staged.config.js",
+    "findRelated.js",
+    "rollup.config.js"
+  ],
+  "exclude": ["node_modules", "dist"]
 }

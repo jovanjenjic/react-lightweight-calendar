@@ -3,7 +3,7 @@ import {
   ColorDotFull,
   DateInfo,
   DateInfoExtendedFunction,
-  TimeFormat,
+  TimeFormatModified,
   WeekStartsOn,
 } from '../Calendar.types';
 
@@ -24,7 +24,7 @@ export interface WeekInPlaceViewProps {
     event: React.MouseEvent<HTMLElement>,
   ) => void;
   onCellClick: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
-  timeDateFormat: TimeFormat;
+  timeDateFormat: TimeFormatModified;
   preparedColorDots: ColorDotFull;
   onHourClick: (
     value: DateInfo | number,

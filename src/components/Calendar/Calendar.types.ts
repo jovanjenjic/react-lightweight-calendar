@@ -93,6 +93,12 @@ export interface CellDisplayMode {
 }
 
 export interface TimeFormat {
+  day?: string;
+  hour?: string;
+  monthYear?: string;
+}
+
+export interface TimeFormatModified {
   day: string;
   hour: string;
   monthYear: string;
@@ -122,7 +128,7 @@ export interface CalendarProps {
     event: React.MouseEvent<HTMLElement>,
   ) => void;
   onCellClick: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
-  timeDateFormat: TimeFormat;
+  timeDateFormat: TimeFormatModified;
   weekStartsOn: WeekStartsOn;
 }
 
@@ -148,7 +154,7 @@ export interface CalendarWrapperProps {
   currentDate?: string | Date;
   setCurrentDate?: (date: string | Date) => void;
   activeTimeDateField?: string;
-  currentView?: CurrentView;
+  currentView?: CurrentView | string;
   cellDisplayMode?: CellDisplayMode;
   colorDots?: ColorDot[];
   onDayNumberClick?: (
@@ -171,14 +177,14 @@ export interface CalendarWrapperProps {
   onItemClick?: (item: Record<string, any>, event: React.MouseEvent<HTMLElement>) => void;
   onCellClick?: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
   timeDateFormat?: TimeFormat;
-  weekStartsOn?: WeekStartsOn;
+  weekStartsOn?: WeekStartsOn | number;
 }
 
 export interface CalendarHeaderProps {
   setCurrentDate: (date: string | Date) => void;
   currentView: CurrentView;
   currentDate: string | Date;
-  timeDateFormat: TimeFormat;
+  timeDateFormat: TimeFormatModified;
 }
 
 export interface CalculateStartAndEndMinuteFunc {
@@ -216,7 +222,7 @@ export interface InitializePropsFunc {
   onCellClick?: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
   weekStartsOn?: WeekStartsOn;
   currentDate?: string | Date;
-  currentView?: CurrentView;
+  currentView?: CurrentView | string;
   activeTimeDateField?: string;
   // eslint-disable-next-line
   data?: Record<string, any>[];
@@ -245,7 +251,7 @@ export interface InitializePropsRetFunc {
     value: DateInfo,
     event: React.MouseEvent<HTMLElement>,
   ) => void;
-  timeDateFormatModified: TimeFormat;
+  timeDateFormatModified: TimeFormatModified;
   weekStartsOnModified: WeekStartsOn;
   currentDateModified: string | Date;
   currentViewModified: CurrentView;
