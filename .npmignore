@@ -16,3 +16,6 @@ dist/src/dataProps.d.ts
 storybook-static/
 **/*.cy.*
 **/*.stories.*
+tsup.config.ts
+tsconfig.json
+cypress.config

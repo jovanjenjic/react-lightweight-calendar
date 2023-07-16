@@ -2,8 +2,16 @@
   "name": "react-lightweight-calendar",
   "version": "1.0.8",
   "description": "The Calendar component is a calendar display component that allows you to visualize entities. It provides various customization options to tailor the appearance and behavior of the calendar to your needs.",
-  "main": "/dist/src/components/Calendar/CalendarWrapper.js",
-  "types": "/dist/src/components/Calendar/Calendar.types.d.ts",
+  "main": "/dist/components/Calendar/CalendarWrapper.js",
+  "types": "/dist/components/Calendar/CalendarWrapper.d.ts",
+  "files": [
+    "dist/components/**",
+    "dist/utils/**"
+  ],
+  "sideEffects": [
+    "dist/*",
+    "*.scss"
+  ],
   "keywords": [
     "react-calendar",
     "react-timeline-calendar",
@@ -31,7 +39,7 @@
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
-    "build": "node-sass src/styles/styles.scss -o src/styles && react-scripts build && tsc",
+    "build": "node-sass src/styles/styles.scss -o dist/styles",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
@@ -80,6 +88,7 @@
     "prettier": "^2.8.8",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.26",
+    "tsup": "^7.1.0",
     "webpack": "^5.88.1"
   }
 }

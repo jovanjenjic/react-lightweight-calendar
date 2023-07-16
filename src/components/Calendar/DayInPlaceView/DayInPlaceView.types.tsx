@@ -1,10 +1,9 @@
 import {
   ColorDot,
   ColorDotFull,
-  CurrentView,
   DateInfo,
   DateInfoExtendedFunction,
-  TimeFormat,
+  TimeFormatModified,
 } from '../Calendar.types';
 
 export interface DayInPlaceViewProps {
@@ -24,7 +23,7 @@ export interface DayInPlaceViewProps {
     event: React.MouseEvent<HTMLElement>,
   ) => void;
   onCellClick: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
-  timeDateFormat: TimeFormat;
+  timeDateFormat: TimeFormatModified;
   preparedColorDots: ColorDotFull;
   onHourClick: (
     value: DateInfo | number,

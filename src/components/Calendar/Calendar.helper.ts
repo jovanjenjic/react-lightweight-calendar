@@ -188,7 +188,7 @@ export const initializeProps = ({
   };
   const weekStartsOnModified = weekStartsOn ?? WeekStartsOn.MONDAY;
   const currentDateModified = currentDate || formatFullDate(new Date());
-  const currentViewModified = currentView || CurrentView.MONTH;
+  const currentViewModified = (currentView as CurrentView) || CurrentView.MONTH;
   const activeTimeDateFieldModified = activeTimeDateField || '';
   const dataModified = data || [];
   const cellDisplayModeConst = {

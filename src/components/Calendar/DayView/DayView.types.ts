@@ -3,7 +3,7 @@ import {
   ColorDotFull,
   DateInfo,
   DateInfoFunction,
-  TimeFormat,
+  TimeFormatModified,
 } from '../Calendar.types';
 
 export interface DayTimeViewProps {
@@ -23,7 +23,7 @@ export interface DayTimeViewProps {
     event: React.MouseEvent<HTMLElement>,
   ) => void;
   onCellClick: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
-  timeDateFormat: TimeFormat;
+  timeDateFormat: TimeFormatModified;
   preparedColorDots: ColorDotFull;
   onHourClick: (
     value: DateInfo | number,

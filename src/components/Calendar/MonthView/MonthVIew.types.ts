@@ -4,7 +4,7 @@ import {
   CurrentView,
   DateInfo,
   DateInfoFunction,
-  TimeFormat,
+  TimeFormatModified,
   WeekStartsOn,
 } from '../Calendar.types';
 
@@ -22,7 +22,7 @@ export interface MonthViewProps {
     event: React.MouseEvent<HTMLElement>,
   ) => void;
   onCellClick: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
-  timeDateFormat: TimeFormat;
+  timeDateFormat: TimeFormatModified;
   preparedColorDots: ColorDotFull;
   weekStartsOn: WeekStartsOn;
 }
