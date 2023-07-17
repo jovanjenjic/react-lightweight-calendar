@@ -84,6 +84,7 @@ const codeSnippet = Prism.highlight(
     onColorDotClick={value: ColorDotInfo, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on a color
     onItemClick={(item: Record<string, any>, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on an item
     onCellClick={(value: DateInfo, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on a cell
+    onCellHeaderClick={(value: DateInfo, event: React.MouseEvent<HTMLElement>) => void} // A callback function that is called when a cell header is clicked. In the case of a MONTH and WEEK views, onCellClick method will be called instead of this one.
     cellDisplayMode={ // Controls whether the elements of a cell will be shown or hidden. Will not bi applied on WEEK_TIME and DAY views
         [CURRENT_VIEW]: { // WEEK_TIME, DAY, MONTH...
             inactiveCells: ['string'], // List of inactive cells. (['2023-05-29'...])
