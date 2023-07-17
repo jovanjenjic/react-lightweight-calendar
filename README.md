@@ -7,7 +7,9 @@ The `Calendar` component allows you to visualize entities. It provides various c
 It can be customized for displaying various entities such as events, orders, activity calendars, reservations, bookings, rentals etc. It can be used for any entity that has at least one field in the ISO 8601 format. Each element on the calendar can be positioned based on a single field, based on any field that the data array contains, or based on any interval defined by separating two time date fields with a `-`.
 
 [Storybook usage example](https://64a7f9553a2478c46491aea9-yncqvnyuvd.chromatic.com/?path=/story/ui-components-calendar--calendar)
+
 [CodeSandbox typescript example](https://codesandbox.io/s/react-lightweight-calendar-ts-yzxryp)
+
 [CodeSandbox javascript example](https://codesandbox.io/s/react-lightweight-calendar-nv8csq)
 
 The component is written in TypeScript and is covered by tests. The calendar was developed using pure html, css and js (ts). The only library the calendar relies on during development is `date-fns`. 
