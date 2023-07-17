@@ -46,6 +46,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   onColorDotClick,
   onItemClick,
   onCellClick,
+  onCellHeaderClick,
   timeDateFormat,
   weekStartsOn,
 }) => {
@@ -59,6 +60,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     onColorDotClickModified,
     onItemClickModified,
     onCellClickModified,
+    onCellHeaderClickModified,
     weekStartsOnModified,
     currentDateModified,
     currentViewModified,
@@ -71,6 +73,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     onDayStringClick,
     onHourClick,
     onColorDotClick,
+    onCellHeaderClick,
     onItemClick,
     onCellClick,
     weekStartsOn,
@@ -233,7 +236,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
           <div
             key={`${index}-${dateInfo.date}`}
             style={{
-              gridRow: `${+preparedDataItem.startMinute} / ${+preparedDataItem.endMinute}`,
+              gridRow: `${preparedDataItem.startMinute} / ${preparedDataItem.endMinute}`,
               width: preparedDataItem.width,
               left: preparedDataItem.left,
               margin: preparedDataItem.margin,
@@ -258,6 +261,8 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
                 className={cn(
                   'sub-item',
                   hoveredElement === preparedDataItem.id && 'sub-item--hovered',
+                  preparedDataItem.endMinute - preparedDataItem.startMinute <=
+                    40 && 'sub-item--small-size',
                 )}
                 style={{
                   backgroundColor: preparedDataItem?.bgColor,
@@ -329,7 +334,10 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
                 isFromPrevious && 'sub-item--left-arrow',
                 isFromNext && 'sub-item--right-arrow',
               )}
-              onClick={(e) => onItemClickModified(preparedDataItem, e)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onItemClickModified(preparedDataItem, e);
+              }}
               style={{
                 backgroundColor: preparedDataItem?.bgColor,
                 color: preparedDataItem?.textColor,
@@ -385,6 +393,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
         onHourClick={onHourClickModified}
         onColorDotClick={onColorDotClickModified}
         onCellClick={onCellClickModified}
+        onCellHeaderClick={onCellHeaderClickModified}
         timeDateFormat={timeDateFormatModified}
         weekStartsOn={weekStartsOnModified}
       />

@@ -37,6 +37,8 @@ const Playground = () => {
   const onHourClick = (day, event) => console.log('onHourClick', day, event);
   const onColorDotClick = (val, e) => console.log('onColorDotClick', val, e);
   const onItemClick = (item, event) => console.log('onItemClick', item, event);
+  const onCellHeaderClick = (value, event) =>
+    console.log('onCellHeaderClick', value, event);
   const onCellClick = (value, event) => {
     console.log('onCellClick', value, event);
     setCellDisplayMode(() => {
@@ -81,6 +83,7 @@ const Playground = () => {
         onColorDotClick={onColorDotClick}
         onItemClick={onItemClick}
         onCellClick={onCellClick}
+        onCellHeaderClick={onCellHeaderClick}
       />
     </div>
   );

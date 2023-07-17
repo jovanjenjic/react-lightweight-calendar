@@ -28,6 +28,8 @@ const getDateInfo = (date: Date, currentMonth: number): DateInfo => {
     isCurrentMonth: getMonth(date) === currentMonth,
     isCurrentDay: isToday(date),
     date: formatFullDate(date),
+    timeDate: '',
+    timeDateUTC: '',
   };
 };
 
@@ -40,6 +42,7 @@ const WeekTimeView: FC<WeekTimeViewProps> = ({
   onHourClick,
   onColorDotClick,
   onCellClick,
+  onCellHeaderClick,
   timeDateFormat,
   preparedColorDots,
   weekStartsOn,
@@ -105,52 +108,68 @@ const WeekTimeView: FC<WeekTimeViewProps> = ({
           ))}
         </div>
         <div className="week-time-header">
-          <>
-            {Array.from(Array(7)).map((_, i) => (
-              <div key={i} className="week-time-header--item">
-                <p
-                  data-cy="DayNumber"
-                  data-day-type={
-                    getCurrentWeek[i].isCurrentDay
-                      ? 'current'
-                      : !getCurrentWeek[i].isCurrentMonth && 'disabled'
-                  }
-                  className={cn(
-                    'week-time-header__number',
-                    !getCurrentWeek[i].isCurrentMonth &&
-                      'week-time-header__number--disabled',
-                    getCurrentWeek[i].isCurrentDay &&
-                      'week-time-header__number--current-day',
-                  )}
-                  onClick={(e) => onDayNumberClick(getCurrentWeek[i].date, e)}
-                >
-                  {getCurrentWeek[i].day}
-                </p>
-                {preparedColorDots.dateKeys?.[getCurrentWeek[i].date] && (
-                  <p
-                    data-cy="ColorDot"
-                    data-date={getCurrentWeek[i].date}
-                    style={{
-                      backgroundColor:
-                        preparedColorDots.dateKeys[getCurrentWeek[i].date]
-                          ?.color,
-                    }}
-                    className="week-time-header__color-dot"
-                    onClick={(e) =>
-                      onColorDotClick(
-                        preparedColorDots.dateKeys[getCurrentWeek[i].date],
-                        e,
-                      )
-                    }
-                  />
+          {Array.from(Array(7)).map((_, i) => (
+            <div
+              key={i}
+              className="week-time-header--item"
+              onClick={(e) => {
+                const timeDate = getKeyFromDateInfo(getCurrentWeek[i], 0);
+                onCellHeaderClick(
+                  {
+                    ...getCurrentWeek[i],
+                    hour: 0,
+                    timeDate,
+                    timeDateUTC: new Date(timeDate).toISOString(),
+                  },
+                  e,
+                );
+              }}
+            >
+              <p
+                data-cy="DayNumber"
+                data-day-type={
+                  getCurrentWeek[i].isCurrentDay
+                    ? 'current'
+                    : !getCurrentWeek[i].isCurrentMonth && 'disabled'
+                }
+                className={cn(
+                  'week-time-header__number',
+                  !getCurrentWeek[i].isCurrentMonth &&
+                    'week-time-header__number--disabled',
+                  getCurrentWeek[i].isCurrentDay &&
+                    'week-time-header__number--current-day',
                 )}
-              </div>
-            ))}
-            {renderHeaderItems(
-              getCurrentWeek[0]?.date,
-              getCurrentWeek[getCurrentWeek.length - 1]?.date,
-            )}
-          </>
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDayNumberClick(getCurrentWeek[i].date, e);
+                }}
+              >
+                {getCurrentWeek[i].day}
+              </p>
+              {preparedColorDots.dateKeys?.[getCurrentWeek[i].date] && (
+                <p
+                  data-cy="ColorDot"
+                  data-date={getCurrentWeek[i].date}
+                  style={{
+                    backgroundColor:
+                      preparedColorDots.dateKeys[getCurrentWeek[i].date]?.color,
+                  }}
+                  className="week-time-header__color-dot"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onColorDotClick(
+                      preparedColorDots.dateKeys[getCurrentWeek[i].date],
+                      e,
+                    );
+                  }}
+                />
+              )}
+            </div>
+          ))}
+          {renderHeaderItems(
+            getCurrentWeek[0]?.date,
+            getCurrentWeek[getCurrentWeek.length - 1]?.date,
+          )}
         </div>
         <div className="week-time-week">
           <>
