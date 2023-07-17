@@ -83,6 +83,9 @@
 }
 
 .sub-item {
+  display: flex;
+  flex-direction: column;
+
   border-radius: 5px;
   background-color: var(--b-100);
   color: var(--gs-700);
@@ -104,6 +107,13 @@
   &--hovered {
     z-index: 10;
     filter: brightness(1.05);
+  }
+
+  &--small-size {
+    flex-wrap: wrap;
+    padding: 0 0 0 var(--spacing);
+    font: var(--font-a-4);
+    justify-content: center;
   }
   
   &--right-arrow {

@@ -22,6 +22,8 @@ const getDateInfo = (date: Date, currentMonth: number): DateInfo => {
     isCurrentMonth: getMonth(date) === currentMonth,
     isCurrentDay: isToday(date),
     date: formatFullDate(date),
+    timeDate: '',
+    timeDateUTC: '',
   };
 };
 

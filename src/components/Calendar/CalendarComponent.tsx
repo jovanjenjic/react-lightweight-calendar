@@ -21,6 +21,7 @@ const CalendarComponent: FC<CalendarProps> = ({
   onHourClick,
   onColorDotClick,
   onCellClick,
+  onCellHeaderClick,
   timeDateFormat,
   weekStartsOn,
 }) => {
@@ -89,6 +90,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           onDayStringClick={onDayStringClick}
           onColorDotClick={onColorDotClick}
           onCellClick={onCellClick}
+          onCellHeaderClick={onCellHeaderClick}
           timeDateFormat={timeDateFormat}
           onHourClick={onHourClick}
           weekStartsOn={weekStartsOn}
@@ -104,6 +106,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           onDayStringClick={onDayStringClick}
           onColorDotClick={onColorDotClick}
           onCellClick={onCellClick}
+          onCellHeaderClick={onCellHeaderClick}
           timeDateFormat={timeDateFormat}
           onHourClick={onHourClick}
         />
@@ -117,6 +120,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           onDayStringClick={onDayStringClick}
           onColorDotClick={onColorDotClick}
           onCellClick={onCellClick}
+          onCellHeaderClick={onCellHeaderClick}
           timeDateFormat={timeDateFormat}
           onHourClick={onHourClick}
           weekStartsOn={weekStartsOn}
@@ -131,6 +135,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           onDayStringClick={onDayStringClick}
           onColorDotClick={onColorDotClick}
           onCellClick={onCellClick}
+          onCellHeaderClick={onCellHeaderClick}
           timeDateFormat={timeDateFormat}
           onHourClick={onHourClick}
         />

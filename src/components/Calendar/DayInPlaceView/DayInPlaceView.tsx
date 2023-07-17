@@ -14,6 +14,8 @@ const getDateInfo = (date: Date, currentMonth: number): DateInfo => {
     isCurrentMonth: getMonth(date) === currentMonth,
     isCurrentDay: isToday(date),
     date: format(date, TimeDateFormat.FULL_DATE),
+    timeDate: '',
+    timeDateUTC: '',
   };
 };
 
@@ -25,6 +27,7 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
   onHourClick,
   onColorDotClick,
   onCellClick,
+  onCellHeaderClick,
   timeDateFormat,
   preparedColorDots,
 }) => {
@@ -47,7 +50,21 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
         </div>
       </div>
       <div data-cy="DayInPlaceViewInside" className="day-view-inside">
-        <div className="day-in-place-cell-header">
+        <div
+          className="day-in-place-cell-header"
+          onClick={(e) => {
+            const timeDate = getKeyFromDateInfo(parsedCurrentDay, 0);
+            onCellHeaderClick(
+              {
+                ...parsedCurrentDay,
+                hour: 0,
+                timeDate,
+                timeDateUTC: new Date(timeDate).toISOString(),
+              },
+              e,
+            );
+          }}
+        >
           <p
             data-cy="DayNumber"
             className={cn(
@@ -57,7 +74,10 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
               parsedCurrentDay.isCurrentDay &&
                 'day-in-place-cell-header__number--current-day',
             )}
-            onClick={(e) => onDayNumberClick(parsedCurrentDay.date, e)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDayNumberClick(parsedCurrentDay.date, e);
+            }}
           >
             {parsedCurrentDay.day}
           </p>
@@ -70,12 +90,13 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
                   preparedColorDots.dateKeys[parsedCurrentDay.date]?.color,
               }}
               className="day-in-place-cell-header__color-dot"
-              onClick={(e) =>
+              onClick={(e) => {
+                e.stopPropagation();
                 onColorDotClick(
                   preparedColorDots.dateKeys[parsedCurrentDay.date],
                   e,
-                )
-              }
+                );
+              }}
             />
           )}
         </div>

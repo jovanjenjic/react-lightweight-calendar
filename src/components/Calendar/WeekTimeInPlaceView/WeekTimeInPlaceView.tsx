@@ -26,6 +26,8 @@ const getDateInfo = (date: Date, currentMonth: number): DateInfo => {
     isCurrentMonth: getMonth(date) === currentMonth,
     isCurrentDay: isToday(date),
     date: formatFullDate(date),
+    timeDate: '',
+    timeDateUTC: '',
   };
 };
 
@@ -37,6 +39,7 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
   onHourClick,
   onColorDotClick,
   onCellClick,
+  onCellHeaderClick,
   timeDateFormat,
   preparedColorDots,
   weekStartsOn,
@@ -109,46 +112,62 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
         </div>
         <div className="week-in-place-header">
           {Array.from(Array(7)).map((_, i) => (
-            <React.Fragment key={i}>
-              <div className="week-in-place-cell-header">
-                <p
-                  data-cy="DayNumber"
-                  data-day-type={
-                    getCurrentWeek[i].isCurrentDay
-                      ? 'current'
-                      : !getCurrentWeek[i].isCurrentMonth && 'disabled'
-                  }
-                  className={cn(
-                    'week-in-place-cell-header__number',
-                    !getCurrentWeek[i].isCurrentMonth &&
-                      'week-in-place-cell-header__number--disabled',
-                    getCurrentWeek[i].isCurrentDay &&
-                      'week-in-place-cell-header__number--current-day',
-                  )}
-                  onClick={(e) => onDayNumberClick(getCurrentWeek[i].date, e)}
-                >
-                  {getCurrentWeek[i].day}
-                </p>
-                {preparedColorDots.dateKeys?.[getCurrentWeek[i].date] && (
-                  <p
-                    data-cy="ColorDot"
-                    data-date={getCurrentWeek[i].date}
-                    style={{
-                      backgroundColor:
-                        preparedColorDots.dateKeys[getCurrentWeek[i].date]
-                          ?.color,
-                    }}
-                    className="week-in-place-cell-header__color-dot"
-                    onClick={(e) =>
-                      onColorDotClick(
-                        preparedColorDots.dateKeys[getCurrentWeek[i].date],
-                        e,
-                      )
-                    }
-                  />
+            <div
+              key={i}
+              className="week-in-place-cell-header"
+              onClick={(e) => {
+                const timeDate = getKeyFromDateInfo(getCurrentWeek[i], 0);
+                onCellHeaderClick(
+                  {
+                    ...getCurrentWeek[i],
+                    hour: 0,
+                    timeDate,
+                    timeDateUTC: new Date(timeDate).toISOString(),
+                  },
+                  e,
+                );
+              }}
+            >
+              <p
+                data-cy="DayNumber"
+                data-day-type={
+                  getCurrentWeek[i].isCurrentDay
+                    ? 'current'
+                    : !getCurrentWeek[i].isCurrentMonth && 'disabled'
+                }
+                className={cn(
+                  'week-in-place-cell-header__number',
+                  !getCurrentWeek[i].isCurrentMonth &&
+                    'week-in-place-cell-header__number--disabled',
+                  getCurrentWeek[i].isCurrentDay &&
+                    'week-in-place-cell-header__number--current-day',
                 )}
-              </div>
-            </React.Fragment>
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDayNumberClick(getCurrentWeek[i].date, e);
+                }}
+              >
+                {getCurrentWeek[i].day}
+              </p>
+              {preparedColorDots.dateKeys?.[getCurrentWeek[i].date] && (
+                <p
+                  data-cy="ColorDot"
+                  data-date={getCurrentWeek[i].date}
+                  style={{
+                    backgroundColor:
+                      preparedColorDots.dateKeys[getCurrentWeek[i].date]?.color,
+                  }}
+                  className="week-in-place-cell-header__color-dot"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onColorDotClick(
+                      preparedColorDots.dateKeys[getCurrentWeek[i].date],
+                      e,
+                    );
+                  }}
+                />
+              )}
+            </div>
           ))}
         </div>
         <div data-cy="Cells" className="week-in-place-row">

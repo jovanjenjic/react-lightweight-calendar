@@ -26,6 +26,7 @@ export const fonts = () => {
       --font-a-1: normal normal 500 20px/28px 'Inter', sans-serif;
       --font-a-2: normal normal 500 14px/20px 'Inter', sans-serif;
       --font-a-3: normal normal 500 12px/18px 'Inter', sans-serif;
+      --font-a-4: normal normal 500 12px/14px 'Inter', sans-serif;
 
       --font-b-1: normal normal 400 16px/24px 'Inter', sans-serif;
       --font-b-2: normal normal 400 12px/20px 'Inter', sans-serif;

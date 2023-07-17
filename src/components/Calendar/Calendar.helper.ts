@@ -169,6 +169,7 @@ export const initializeProps = ({
   onColorDotClick,
   onItemClick,
   onCellClick,
+  onCellHeaderClick,
   currentDate,
   currentView,
   activeTimeDateField,
@@ -180,6 +181,7 @@ export const initializeProps = ({
   const onColorDotClickModified = onColorDotClick || (() => null);
   const onItemClickModified = onItemClick || (() => null);
   const onCellClickModified = onCellClick || (() => null);
+  const onCellHeaderClickModified = onCellHeaderClick || (() => null);
 
   const timeDateFormatModified = {
     day: timeDateFormat?.day || TimeDateFormat.SHORT_WEEKDAY,
@@ -221,6 +223,7 @@ export const initializeProps = ({
     onColorDotClickModified,
     onItemClickModified,
     onCellClickModified,
+    onCellHeaderClickModified,
     weekStartsOnModified,
     currentDateModified,
     currentViewModified,

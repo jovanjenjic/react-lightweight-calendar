@@ -6,8 +6,8 @@ export interface DateInfo {
   month: number;
   year: number;
   hour?: number;
-  timeDate?: string;
-  timeDateUTC?: string;
+  timeDate: string;
+  timeDateUTC: string;
 }
 export interface DateInfoFunction {
   dateInfo: DateInfo;
@@ -128,6 +128,10 @@ export interface CalendarProps {
     event: React.MouseEvent<HTMLElement>,
   ) => void;
   onCellClick: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
+  onCellHeaderClick: (
+    value: DateInfo,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
   timeDateFormat: TimeFormatModified;
   weekStartsOn: WeekStartsOn;
 }
@@ -176,6 +180,10 @@ export interface CalendarWrapperProps {
   // eslint-disable-next-line
   onItemClick?: (item: Record<string, any>, event: React.MouseEvent<HTMLElement>) => void;
   onCellClick?: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
+  onCellHeaderClick?: (
+    value: DateInfo,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
   timeDateFormat?: TimeFormat;
   weekStartsOn?: WeekStartsOn | number;
 }
@@ -220,6 +228,10 @@ export interface InitializePropsFunc {
   // eslint-disable-next-line
   onItemClick?: ((item: Record<string, any>, event: React.MouseEvent<HTMLElement>) => void) ;
   onCellClick?: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
+  onCellHeaderClick?: (
+    value: DateInfo,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
   weekStartsOn?: WeekStartsOn;
   currentDate?: string | Date;
   currentView?: CurrentView | string;
@@ -248,6 +260,10 @@ export interface InitializePropsRetFunc {
   // eslint-disable-next-line
   onItemClickModified: (item: Record<string, any>, event: React.MouseEvent<HTMLElement>) => void;
   onCellClickModified: (
+    value: DateInfo,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
+  onCellHeaderClickModified: (
     value: DateInfo,
     event: React.MouseEvent<HTMLElement>,
   ) => void;

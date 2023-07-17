@@ -24,6 +24,10 @@ export interface WeekInPlaceViewProps {
     event: React.MouseEvent<HTMLElement>,
   ) => void;
   onCellClick: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
+  onCellHeaderClick: (
+    value: DateInfo,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
   timeDateFormat: TimeFormatModified;
   preparedColorDots: ColorDotFull;
   onHourClick: (
