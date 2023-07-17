@@ -80,6 +80,8 @@ The `Calendar` component accepts the following props:
 - `onItemClick`: A callback function that is called when an item is clicked. It receives the clicked item data and _event_ as a parameter.
 
 - `onCellClick`: A callback function that is called when a cell on the calendar is clicked. It receives the clicked cell date information and _event_ as a parameter.
+  
+- `onCellHeaderClick`: A callback function that is called when a cell header is clicked. It receives the clicked cell date information and _event_ as a parameter. It is the part to the left and right of the day number within cell. In the case of a MONTH and WEEK views, `onCellClick` method will be called.
 
 - `cellDisplayMode`: An object that controls the display mode of the cells in the calendar. It should have the following structure:
   - `[CURRENT_VIEW]`: The current view of the calendar (e.g., `WEEK_TIME`, `DAY`, `MONTH`, etc.).
