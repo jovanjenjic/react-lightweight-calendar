@@ -57,7 +57,7 @@ The `Calendar` component accepts the following props:
 
 - `renderHeaderItemText`: A callback function for custom rendering of the text content of the header element in the `WEEK_TIME` and `DAY` views. It receives the header item data.
 
-- `enableHoverEffect`: A boolean value that determines whether a 'hovered' class name will be added to each hovered element. This can be used to apply custom styling to the hovered elements.
+- `disableHoverEffect`: A boolean value that determines whether a 'hovered' class name will be added to each hovered element. This can be used to apply custom styling to the hovered elements.
 
 - `colorDots`: An array of color dot objects that can be used to mark specific dates on the calendar. Each color dot object should have the following properties:
   - `color`: The color of the dot.
