@@ -70,7 +70,7 @@ const checkAreSubcomponentsExist = () => {
   cy.get(colorDotsComponent).should('exist');
   cy.get(dayNumber).each((day) => {
     if (day.attr('data-day-type') === 'current') {
-      cy.wrap(day).should('have.css', 'background-color', 'rgb(240, 131, 0)');
+      cy.wrap(day).should('have.css', 'background-color', 'rgb(19, 155, 255)');
       cy.wrap(day).should('have.css', 'color', 'rgb(255, 255, 255)');
     } else if (day.attr('data-day-type') === 'disabled') {
       cy.wrap(day).should('have.css', 'color', 'rgb(160, 174, 192)');
