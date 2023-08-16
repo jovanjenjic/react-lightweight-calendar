@@ -8,6 +8,7 @@ import DayView from './DayView/DayView';
 import DayInPlaceView from './DayInPlaceView/DayInPlaceView';
 import WeekTimeInPlaceView from './WeekTimeInPlaceView/WeekTimeInPlaceView';
 import { isEmptyObject } from '../../utils';
+import DayReverseView from './DayReverseView/DayReverseView';
 
 const CalendarComponent: FC<CalendarProps> = ({
   renderItems,
@@ -107,6 +108,19 @@ const CalendarComponent: FC<CalendarProps> = ({
           onColorDotClick={onColorDotClick}
           onCellClick={onCellClick}
           onCellHeaderClick={onCellHeaderClick}
+          timeDateFormat={timeDateFormat}
+          onHourClick={onHourClick}
+        />
+      )}
+      {currentView === CurrentView.DAY_REVERSE && (
+        <DayReverseView
+          preparedColorDots={preparedColorDots}
+          renderItems={renderItems}
+          currentDate={currentDate}
+          onDayNumberClick={onDayNumberClick}
+          onDayStringClick={onDayStringClick}
+          onColorDotClick={onColorDotClick}
+          onCellClick={onCellClick}
           timeDateFormat={timeDateFormat}
           onHourClick={onHourClick}
         />

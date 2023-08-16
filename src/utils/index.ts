@@ -20,6 +20,7 @@ import {
   startOfMonth,
   endOfMonth,
   startOfHour,
+  addDays,
 } from 'date-fns';
 
 export const formatFullDate = (date: Date): string =>
@@ -358,6 +359,88 @@ export const prepareCalendarDataInPlace = (
 
     result[key] = [...(result[key] || []), obj];
   }
+
+  return result;
+};
+
+/**
+ * Based on the currently selected field in the configuration (eg `startTime` or `startTime-endTime`),
+ * a corresponding array is formed that will be displayed on the calendar.
+ * Used for DAY and WEEK_TIME
+ * @param calendarData - Array of data for calendar view
+ * @param activeTimeDateField - Current active field (startTime, endTime, startTime-endTIme, etc...)
+ * @returns - Prepared array of data for calendar view
+ */
+export const prepareCalendarDataWithTimeReverse = (
+  // eslint-disable-next-line
+  calendarData: Record<string, any>[],
+  activeTimeDateField: string,
+): PreparedDataWithTimeFull => {
+  const result = {
+    week: [] as PreparedDataWithTime[],
+    day: {} as Record<string, PreparedDataWithTime>[],
+  };
+  // If there is an end interval, it is separated by '-' (createdAt - updatedAt)
+  const [startIntervalKey, endIntervalKey = startIntervalKey] = (
+    activeTimeDateField ?? ''
+  )
+    .split('-')
+    .map((str) => str.replace(/\s/g, '')) as [string, string];
+
+  // Sorted by active field
+  const sortedCalendarValue = calendarData.sort(
+    (a, b) =>
+      new Date(a?.[startIntervalKey]).valueOf() -
+      new Date(b?.[startIntervalKey]).valueOf(),
+  );
+
+  sortedCalendarValue.forEach((obj) => {
+    const startDateValue = obj?.[startIntervalKey];
+    const endDateValue = obj?.[endIntervalKey];
+
+    if (!startDateValue || !endDateValue) return;
+
+    const startDate = new Date(startDateValue);
+    const endDate = new Date(endDateValue);
+
+    // Calculate difference in days
+    const diffInDays = differenceInDays(endDate, startDate);
+
+    for (let i = 0; i <= diffInDays; i++) {
+      const currentDate = addDays(startDate, i);
+      const key: string = formatFullDate(currentDate);
+
+      const res: PreparedDataWithTime = {
+        ...obj,
+        startMinute: 0,
+        endMinute: 0,
+      };
+
+      const startOfDayDate =
+        startDate > startOfDay(currentDate)
+          ? startDate
+          : startOfDay(currentDate);
+      const endOfDayDate =
+        endDate < endOfDay(currentDate) ? endDate : endOfDay(currentDate);
+
+      const { startMinute, endMinute } = calculateStartAndEndMinute(
+        startOfDayDate,
+        endOfDayDate,
+      );
+
+      const adjustedRes = {
+        ...res,
+        startMinute,
+        endMinute,
+      };
+
+      result.day[key] = [...(result.day[key] || []), adjustedRes];
+    }
+  });
+
+  Object.keys(result.day).forEach((key) => {
+    processMatchingItems(result.day[key]);
+  });
 
   return result;
 };

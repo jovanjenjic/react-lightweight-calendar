@@ -15,6 +15,7 @@ import {
   prepareCalendarData,
   prepareCalendarDataInPlace,
   prepareCalendarDataWithTime,
+  prepareCalendarDataWithTimeReverse,
 } from '../../utils/index';
 import {
   shouldCollapse,
@@ -94,6 +95,11 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     | Record<string, PreparedDataWithoutTime[]>[]
     | PreparedDataWithTimeInPlace = React.useMemo(() => {
     switch (currentViewModified) {
+      case CurrentView.DAY_REVERSE:
+        return prepareCalendarDataWithTimeReverse(
+          dataModified,
+          activeTimeDateFieldModified,
+        );
       case CurrentView.DAY:
       case CurrentView.WEEK_TIME:
         return prepareCalendarDataWithTime(
@@ -230,16 +236,20 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   }: DateInfoFunction): ReactElement[] => {
     const key = formatFullDate(new Date(dateInfo.date));
 
+    const isDayReverseView = currentView === CurrentView.DAY_REVERSE;
     return ((preparedData as PreparedDataWithTimeFull).day[key] || []).map(
       (preparedDataItem, index) => {
         return (
           <div
             key={`${index}-${dateInfo.date}`}
             style={{
-              gridRow: `${preparedDataItem.startMinute} / ${preparedDataItem.endMinute}`,
-              width: preparedDataItem.width,
-              left: preparedDataItem.left,
-              margin: preparedDataItem.margin,
+              [!isDayReverseView
+                ? 'gridRow'
+                : 'gridColumn']: `${preparedDataItem.startMinute} / ${preparedDataItem.endMinute}`,
+              width: !isDayReverseView && preparedDataItem.width,
+              left: !isDayReverseView && preparedDataItem.left,
+              margin: !isDayReverseView && preparedDataItem.margin,
+              height: !isDayReverseView ? 'max-content' : 'auto',
             }}
             onMouseEnter={() =>
               !disableHoverEffect && setHoveredElement(preparedDataItem?.id)
@@ -358,6 +368,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   const renderItems = React.useMemo(() => {
     switch (currentViewModified) {
       case CurrentView.DAY:
+      case CurrentView.DAY_REVERSE:
       case CurrentView.WEEK_TIME:
         return renderDayWeekTimeItems;
       case CurrentView.MONTH:

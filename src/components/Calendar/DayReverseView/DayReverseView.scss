@@ -1,0 +1,130 @@
+
+.day-reverse-view-inside {
+  width: fit-content;
+  background-color: var(--gs-50);
+  border: 1px solid var(--gs-200);
+  border-radius: 4px;
+  position: relative;
+  min-height: 700px;
+}
+
+.day-reverse-day {
+  position: relative;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 32px;
+  padding-bottom: var(--spacing);
+  margin-bottom: calc(var(--spacing) * 3.5);
+
+  &__day {
+    font: var(--font-c-3);
+    text-transform: uppercase;
+    color: var(--gs-500);
+    margin-bottom: calc(var(--spacing) * 1.5);
+    @include breakpoint('md') {
+        font: var(--font-c-1);
+    }
+  }
+
+  &__number {
+    z-index: 10;
+    font: var(--font-a-3);
+    color: var(--gs-700);
+    font-size: 24px;
+    position: relative;
+    @include breakpoint('md') {
+      font: var(--font-a-2);
+      font-size: 26px;
+    }
+
+    &--current-day {
+      color: var(--gs-0);
+    }
+  }
+
+  &__current-background {
+    position: absolute;
+    background: var(--b-200);
+    border-radius: 50%;
+    height: 38px;
+    width: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 23px;
+    left: -2px;
+  }
+
+  &__color-dot {
+    z-index: 20;
+    width: 8px;
+    height: 8px;
+    display: flex;
+    border-radius: 50%;
+    position: absolute;
+    top: 33px;
+    right: 0px;
+
+    @include breakpoint('md') {
+      width: 10px;
+      height: 10px;
+      top: 36px;
+      right: -3px;
+    }
+  }
+}
+
+.day-reverse-columns {
+  display: grid;
+  grid-template-columns: repeat(24, 60px);
+  position: absolute;
+  height: 100%;
+
+  &__border {
+    position: relative;
+    font: var(--font-b-1);
+    font-size: 10px;
+    &:not(:last-child) {
+      border-right: 1px solid var(--gs-200);
+    }
+
+    &-hour {
+      position: absolute;
+      top: -25px;
+    }
+  }
+}
+
+.day-reverse-items {
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(1440, 1px);
+  grid-auto-flow: dense;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--gs-200);
+  }
+
+  &__minute-line {
+    width: 2px;
+    height: 100%;
+    min-height: 700px;
+    position: relative;
+    background: var(--b-200);
+    z-index: 30;
+
+    &::before {
+      content: "";
+      width: 13px;
+      height: 13px;
+      background: var(--b-200);
+      border-radius: 50%;
+      position: absolute;
+      transform: translate(-43%, -50%);
+    }
+  }
+}

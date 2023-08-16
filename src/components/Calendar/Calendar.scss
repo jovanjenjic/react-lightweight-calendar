@@ -70,6 +70,7 @@
   z-index: 20;
   grid-column: 1 / 3;
   min-width: 0px;
+  height: max-content;
   text-align: left;
   
   &--hovered {

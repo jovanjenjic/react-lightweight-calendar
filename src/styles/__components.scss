@@ -1,7 +1,29 @@
-@import '../styles//_mixins';
+@import '../styles/_mixins';
 
 @mixin days-component {
     .days-component {
+        cursor: default;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-bottom: var(--spacing);
+    
+        &__day {
+            font: var(--font-c-3);
+            text-transform: uppercase;
+            color: var(--gs-500);
+            width: calc(var(--spacing) * 4);
+            display: flex;
+            justify-content: center;
+
+            @include breakpoint('md') {
+                font: var(--font-c-1);
+            }
+        }
+    }
+}
+@mixin days-reverse-component {
+    .days-reverse-component {
         cursor: default;
         display: flex;
         justify-content: space-around;
