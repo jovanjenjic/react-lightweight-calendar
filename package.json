@@ -1,6 +1,6 @@
 {
   "name": "react-lightweight-calendar",
-  "version": "1.3.0",
+  "version": "1.3.4",
   "description": "Customizable calendar component to visualize entities.",
   "main": "dist/components/Calendar/CalendarWrapper.js",
   "types": "dist/components/Calendar/CalendarWrapper.d.ts",
@@ -17,7 +17,14 @@
     "react-calendar",
     "react-timeline-calendar",
     "react-event-calendar",
-    "react-google-calendar"
+    "react-google-calendar",
+    "calendar",
+    "timeline-calendar",
+    "event-calendar",
+    "google-calendar",
+    "google calendar",
+    "event calendar",
+    "timeline calendar"
   ],
   "author": "Jovan Jenjic",
   "license": "MIT",
