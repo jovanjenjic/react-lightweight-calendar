@@ -19,9 +19,9 @@ The plan is to continue developing additional views and functionalities. The pri
 
 ### Images
 
-| WEEK_TIME | DAY | MONTH | WEEK  | WEEK_IN_PLACE | DAY_IN_PLACE |
-| :---:         |     :---:      |         :---: | :---: | :---:         | :---:         |
-| [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/a0ed5178-73d3-4e2f-ad10-b2fa7e1c0d31)   | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/130776e2-437a-4335-a759-ea94f5784a6c)     | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/6a1612b3-f5d3-494c-9776-2f0c791a1ff1)    |   [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/4648f562-8841-4751-b246-e06ffdb82020)    |    [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/17af45bb-1ef7-471b-bc64-6094d4849933)           |     [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/cf27dfec-2b31-4dd5-9631-e61e3b5a7e58)         |
+| WEEK_TIME | DAY | DAY_REVERSE | MONTH | WEEK  | WEEK_IN_PLACE | DAY_IN_PLACE |
+| :---:         |     :---:      |     :---:      |         :---: | :---: | :---:         | :---:         |
+| [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/a0ed5178-73d3-4e2f-ad10-b2fa7e1c0d31)   | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/130776e2-437a-4335-a759-ea94f5784a6c)     | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/77787eb6-a256-45dd-81dd-e3eedc0d987d)    |   [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/6a1612b3-f5d3-494c-9776-2f0c791a1ff1)    |    [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/4648f562-8841-4751-b246-e06ffdb82020)           |     [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/17af45bb-1ef7-471b-bc64-6094d4849933)         | [IMAGE_LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/cf27dfec-2b31-4dd5-9631-e61e3b5a7e58)
 
 ### Props
 
@@ -37,8 +37,9 @@ The `Calendar` component accepts the following props:
 
 - `currentView` _(DEFAULT: MONTH)_: A string indicating the current view of the calendar. It can be one of the following options:
   - `WEEK_TIME`: Display the calendar in a week view with a timeline.
-  - `DAY`: Display the calendar in a day view with a timeline.
-  - `MONTH`: Display the calendar in a month view with a timeline.
+  - `DAY`: Display the calendar in a day view with a timeline (The column is the day and the rows are the hours).
+  - `DAY_REVERSE`: Display the calendar in a day view with a timeline (Columns are hours and row is day).
+  - `MONTH`: Display the calendar in a month view with a timeline .
   - `WEEK`: Display the calendar in a week view with a timeline (similar as `MONTH` view).
   - `WEEK_IN_PLACE`: Display the calendar in a week view without a timeline. It is intended for grouping elements based on the start time interval. It can only be used to show the schedule of elements by hours
   - `DAY_IN_PLACE`: Display the calendar in a day view without a timeline. It is intended for grouping elements based on the start time interval. It can only be used to show the schedule of elements by hours
