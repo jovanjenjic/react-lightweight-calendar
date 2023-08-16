@@ -236,18 +236,20 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   }: DateInfoFunction): ReactElement[] => {
     const key = formatFullDate(new Date(dateInfo.date));
 
-    const isDayView = currentView === CurrentView.DAY;
+    const isDayReverseView = currentView === CurrentView.DAY_REVERSE;
     return ((preparedData as PreparedDataWithTimeFull).day[key] || []).map(
       (preparedDataItem, index) => {
         return (
           <div
             key={`${index}-${dateInfo.date}`}
             style={{
-              gridColumn: `${preparedDataItem.startMinute} / ${preparedDataItem.endMinute}`,
-              width: isDayView && preparedDataItem.width,
-              left: isDayView && preparedDataItem.left,
-              margin: isDayView && preparedDataItem.margin,
-              height: isDayView ? 'max-content' : 'auto',
+              [!isDayReverseView
+                ? 'gridRow'
+                : 'gridColumn']: `${preparedDataItem.startMinute} / ${preparedDataItem.endMinute}`,
+              width: !isDayReverseView && preparedDataItem.width,
+              left: !isDayReverseView && preparedDataItem.left,
+              margin: !isDayReverseView && preparedDataItem.margin,
+              height: !isDayReverseView ? 'max-content' : 'auto',
             }}
             onMouseEnter={() =>
               !disableHoverEffect && setHoveredElement(preparedDataItem?.id)
