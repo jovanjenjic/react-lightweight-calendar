@@ -52,6 +52,7 @@ export enum CurrentView {
   WEEK = 'WEEK',
   WEEK_TIME = 'WEEK_TIME',
   DAY = 'DAY',
+  DAY_REVERSE = 'DAY_REVERSE',
   WEEK_IN_PLACE = 'WEEK_IN_PLACE',
   DAY_IN_PLACE = 'DAY_IN_PLACE',
 }

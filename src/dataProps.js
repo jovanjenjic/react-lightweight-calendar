@@ -96,7 +96,7 @@ const dataProp = (
   data: testData,
   currentDate,
   setCurrentDate,
-  currentView: CurrentView.WEEK,
+  currentView: CurrentView.DAY_REVERSE,
   cellDisplayMode,
   setCellDisplayMode,
   timeDateFormat: {

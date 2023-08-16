@@ -8,6 +8,7 @@ import DayView from './DayView/DayView';
 import DayInPlaceView from './DayInPlaceView/DayInPlaceView';
 import WeekTimeInPlaceView from './WeekTimeInPlaceView/WeekTimeInPlaceView';
 import { isEmptyObject } from '../../utils';
+import DayReverseView from './DayReverseView/DayReverseView';
 
 const CalendarComponent: FC<CalendarProps> = ({
   renderItems,
@@ -38,6 +39,7 @@ const CalendarComponent: FC<CalendarProps> = ({
   // In case there are hours on the left side of the calendar, it is necessary to move the calendar on the left side
   const leftMargin = [
     CurrentView.DAY,
+    CurrentView.DAY_REVERSE,
     CurrentView.DAY_IN_PLACE,
     CurrentView.WEEK_TIME,
     CurrentView.WEEK_IN_PLACE,
@@ -98,6 +100,21 @@ const CalendarComponent: FC<CalendarProps> = ({
       )}
       {currentView === CurrentView.DAY && (
         <DayView
+          preparedColorDots={preparedColorDots}
+          renderItems={renderItems}
+          renderHeaderItems={renderHeaderItems}
+          currentDate={currentDate}
+          onDayNumberClick={onDayNumberClick}
+          onDayStringClick={onDayStringClick}
+          onColorDotClick={onColorDotClick}
+          onCellClick={onCellClick}
+          onCellHeaderClick={onCellHeaderClick}
+          timeDateFormat={timeDateFormat}
+          onHourClick={onHourClick}
+        />
+      )}
+      {currentView === CurrentView.DAY_REVERSE && (
+        <DayReverseView
           preparedColorDots={preparedColorDots}
           renderItems={renderItems}
           renderHeaderItems={renderHeaderItems}

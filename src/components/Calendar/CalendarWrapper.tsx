@@ -95,6 +95,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     | PreparedDataWithTimeInPlace = React.useMemo(() => {
     switch (currentViewModified) {
       case CurrentView.DAY:
+      case CurrentView.DAY_REVERSE:
       case CurrentView.WEEK_TIME:
         return prepareCalendarDataWithTime(
           dataModified,
@@ -236,10 +237,11 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
           <div
             key={`${index}-${dateInfo.date}`}
             style={{
-              gridRow: `${preparedDataItem.startMinute} / ${preparedDataItem.endMinute}`,
-              width: preparedDataItem.width,
-              left: preparedDataItem.left,
-              margin: preparedDataItem.margin,
+              gridColumn: `${preparedDataItem.startMinute} / ${preparedDataItem.endMinute}`,
+              // width: preparedDataItem.width,
+              // left: preparedDataItem.left,
+              // margin: preparedDataItem.margin,
+              // height: 'max-content',
             }}
             onMouseEnter={() =>
               !disableHoverEffect && setHoveredElement(preparedDataItem?.id)
@@ -358,6 +360,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   const renderItems = React.useMemo(() => {
     switch (currentViewModified) {
       case CurrentView.DAY:
+      case CurrentView.DAY_REVERSE:
       case CurrentView.WEEK_TIME:
         return renderDayWeekTimeItems;
       case CurrentView.MONTH:

@@ -1,0 +1,61 @@
+
+.day-reverse-view-inside {
+  width: fit-content;
+  background-color: var(--gs-50);
+  border: 1px solid var(--gs-200);
+  border-radius: 4px;
+  position: relative;
+}
+
+@include days-reverse-component;
+
+.day-reverse-hour-columns {
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(1440, 1px);
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--gs-200);
+  }
+
+  &__cells {
+    display: grid;
+    grid-template-columns: repeat(24, 60px);
+    position: absolute;
+    height: 100%;
+
+    &-item {
+      font: var(--font-b-1);
+      font-size: 10px;
+      &:not(:last-child) {
+        border-right: 1px solid var(--gs-200);
+      }
+    }
+  }
+
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(1440, 1px);
+    grid-auto-flow: dense;
+  }
+}
+
+.day-reverse-header {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  
+  &__number-color-dot {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  @include number;
+  @include color-dot;
+
+}
+
+@include current-minute-line;
