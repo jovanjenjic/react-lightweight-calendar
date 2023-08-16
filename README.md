@@ -38,7 +38,7 @@ The `Calendar` component accepts the following props:
 - `currentView` _(DEFAULT: MONTH)_: A string indicating the current view of the calendar. It can be one of the following options:
   - `WEEK_TIME`: Display the calendar in a week view with a timeline.
   - `DAY`: Display the calendar in a day view with a timeline (The column is the day and the rows are the hours).
-  - `DAY_REVERSE`: Display the calendar in a day view with a timeline (Columns are hours and rows are days).
+  - `DAY_REVERSE`: Display the calendar in a day view with a timeline (Columns are hours and row is day).
   - `MONTH`: Display the calendar in a month view with a timeline .
   - `WEEK`: Display the calendar in a week view with a timeline (similar as `MONTH` view).
   - `WEEK_IN_PLACE`: Display the calendar in a week view without a timeline. It is intended for grouping elements based on the start time interval. It can only be used to show the schedule of elements by hours
