@@ -39,7 +39,6 @@ const CalendarComponent: FC<CalendarProps> = ({
   // In case there are hours on the left side of the calendar, it is necessary to move the calendar on the left side
   const leftMargin = [
     CurrentView.DAY,
-    CurrentView.DAY_REVERSE,
     CurrentView.DAY_IN_PLACE,
     CurrentView.WEEK_TIME,
     CurrentView.WEEK_IN_PLACE,
@@ -117,13 +116,11 @@ const CalendarComponent: FC<CalendarProps> = ({
         <DayReverseView
           preparedColorDots={preparedColorDots}
           renderItems={renderItems}
-          renderHeaderItems={renderHeaderItems}
           currentDate={currentDate}
           onDayNumberClick={onDayNumberClick}
           onDayStringClick={onDayStringClick}
           onColorDotClick={onColorDotClick}
           onCellClick={onCellClick}
-          onCellHeaderClick={onCellHeaderClick}
           timeDateFormat={timeDateFormat}
           onHourClick={onHourClick}
         />

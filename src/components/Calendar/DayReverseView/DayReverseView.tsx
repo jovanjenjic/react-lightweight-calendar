@@ -11,7 +11,7 @@ import {
 } from 'date-fns';
 import { getKeyFromDateInfo, getTimeUnitString } from '../Calendar.helper';
 import { TimeDateFormat } from '../Calendar.constants';
-import { DayTimeViewProps } from './DayReverseView.types';
+import { DayReverseTimeViewProps } from './DayReverseView.types';
 import { DateInfo } from '../Calendar.types';
 
 const getDateInfo = (date: Date): DateInfo => {
@@ -26,16 +26,14 @@ const getDateInfo = (date: Date): DateInfo => {
   };
 };
 
-const DayReverseView: FC<DayTimeViewProps> = ({
+const DayReverseView: FC<DayReverseTimeViewProps> = ({
   renderItems,
-  renderHeaderItems,
   currentDate,
   onDayNumberClick,
   onDayStringClick,
   onHourClick,
   onColorDotClick,
   onCellClick,
-  onCellHeaderClick,
   timeDateFormat,
   preparedColorDots,
 }) => {
@@ -46,26 +44,62 @@ const DayReverseView: FC<DayTimeViewProps> = ({
 
   return (
     <>
-      <div data-cy="StringDay" className="days-reverse-component">
+      <div data-cy="StringDay" className="day-reverse-day">
         <div
           onClick={(e) => onDayStringClick(currentDate, e)}
-          className="days-reverse-component__day"
+          className="day-reverse-day__day"
         >
           {format(
             new Date(currentDate),
             timeDateFormat.day || TimeDateFormat.SHORT_WEEKDAY,
           )}
         </div>
+        <p
+          data-cy="DayNumber"
+          className={cn(
+            'day-reverse-day__number',
+            parsedCurrentDay.isCurrentDay &&
+              'day-reverse-day__number--current-day',
+          )}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDayNumberClick(parsedCurrentDay.date, e);
+          }}
+        >
+          {parsedCurrentDay.day}
+        </p>
+        {parsedCurrentDay.isCurrentDay && (
+          <div className="day-reverse-day__current-background" />
+        )}
+        {preparedColorDots.dateKeys?.[parsedCurrentDay.date] && (
+          <p
+            data-cy="ColorDot"
+            data-date={parsedCurrentDay.date}
+            style={{
+              backgroundColor:
+                preparedColorDots.dateKeys[parsedCurrentDay.date]?.color,
+            }}
+            className="day-reverse-day__color-dot"
+            onClick={(e) => {
+              e.stopPropagation();
+              onColorDotClick(
+                preparedColorDots.dateKeys[parsedCurrentDay.date],
+                e,
+              );
+            }}
+          />
+        )}
       </div>
       <div data-cy="DayViewInside" className="day-reverse-view-inside">
-        <div className="day-reverse-hour-columns__cells">
+        <div className="day-reverse-columns">
           {Array.from(Array(24)).map((_, hour) => (
             <div
               key={hour}
               data-cy="Hours"
-              className="day-reverse-hour-columns__cells-item"
+              className="day-reverse-columns__border"
               onClick={(e) => {
                 const timeDate = getKeyFromDateInfo(parsedCurrentDay, hour);
+                e.stopPropagation();
                 onCellClick(
                   {
                     ...parsedCurrentDay,
@@ -77,24 +111,38 @@ const DayReverseView: FC<DayTimeViewProps> = ({
                 );
               }}
             >
-              {getTimeUnitString(hour - 1, timeDateFormat)}
+              <div
+                onClick={(e) => {
+                  const timeDate = getKeyFromDateInfo(parsedCurrentDay, hour);
+                  e.stopPropagation();
+                  onHourClick(
+                    {
+                      ...parsedCurrentDay,
+                      hour,
+                      timeDate,
+                      timeDateUTC: new Date(timeDate).toISOString(),
+                    },
+                    e,
+                  );
+                }}
+                className="day-reverse-columns__border-hour"
+              >
+                {getTimeUnitString(hour - 1, timeDateFormat)}
+              </div>
             </div>
           ))}
         </div>
-        <div className="day-reverse-hour-columns">
+        <div className="day-reverse-items">
           {renderItems({ dateInfo: parsedCurrentDay, idx: 0 })}
-          <div className="day-hour-rows__items">
-            {parsedCurrentDay.isCurrentDay && (
-              <div
-                data-cy="CurrentMinutLine"
-                className="current-minute-line"
-                style={{
-                  gridColumn: '1/3',
-                  gridRow: getHours(new Date()) * 60 + getMinutes(new Date()),
-                }}
-              />
-            )}
-          </div>
+          {parsedCurrentDay.isCurrentDay && (
+            <div
+              data-cy="CurrentMinutLine"
+              className="day-reverse-items__minute-line"
+              style={{
+                gridColumn: getHours(new Date()) * 60 + getMinutes(new Date()),
+              }}
+            />
+          )}
         </div>
       </div>
     </>

@@ -6,12 +6,8 @@ import {
   TimeFormatModified,
 } from '../Calendar.types';
 
-export interface DayTimeViewProps {
+export interface DayReverseTimeViewProps {
   renderItems: ({ dateInfo, idx }: DateInfoFunction) => JSX.Element[];
-  renderHeaderItems: (
-    startDate: string,
-    endDate?: string,
-  ) => (JSX.Element | null)[];
   currentDate: string | Date;
   onDayNumberClick: (day: string, event: React.MouseEvent<HTMLElement>) => void;
   onDayStringClick: (
@@ -23,10 +19,6 @@ export interface DayTimeViewProps {
     event: React.MouseEvent<HTMLElement>,
   ) => void;
   onCellClick: (value: DateInfo, event: React.MouseEvent<HTMLElement>) => void;
-  onCellHeaderClick: (
-    value: DateInfo,
-    event: React.MouseEvent<HTMLElement>,
-  ) => void;
   timeDateFormat: TimeFormatModified;
   preparedColorDots: ColorDotFull;
   onHourClick: (
