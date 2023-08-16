@@ -20,6 +20,7 @@ import {
   startOfMonth,
   endOfMonth,
   startOfHour,
+  addDays,
 } from 'date-fns';
 
 export const formatFullDate = (date: Date): string =>
@@ -395,70 +396,45 @@ export const prepareCalendarDataWithTimeReverse = (
 
   sortedCalendarValue.forEach((obj) => {
     const startDateValue = obj?.[startIntervalKey];
-    // If there is no end interval key, it will be the same as start
     const endDateValue = obj?.[endIntervalKey];
 
-    // If by chance one of the values is missing, it means that the item is invalid and we will not
-    // insert it into the resulting array
     if (!startDateValue || !endDateValue) return;
 
     const startDate = new Date(startDateValue);
     const endDate = new Date(endDateValue);
 
-    const key: string = formatFullDate(startDate);
+    // Calculate difference in days
+    const diffInDays = differenceInDays(endDate, startDate);
 
-    const res: PreparedDataWithTime = {
-      ...obj,
-      startMinute: 0,
-      endMinute: 0,
-    };
+    for (let i = 0; i <= diffInDays; i++) {
+      const currentDate = addDays(startDate, i);
+      const key: string = formatFullDate(currentDate);
 
-    // In case it is longer than 24 hours, we will place it in the header
-    if (differenceInMinutes(endDate, startOfDay(startDate)) >= 24 * 60) {
-      // First day
-      const firstDayEnd = endOfDay(startDate);
+      const res: PreparedDataWithTime = {
+        ...obj,
+        startMinute: 0,
+        endMinute: 0,
+      };
+
+      const startOfDayDate =
+        startDate > startOfDay(currentDate)
+          ? startDate
+          : startOfDay(currentDate);
+      const endOfDayDate =
+        endDate < endOfDay(currentDate) ? endDate : endOfDay(currentDate);
+
       const { startMinute, endMinute } = calculateStartAndEndMinute(
-        startDate,
-        firstDayEnd,
+        startOfDayDate,
+        endOfDayDate,
       );
-      const firstDayRes = {
+
+      const adjustedRes = {
         ...res,
         startMinute,
         endMinute,
       };
-      result.day[key] = [...(result.day[key] || []), firstDayRes];
 
-      // Next day
-      const secondDayStart = startOfDay(endDate);
-      // To avoid the case when it is until the beginning of the next day (00:00)
-      if (formatFullDateTime(secondDayStart) !== formatFullDateTime(endDate)) {
-        const startAndEndMinutSecondItem = calculateStartAndEndMinute(
-          secondDayStart,
-          endDate,
-        );
-        const secondDayKey: string = formatFullDate(secondDayStart);
-        const secondDayRes = {
-          ...res,
-          startMinute: startAndEndMinutSecondItem.startMinute,
-          endMinute: startAndEndMinutSecondItem.endMinute,
-        };
-        result.day[secondDayKey] = [
-          ...(result.day[secondDayKey] || []),
-          secondDayRes,
-        ];
-      }
-      // In case if it is in one day
-    } else {
-      const { startMinute, endMinute } = calculateStartAndEndMinute(
-        startDate,
-        endDate,
-      );
-      const expendedRes = {
-        ...res,
-        startMinute,
-        endMinute: endMinute == startMinute ? endMinute + 30 : endMinute,
-      };
-      result.day[key] = [...(result.day[key] || []), expendedRes];
+      result.day[key] = [...(result.day[key] || []), adjustedRes];
     }
   });
 
