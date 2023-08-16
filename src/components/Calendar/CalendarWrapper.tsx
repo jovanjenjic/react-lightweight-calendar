@@ -249,7 +249,6 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
               width: !isDayReverseView && preparedDataItem.width,
               left: !isDayReverseView && preparedDataItem.left,
               margin: !isDayReverseView && preparedDataItem.margin,
-              height: !isDayReverseView ? 'max-content' : 'auto',
             }}
             onMouseEnter={() =>
               !disableHoverEffect && setHoveredElement(preparedDataItem?.id)
