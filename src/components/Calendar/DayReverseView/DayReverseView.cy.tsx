@@ -16,7 +16,7 @@ const navigationNowButton = "*[data-cy='NavigationNowButton']";
 const navigationTimeDateText = "*[data-cy='NavigationTimeDateText']";
 const colorDot = "*[data-cy='ColorDot']";
 const dayNumber = "*[data-cy='DayNumber']";
-const hourRows = "*[data-cy='HourRows']";
+const hourColumns = "*[data-cy='HourColumns']";
 const currentMinutLine = "*[data-cy='CurrentMinutLine']";
 const hours = "*[data-cy='Hours']";
 
@@ -65,7 +65,7 @@ const checkAreSubcomponentsExist = (isCurrentDay = false) => {
   }
   cy.get(dayNumber).each((day) => {
     if (isCurrentDay) {
-      cy.wrap(day).should('have.css', 'background-color', 'rgb(240, 131, 0)');
+      cy.wrap(day).should('have.css', 'background-color', 'rgba(0, 0, 0, 0)');
       cy.wrap(day).should('have.css', 'color', 'rgb(255, 255, 255)');
     } else {
       cy.wrap(day).should('have.css', 'color', 'rgb(61, 71, 87)');
@@ -74,7 +74,7 @@ const checkAreSubcomponentsExist = (isCurrentDay = false) => {
 };
 
 const numberOfHours = () => {
-  cy.get(hourRows).children().should('have.length', 24);
+  cy.get(hourColumns).children().should('have.length', 24);
   cy.get(hours).should('have.length', 24);
 };
 
@@ -161,7 +161,7 @@ describe('Calendar day view, random day', () => {
   beforeEach(() => {
     cy.mount(
       <CalendarComponent
-        currentView={CurrentView.DAY}
+        currentView={CurrentView.DAY_REVERSE}
         currentDateProp={RANDOM_TIME_DATE}
       />,
     );
@@ -196,7 +196,7 @@ describe('Calendar day view, current day', () => {
   beforeEach(() => {
     cy.mount(
       <CalendarComponent
-        currentView={CurrentView.DAY}
+        currentView={CurrentView.DAY_REVERSE}
         currentDateProp={CURRENT_TIME_DATE}
       />,
     );

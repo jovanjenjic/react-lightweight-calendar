@@ -44,10 +44,11 @@ const DayReverseView: FC<DayReverseTimeViewProps> = ({
 
   return (
     <>
-      <div data-cy="StringDay" className="day-reverse-day">
+      <div className="day-reverse-day">
         <div
           onClick={(e) => onDayStringClick(currentDate, e)}
           className="day-reverse-day__day"
+          data-cy="StringDay"
         >
           {format(
             new Date(currentDate),
@@ -95,7 +96,7 @@ const DayReverseView: FC<DayReverseTimeViewProps> = ({
           {Array.from(Array(24)).map((_, hour) => (
             <div
               key={hour}
-              data-cy="Hours"
+              data-cy="HourColumns"
               className="day-reverse-columns__border"
               onClick={(e) => {
                 const timeDate = getKeyFromDateInfo(parsedCurrentDay, hour);
@@ -125,6 +126,7 @@ const DayReverseView: FC<DayReverseTimeViewProps> = ({
                     e,
                   );
                 }}
+                data-cy="Hours"
                 className="day-reverse-columns__border-hour"
               >
                 {getTimeUnitString(hour - 1, timeDateFormat)}

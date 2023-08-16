@@ -65,7 +65,7 @@ const checkAreSubcomponentsExist = (isCurrentDay = false) => {
   }
   cy.get(dayNumber).each((day) => {
     if (isCurrentDay) {
-      cy.wrap(day).should('have.css', 'background-color', 'rgb(240, 131, 0)');
+      cy.wrap(day).should('have.css', 'background-color', 'rgb(19, 155, 255)');
       cy.wrap(day).should('have.css', 'color', 'rgb(255, 255, 255)');
     } else {
       cy.wrap(day).should('have.css', 'color', 'rgb(61, 71, 87)');
