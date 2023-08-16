@@ -362,6 +362,113 @@ export const prepareCalendarDataInPlace = (
   return result;
 };
 
+/**
+ * Based on the currently selected field in the configuration (eg `startTime` or `startTime-endTime`),
+ * a corresponding array is formed that will be displayed on the calendar.
+ * Used for DAY and WEEK_TIME
+ * @param calendarData - Array of data for calendar view
+ * @param activeTimeDateField - Current active field (startTime, endTime, startTime-endTIme, etc...)
+ * @returns - Prepared array of data for calendar view
+ */
+export const prepareCalendarDataWithTimeReverse = (
+  // eslint-disable-next-line
+  calendarData: Record<string, any>[],
+  activeTimeDateField: string,
+): PreparedDataWithTimeFull => {
+  const result = {
+    week: [] as PreparedDataWithTime[],
+    day: {} as Record<string, PreparedDataWithTime>[],
+  };
+  // If there is an end interval, it is separated by '-' (createdAt - updatedAt)
+  const [startIntervalKey, endIntervalKey = startIntervalKey] = (
+    activeTimeDateField ?? ''
+  )
+    .split('-')
+    .map((str) => str.replace(/\s/g, '')) as [string, string];
+
+  // Sorted by active field
+  const sortedCalendarValue = calendarData.sort(
+    (a, b) =>
+      new Date(a?.[startIntervalKey]).valueOf() -
+      new Date(b?.[startIntervalKey]).valueOf(),
+  );
+
+  sortedCalendarValue.forEach((obj) => {
+    const startDateValue = obj?.[startIntervalKey];
+    // If there is no end interval key, it will be the same as start
+    const endDateValue = obj?.[endIntervalKey];
+
+    // If by chance one of the values is missing, it means that the item is invalid and we will not
+    // insert it into the resulting array
+    if (!startDateValue || !endDateValue) return;
+
+    const startDate = new Date(startDateValue);
+    const endDate = new Date(endDateValue);
+
+    const key: string = formatFullDate(startDate);
+
+    const res: PreparedDataWithTime = {
+      ...obj,
+      startMinute: 0,
+      endMinute: 0,
+    };
+
+    // In case it is longer than 24 hours, we will place it in the header
+    if (differenceInMinutes(endDate, startOfDay(startDate)) >= 24 * 60) {
+      // First day
+      const firstDayEnd = endOfDay(startDate);
+      const { startMinute, endMinute } = calculateStartAndEndMinute(
+        startDate,
+        firstDayEnd,
+      );
+      const firstDayRes = {
+        ...res,
+        startMinute,
+        endMinute,
+      };
+      result.day[key] = [...(result.day[key] || []), firstDayRes];
+
+      // Next day
+      const secondDayStart = startOfDay(endDate);
+      // To avoid the case when it is until the beginning of the next day (00:00)
+      if (formatFullDateTime(secondDayStart) !== formatFullDateTime(endDate)) {
+        const startAndEndMinutSecondItem = calculateStartAndEndMinute(
+          secondDayStart,
+          endDate,
+        );
+        const secondDayKey: string = formatFullDate(secondDayStart);
+        const secondDayRes = {
+          ...res,
+          startMinute: startAndEndMinutSecondItem.startMinute,
+          endMinute: startAndEndMinutSecondItem.endMinute,
+        };
+        result.day[secondDayKey] = [
+          ...(result.day[secondDayKey] || []),
+          secondDayRes,
+        ];
+      }
+      // In case if it is in one day
+    } else {
+      const { startMinute, endMinute } = calculateStartAndEndMinute(
+        startDate,
+        endDate,
+      );
+      const expendedRes = {
+        ...res,
+        startMinute,
+        endMinute: endMinute == startMinute ? endMinute + 30 : endMinute,
+      };
+      result.day[key] = [...(result.day[key] || []), expendedRes];
+    }
+  });
+
+  Object.keys(result.day).forEach((key) => {
+    processMatchingItems(result.day[key]);
+  });
+
+  return result;
+};
+
 // It simulates the lodash method
 export const isEqualValues = (value, other) => {
   if (value === other) {

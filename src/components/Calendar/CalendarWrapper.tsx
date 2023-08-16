@@ -15,6 +15,7 @@ import {
   prepareCalendarData,
   prepareCalendarDataInPlace,
   prepareCalendarDataWithTime,
+  prepareCalendarDataWithTimeReverse,
 } from '../../utils/index';
 import {
   shouldCollapse,
@@ -94,8 +95,12 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     | Record<string, PreparedDataWithoutTime[]>[]
     | PreparedDataWithTimeInPlace = React.useMemo(() => {
     switch (currentViewModified) {
-      case CurrentView.DAY:
       case CurrentView.DAY_REVERSE:
+        return prepareCalendarDataWithTimeReverse(
+          dataModified,
+          activeTimeDateFieldModified,
+        );
+      case CurrentView.DAY:
       case CurrentView.WEEK_TIME:
         return prepareCalendarDataWithTime(
           dataModified,
@@ -231,6 +236,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   }: DateInfoFunction): ReactElement[] => {
     const key = formatFullDate(new Date(dateInfo.date));
 
+    const isDayView = currentView === CurrentView.DAY;
     return ((preparedData as PreparedDataWithTimeFull).day[key] || []).map(
       (preparedDataItem, index) => {
         return (
@@ -238,10 +244,10 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
             key={`${index}-${dateInfo.date}`}
             style={{
               gridColumn: `${preparedDataItem.startMinute} / ${preparedDataItem.endMinute}`,
-              // width: preparedDataItem.width,
-              // left: preparedDataItem.left,
-              // margin: preparedDataItem.margin,
-              // height: 'max-content',
+              width: isDayView && preparedDataItem.width,
+              left: isDayView && preparedDataItem.left,
+              margin: isDayView && preparedDataItem.margin,
+              height: isDayView ? 'max-content' : 'auto',
             }}
             onMouseEnter={() =>
               !disableHoverEffect && setHoveredElement(preparedDataItem?.id)
