@@ -8,7 +8,7 @@ It can be customized for displaying various entities such as events, orders, act
 
 [Documentation](https://www.calendar-react.com)
 
-[Storybook usage example](https://64a7f9553a2478c46491aea9-opgyqiriah.chromatic.com/?path=/story/ui-components-calendar--calendar)
+[Storybook usage example](https://64a7f9553a2478c46491aea9-xzaakxuxzj.chromatic.com/?path=/story/ui-components-calendar--calendar)
 
 [CodeSandbox typescript example](https://codesandbox.io/s/react-lightweight-calendar-ts-yzxryp)
 
