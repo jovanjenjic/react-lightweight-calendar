@@ -20,6 +20,7 @@ export default {
       options: [
         'WEEK_TIME',
         'DAY',
+        'DAY_REVERSE',
         'MONTH',
         'WEEK',
         'WEEK_IN_PLACE',
@@ -51,7 +52,7 @@ const codeSnippet = Prism.highlight(
             textColor: 'white', // If we do not pass the color, color will be the default one
         },
     ]}
-    currentView='string' // (DEFAULT: MONTH) WEEK_TIME, DAY, MONTH, WEEK, WEEK_IN_PLACE or DAY_IN_PLACE 
+    currentView='string' // (DEFAULT: MONTH) WEEK_TIME, DAY, DAY_REVERSE, MONTH, WEEK, WEEK_IN_PLACE or DAY_IN_PLACE 
     currentDate='string' // (REQUIRED, DEFAULT: now) The current date displayed on the calendar ('2023-06-01')
     setCurrentDate={(date: string) => void} // The current date is being changed. If this field is not sent, the calendar navigation will be hidden
     activeTimeDateField='string' // The field based on which the elements will be positioned. It can be any time date field from the 'data' array. It can also be an interval separated by a '-'. ('startTime', 'endTime', 'createdAt', 'updatedAt', 'startTime-endTime'...)
