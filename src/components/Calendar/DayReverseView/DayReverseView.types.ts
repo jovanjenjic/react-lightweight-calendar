@@ -1,3 +1,4 @@
+import { Locale } from 'date-fns';
 import {
   ColorDot,
   ColorDotFull,
@@ -25,4 +26,5 @@ export interface DayReverseTimeViewProps {
     value: DateInfo | number,
     event: React.MouseEvent<HTMLElement>,
   ) => void;
+  locale: Locale;
 }

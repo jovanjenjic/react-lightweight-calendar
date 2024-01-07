@@ -39,6 +39,7 @@ const MonthView: FC<MonthViewProps> = ({
   timeDateFormat,
   preparedColorDots,
   weekStartsOn,
+  locale,
 }) => {
   // It is necessary to render the rows (weeks) that are visible in the viewport
   const [visibleWeeks, setVisibleWeeks] = useState<number[]>([0]);
@@ -134,6 +135,7 @@ const MonthView: FC<MonthViewProps> = ({
                 days: i,
               }),
               timeDateFormat.day,
+              { locale },
             )}
           </div>
         ))}

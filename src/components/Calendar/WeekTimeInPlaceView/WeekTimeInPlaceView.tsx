@@ -43,6 +43,7 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
   timeDateFormat,
   preparedColorDots,
   weekStartsOn,
+  locale,
 }) => {
   // Returns every day of the week
   const getCurrentWeek = useMemo(() => {
@@ -90,6 +91,7 @@ const WeekTimeInPlaceView: FC<WeekInPlaceViewProps> = ({
                 days: i,
               }),
               timeDateFormat.day,
+              { locale },
             )}
           </div>
         ))}
