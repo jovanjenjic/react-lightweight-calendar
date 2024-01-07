@@ -1,3 +1,5 @@
+import { Locale } from 'date-fns';
+
 export interface DateInfo {
   isCurrentDay: boolean;
   isCurrentMonth?: boolean;
@@ -135,6 +137,7 @@ export interface CalendarProps {
   ) => void;
   timeDateFormat: TimeFormatModified;
   weekStartsOn: WeekStartsOn;
+  locale: Locale;
 }
 
 export interface CalendarWrapperProps {
@@ -187,6 +190,7 @@ export interface CalendarWrapperProps {
   ) => void;
   timeDateFormat?: TimeFormat;
   weekStartsOn?: WeekStartsOn | number;
+  locale?: Locale;
 }
 
 export interface CalendarHeaderProps {
@@ -194,6 +198,7 @@ export interface CalendarHeaderProps {
   currentView: CurrentView;
   currentDate: string | Date;
   timeDateFormat: TimeFormatModified;
+  locale: Locale;
 }
 
 export interface CalculateStartAndEndMinuteFunc {
@@ -239,6 +244,7 @@ export interface InitializePropsFunc {
   activeTimeDateField?: string;
   // eslint-disable-next-line
   data?: Record<string, any>[];
+  locale?: Locale;
 }
 export interface InitializePropsRetFunc {
   cellDisplayModeModified: CellDisplayMode;
@@ -275,4 +281,5 @@ export interface InitializePropsRetFunc {
   activeTimeDateFieldModified: string;
   // eslint-disable-next-line
   dataModified: Record<string, any>[];
+  localeModified: Locale;
 }

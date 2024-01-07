@@ -50,6 +50,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   onCellHeaderClick,
   timeDateFormat,
   weekStartsOn,
+  locale,
 }) => {
   // Preparing the data to work for all cases
   const {
@@ -67,6 +68,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     currentViewModified,
     dataModified,
     activeTimeDateFieldModified,
+    localeModified,
   } = initializeProps({
     cellDisplayMode,
     timeDateFormat,
@@ -82,6 +84,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     currentView,
     activeTimeDateField,
     data,
+    locale,
   });
 
   const [hoveredElement, setHoveredElement] = React.useState(0);
@@ -406,6 +409,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
         onCellHeaderClick={onCellHeaderClickModified}
         timeDateFormat={timeDateFormatModified}
         weekStartsOn={weekStartsOnModified}
+        locale={localeModified}
       />
     </>
   );

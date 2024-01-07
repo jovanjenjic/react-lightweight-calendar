@@ -36,6 +36,7 @@ const DayReverseView: FC<DayReverseTimeViewProps> = ({
   onCellClick,
   timeDateFormat,
   preparedColorDots,
+  locale,
 }) => {
   // Current day info
   const parsedCurrentDay = useMemo(() => {
@@ -53,6 +54,7 @@ const DayReverseView: FC<DayReverseTimeViewProps> = ({
           {format(
             new Date(currentDate),
             timeDateFormat.day || TimeDateFormat.SHORT_WEEKDAY,
+            { locale },
           )}
         </div>
         <p

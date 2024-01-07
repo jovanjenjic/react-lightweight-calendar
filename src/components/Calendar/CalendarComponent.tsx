@@ -25,6 +25,7 @@ const CalendarComponent: FC<CalendarProps> = ({
   onCellHeaderClick,
   timeDateFormat,
   weekStartsOn,
+  locale,
 }) => {
   // Object that will be used to display the color dot for each day, but also for the legend below the calendar
   const preparedColorDots: ColorDotFull = useMemo(() => {
@@ -52,6 +53,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           currentView={currentView}
           setCurrentDate={setCurrentDate}
           timeDateFormat={timeDateFormat}
+          locale={locale}
         />
       )}
       {currentView === CurrentView.MONTH && (
@@ -66,6 +68,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           onCellClick={onCellClick}
           timeDateFormat={timeDateFormat}
           weekStartsOn={weekStartsOn}
+          locale={locale}
         />
       )}
       {currentView === CurrentView.WEEK && (
@@ -79,6 +82,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           onCellClick={onCellClick}
           timeDateFormat={timeDateFormat}
           weekStartsOn={weekStartsOn}
+          locale={locale}
         />
       )}
       {currentView === CurrentView.WEEK_TIME && (
@@ -95,6 +99,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           timeDateFormat={timeDateFormat}
           onHourClick={onHourClick}
           weekStartsOn={weekStartsOn}
+          locale={locale}
         />
       )}
       {currentView === CurrentView.DAY && (
@@ -110,6 +115,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           onCellHeaderClick={onCellHeaderClick}
           timeDateFormat={timeDateFormat}
           onHourClick={onHourClick}
+          locale={locale}
         />
       )}
       {currentView === CurrentView.DAY_REVERSE && (
@@ -123,6 +129,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           onCellClick={onCellClick}
           timeDateFormat={timeDateFormat}
           onHourClick={onHourClick}
+          locale={locale}
         />
       )}
       {currentView === CurrentView.WEEK_IN_PLACE && (
@@ -138,6 +145,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           timeDateFormat={timeDateFormat}
           onHourClick={onHourClick}
           weekStartsOn={weekStartsOn}
+          locale={locale}
         />
       )}
       {currentView === CurrentView.DAY_IN_PLACE && (
@@ -152,6 +160,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           onCellHeaderClick={onCellHeaderClick}
           timeDateFormat={timeDateFormat}
           onHourClick={onHourClick}
+          locale={locale}
         />
       )}
       {!isEmptyObject(preparedColorDots) && (

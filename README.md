@@ -86,6 +86,8 @@ The `Calendar` component accepts the following props:
   
 - `onCellHeaderClick`: A callback function that is called when a cell header is clicked. It receives the clicked cell date information and _event_ as a parameter. It is the part to the left and right of the day number within cell. In the case of a MONTH and WEEK views, `onCellClick` method will be called instead of this one.
 
+- `locale` _(DEFAULT: enUS)_: Accepts a locale object from the `date-fns` library. It controls the language used for displaying the names of days and months in the calendar.
+
 - `cellDisplayMode`: An object that controls the display mode of the cells in the calendar. It should have the following structure:
   - `[CURRENT_VIEW]`: The current view of the calendar (e.g., `WEEK_TIME`, `DAY`, `MONTH`, etc.).
     - `inactiveCells`: An array of inactive cell dates that should be hidden.

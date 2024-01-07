@@ -10,6 +10,7 @@ const CalendarNavigation: React.FC<CalendarHeaderProps> = ({
   currentDate,
   currentView,
   timeDateFormat,
+  locale,
 }) => {
   const getNextTimeUnit = React.useMemo(() => {
     switch (currentView) {
@@ -64,6 +65,7 @@ const CalendarNavigation: React.FC<CalendarHeaderProps> = ({
           {format(
             new Date(currentDate),
             timeDateFormat?.monthYear || TimeDateFormat.MONTH_YEAR,
+            { locale },
           )}
         </span>
       </div>

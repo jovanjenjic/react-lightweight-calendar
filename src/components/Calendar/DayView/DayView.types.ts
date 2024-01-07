@@ -1,3 +1,4 @@
+import { Locale } from 'date-fns';
 import {
   ColorDot,
   ColorDotFull,
@@ -33,4 +34,5 @@ export interface DayTimeViewProps {
     value: DateInfo | number,
     event: React.MouseEvent<HTMLElement>,
   ) => void;
+  locale: Locale;
 }

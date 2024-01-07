@@ -27,6 +27,7 @@ import {
   isEmptyObject,
 } from '../../utils/index';
 import { TimeDateFormat } from './Calendar.constants';
+import enUS from 'date-fns/locale/en-US';
 
 // Designed to prepare and display the hours on the left side of the calendar
 export const getTimeUnitString = (
@@ -174,6 +175,7 @@ export const initializeProps = ({
   currentView,
   activeTimeDateField,
   data,
+  locale,
 }: InitializePropsFunc): InitializePropsRetFunc => {
   const onDayNumberClickModified = onDayNumberClick || (() => null);
   const onDayStringClickModified = onDayStringClick || (() => null);
@@ -193,6 +195,7 @@ export const initializeProps = ({
   const currentViewModified = (currentView as CurrentView) || CurrentView.MONTH;
   const activeTimeDateFieldModified = activeTimeDateField || '';
   const dataModified = data || [];
+  const localeModified = locale || enUS;
   const cellDisplayModeConst = {
     MONTH: {
       inactiveCells: [],
@@ -229,6 +232,7 @@ export const initializeProps = ({
     currentViewModified,
     activeTimeDateFieldModified,
     dataModified,
+    localeModified,
   };
 };
 
