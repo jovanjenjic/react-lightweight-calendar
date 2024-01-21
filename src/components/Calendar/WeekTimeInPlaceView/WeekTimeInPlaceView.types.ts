@@ -1,3 +1,4 @@
+import { Locale } from 'date-fns';
 import {
   ColorDot,
   ColorDotFull,
@@ -35,4 +36,5 @@ export interface WeekInPlaceViewProps {
     event: React.MouseEvent<HTMLElement>,
   ) => void;
   weekStartsOn: WeekStartsOn;
+  locale: Locale;
 }

@@ -1,3 +1,4 @@
+import { Locale } from 'date-fns';
 import {
   ColorDot,
   ColorDotFull,
@@ -23,4 +24,5 @@ export interface WeekViewProps {
   timeDateFormat: TimeFormatModified;
   preparedColorDots: ColorDotFull;
   weekStartsOn: WeekStartsOn;
+  locale: Locale;
 }

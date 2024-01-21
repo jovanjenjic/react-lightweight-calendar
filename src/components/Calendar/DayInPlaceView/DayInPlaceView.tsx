@@ -30,6 +30,7 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
   onCellHeaderClick,
   timeDateFormat,
   preparedColorDots,
+  locale,
 }) => {
   // Current day info
   const parsedCurrentDay = useMemo(() => {
@@ -46,6 +47,7 @@ const DayInPlaceView: FC<DayInPlaceViewProps> = ({
           {format(
             new Date(currentDate),
             timeDateFormat.day || TimeDateFormat.SHORT_WEEKDAY,
+            { locale },
           )}
         </div>
       </div>
