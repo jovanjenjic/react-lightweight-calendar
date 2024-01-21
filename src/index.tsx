@@ -6,6 +6,7 @@ import {
   CellDisplayMode,
   CellDisplayModeState,
 } from './components/Calendar/Calendar.types';
+import { enUS } from 'date-fns/locale';
 
 const Playground = () => {
   const [currentDate, setCurrentDate] = React.useState('2023-06-02');
@@ -84,6 +85,7 @@ const Playground = () => {
         onItemClick={onItemClick}
         onCellClick={onCellClick}
         onCellHeaderClick={onCellHeaderClick}
+        locale={enUS}
       />
     </div>
   );
