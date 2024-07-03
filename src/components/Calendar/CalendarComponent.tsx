@@ -1,14 +1,14 @@
-import React, { FC, useMemo } from 'react';
-import { CalendarProps, ColorDotFull, CurrentView } from './Calendar.types';
-import MonthView from './MonthView/MonthView';
-import WeekView from './WeekView/WeekView';
-import CalendarNavigation from './CalendarNavigation';
-import WeekTimeView from './WeekTimeView/WeekTimeView';
-import DayView from './DayView/DayView';
-import DayInPlaceView from './DayInPlaceView/DayInPlaceView';
-import WeekTimeInPlaceView from './WeekTimeInPlaceView/WeekTimeInPlaceView';
+import { FC, useMemo } from 'react';
 import { isEmptyObject } from '../../utils';
+import { CalendarProps, ColorDotFull, CurrentView } from './Calendar.types';
+import CalendarNavigation from './CalendarNavigation';
+import DayInPlaceView from './DayInPlaceView/DayInPlaceView';
 import DayReverseView from './DayReverseView/DayReverseView';
+import DayView from './DayView/DayView';
+import MonthView from './MonthView/MonthView';
+import WeekTimeInPlaceView from './WeekTimeInPlaceView/WeekTimeInPlaceView';
+import WeekTimeView from './WeekTimeView/WeekTimeView';
+import WeekView from './WeekView/WeekView';
 
 const CalendarComponent: FC<CalendarProps> = ({
   renderItems,
@@ -26,6 +26,7 @@ const CalendarComponent: FC<CalendarProps> = ({
   timeDateFormat,
   weekStartsOn,
   locale,
+  todayLabel,
 }) => {
   // Object that will be used to display the color dot for each day, but also for the legend below the calendar
   const preparedColorDots: ColorDotFull = useMemo(() => {
@@ -54,6 +55,7 @@ const CalendarComponent: FC<CalendarProps> = ({
           setCurrentDate={setCurrentDate}
           timeDateFormat={timeDateFormat}
           locale={locale}
+          todayLabel={todayLabel}
         />
       )}
       {currentView === CurrentView.MONTH && (

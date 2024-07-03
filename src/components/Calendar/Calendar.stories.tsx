@@ -1,16 +1,17 @@
-import React from 'react';
 import { Story } from '@storybook/react';
+import { enUS } from 'date-fns/locale';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-twilight.css';
+import React from 'react';
+import { colorDots, testData } from '../../dataProps';
 import Styleguide from '../StyleGuide/StyleGuide';
-import CalendarWrapper from './CalendarWrapper';
 import {
   CalendarWrapperProps,
   CellDisplayModeState,
   CurrentView,
   WeekStartsOn,
 } from './Calendar.types';
-import { colorDots, testData } from '../../dataProps';
+import CalendarWrapper from './CalendarWrapper';
 
 export default {
   title: 'UI Components/Calendar',
@@ -79,6 +80,8 @@ const codeSnippet = Prism.highlight(
       hour: 'string', // Hour on the left side of the calendar
       monthYear: 'string', // Text in navigation
     }}
+    locale={enUS} // Locale object from the date-fns library
+    todayLabel="Today" // Label for the "Today" button
     onDayNumberClick={(day: string, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on day number
     onDayStringClick={(day: string | Date, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on day text
     onHourClick={(value: DateInfo | number, event: React.MouseEvent<HTMLElement>) => void} // A callback method that is called by clicking on hour on left side of Calendar
@@ -132,6 +135,8 @@ const Template: Story<CalendarWrapperProps> = (args) => {
         colorDots={argsData.colorDots}
         timeDateFormat={argsData.timeDateFormat}
         cellDisplayMode={argsData.cellDisplayMode}
+        locale={enUS}
+        todayLabel="Today"
       />
 
       <br />
@@ -176,4 +181,6 @@ Calendar.args = {
       state: CellDisplayModeState.CUSTOM,
     },
   },
+  locale: enUS,
+  todayLabel: 'Today',
 };

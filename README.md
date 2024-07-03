@@ -139,6 +139,7 @@ Access any component by **className** and apply whatever style you want
 ```jsx
 import React from 'react';
 import Calendar from 'react-lightweight-calendar';
+import { enUS } from 'date-fns/locale';
 
 const MyCalendar = () => {
   const [currentDate, setCurrentDate] = React.useState('2023-06-02');
@@ -207,6 +208,8 @@ const MyCalendar = () => {
         hour: 'hh a',
         monthYear: 'LLLL yyyy',
       }}
+      locale={enUS}
+      todayLabel="Go to today"
       onDayNumberClick={(day) => {
         // Handle day number click
         console.log(day);
