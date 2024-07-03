@@ -6,6 +6,15 @@ import {
   getMinutes,
   startOfWeek,
 } from 'date-fns';
+import enUS from 'date-fns/locale/en-US';
+import {
+  dayInWeekBasedOnWeekStarts,
+  formatFullDate,
+  formatFullDateTime,
+  getAllDaysInMonth,
+  isEmptyObject,
+} from '../../utils/index';
+import { TimeDateFormat } from './Calendar.constants';
 import {
   CalculateStartAndEndMinuteFunc,
   CellDisplayMode,
@@ -19,15 +28,6 @@ import {
   TimeFormat,
   WeekStartsOn,
 } from './Calendar.types';
-import {
-  dayInWeekBasedOnWeekStarts,
-  formatFullDate,
-  formatFullDateTime,
-  getAllDaysInMonth,
-  isEmptyObject,
-} from '../../utils/index';
-import { TimeDateFormat } from './Calendar.constants';
-import enUS from 'date-fns/locale/en-US';
 
 // Designed to prepare and display the hours on the left side of the calendar
 export const getTimeUnitString = (
@@ -176,6 +176,7 @@ export const initializeProps = ({
   activeTimeDateField,
   data,
   locale,
+  todayLabel,
 }: InitializePropsFunc): InitializePropsRetFunc => {
   const onDayNumberClickModified = onDayNumberClick || (() => null);
   const onDayStringClickModified = onDayStringClick || (() => null);
@@ -196,6 +197,7 @@ export const initializeProps = ({
   const activeTimeDateFieldModified = activeTimeDateField || '';
   const dataModified = data || [];
   const localeModified = locale || enUS;
+  const todayLabelModified = todayLabel || 'Today';
   const cellDisplayModeConst = {
     MONTH: {
       inactiveCells: [],
@@ -233,6 +235,7 @@ export const initializeProps = ({
     activeTimeDateFieldModified,
     dataModified,
     localeModified,
+    todayLabelModified,
   };
 };
 

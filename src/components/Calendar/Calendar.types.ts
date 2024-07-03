@@ -191,6 +191,7 @@ export interface CalendarWrapperProps {
   timeDateFormat?: TimeFormat;
   weekStartsOn?: WeekStartsOn | number;
   locale?: Locale;
+  todayLabel?: string;
 }
 
 export interface CalendarHeaderProps {
@@ -199,6 +200,7 @@ export interface CalendarHeaderProps {
   currentDate: string | Date;
   timeDateFormat: TimeFormatModified;
   locale: Locale;
+  todayLabel?: string;
 }
 
 export interface CalculateStartAndEndMinuteFunc {
@@ -245,6 +247,7 @@ export interface InitializePropsFunc {
   // eslint-disable-next-line
   data?: Record<string, any>[];
   locale?: Locale;
+  todayLabel?: string;
 }
 export interface InitializePropsRetFunc {
   cellDisplayModeModified: CellDisplayMode;
@@ -282,4 +285,5 @@ export interface InitializePropsRetFunc {
   // eslint-disable-next-line
   dataModified: Record<string, any>[];
   localeModified: Locale;
+  todayLabelModified: string;
 }

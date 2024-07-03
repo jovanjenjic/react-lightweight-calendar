@@ -1,13 +1,6 @@
-import React, { ReactElement } from 'react';
 import cn from 'classnames';
-import {
-  CalendarWrapperProps,
-  CurrentView,
-  DateInfoFunction,
-  PreparedDataWithTimeFull,
-  PreparedDataWithTimeInPlace,
-  PreparedDataWithoutTime,
-} from './Calendar.types';
+import React, { ReactElement } from 'react';
+import '../../styles/styles.scss';
 import {
   formatFullDate,
   formatHour,
@@ -17,16 +10,23 @@ import {
   prepareCalendarDataWithTime,
   prepareCalendarDataWithTimeReverse,
 } from '../../utils/index';
+import Styleguide from '../StyleGuide/StyleGuide';
 import {
-  shouldCollapse,
-  shouldShowItem,
   getHeaderItemInfo,
   getKeyFromDateInfo,
   initializeProps,
+  shouldCollapse,
+  shouldShowItem,
 } from './Calendar.helper';
+import {
+  CalendarWrapperProps,
+  CurrentView,
+  DateInfoFunction,
+  PreparedDataWithTimeFull,
+  PreparedDataWithTimeInPlace,
+  PreparedDataWithoutTime,
+} from './Calendar.types';
 import CalendarComponent from './CalendarComponent';
-import Styleguide from '../StyleGuide/StyleGuide';
-import '../../styles/styles.scss';
 
 const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   data,
@@ -51,6 +51,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
   timeDateFormat,
   weekStartsOn,
   locale,
+  todayLabel,
 }) => {
   // Preparing the data to work for all cases
   const {
@@ -69,6 +70,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     dataModified,
     activeTimeDateFieldModified,
     localeModified,
+    todayLabelModified,
   } = initializeProps({
     cellDisplayMode,
     timeDateFormat,
@@ -85,6 +87,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
     activeTimeDateField,
     data,
     locale,
+    todayLabel,
   });
 
   const [hoveredElement, setHoveredElement] = React.useState(0);
@@ -410,6 +413,7 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
         timeDateFormat={timeDateFormatModified}
         weekStartsOn={weekStartsOnModified}
         locale={localeModified}
+        todayLabel={todayLabelModified}
       />
     </>
   );

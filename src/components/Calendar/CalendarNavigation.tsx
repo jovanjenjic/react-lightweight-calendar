@@ -1,9 +1,9 @@
+import { add, format, sub } from 'date-fns';
 import React from 'react';
 import { formatFullDate } from '../../utils/index';
-import { add, sub, format } from 'date-fns';
 import Button from '../Button/Button';
-import { CalendarHeaderProps, CurrentView } from './Calendar.types';
 import { TimeDateFormat } from './Calendar.constants';
+import { CalendarHeaderProps, CurrentView } from './Calendar.types';
 
 const CalendarNavigation: React.FC<CalendarHeaderProps> = ({
   setCurrentDate,
@@ -11,6 +11,7 @@ const CalendarNavigation: React.FC<CalendarHeaderProps> = ({
   currentView,
   timeDateFormat,
   locale,
+  todayLabel,
 }) => {
   const getNextTimeUnit = React.useMemo(() => {
     switch (currentView) {
@@ -43,7 +44,7 @@ const CalendarNavigation: React.FC<CalendarHeaderProps> = ({
     <div data-cy="CalendarNavigation" className="calendar__navigation">
       <Button
         dataCy="NavigationNowButton"
-        label="Today"
+        label={todayLabel}
         onClick={() => setCurrentDate(formatFullDate(new Date()))}
         withBorder
       />
