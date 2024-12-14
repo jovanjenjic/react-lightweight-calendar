@@ -33,16 +33,12 @@
     "url": "git+https://github.com/jovanjenjic/react-lightweight-calendar"
   },
   "dependencies": {
-    "@cypress/react18": "^2.0.0",
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
-    "node-sass": "^7.0.3",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "source-map-explorer": "^2.5.3",
-    "typescript": "^4.9.5"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
@@ -73,6 +69,7 @@
     ]
   },
   "devDependencies": {
+    "@cypress/react18": "^2.0.0",
     "@storybook/addon-essentials": "^7.0.26",
     "@storybook/addon-interactions": "^7.0.26",
     "@storybook/addon-links": "^7.0.26",
@@ -94,10 +91,13 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-storybook": "^0.6.12",
+    "node-sass": "^7.0.3",
     "prettier": "^2.8.8",
     "prop-types": "^15.8.1",
+    "source-map-explorer": "^2.5.3",
     "storybook": "^7.0.26",
     "tsup": "^7.1.0",
+    "typescript": "^4.9.5",
     "webpack": "^5.88.1"
   }
 }
