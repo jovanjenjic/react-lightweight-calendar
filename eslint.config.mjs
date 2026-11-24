@@ -21,6 +21,12 @@ export default defineConfig([
       'react-hooks/exhaustive-deps': 'warn',
     },
   },
+  {
+    files: ['scripts/**/*.{js,mjs}'],
+    languageOptions: {
+      globals: { ...globals.node },
+    },
+  },
   // Must stay last: turns off formatting rules that conflict with Prettier.
   prettierRecommended,
 ]);

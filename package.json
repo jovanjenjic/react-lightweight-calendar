@@ -56,12 +56,17 @@
     "build:js": "npm run clean && tsup",
     "build:css": "sass --no-source-map src/styles/styles.scss dist/styles/styles.css",
     "typecheck": "tsc --noEmit",
-    "eslint": "eslint src --fix",
-    "lint": "eslint src",
+    "eslint": "eslint src scripts --fix",
+    "lint": "eslint src scripts",
     "test": "cypress run --component --browser chrome",
     "test:open": "cypress open --component",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "release": "node scripts/release.mjs",
+    "release:patch": "node scripts/release.mjs patch",
+    "release:minor": "node scripts/release.mjs minor",
+    "release:major": "node scripts/release.mjs major",
+    "prepublishOnly": "node scripts/release.mjs --guard"
   },
   "peerDependencies": {
     "react": ">=18",
