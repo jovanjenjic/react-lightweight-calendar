@@ -155,8 +155,7 @@ Options:
   --yes           Do not ask for confirmation before publishing.
   --no-push       Publish, commit and tag, but do not push to ${REMOTE}.
   --skip-install  Skip the clean "npm ci" install.
-  --skip-2fa-check  Do not require 2FA on the npm account (for a granular token
-                  with "bypass 2FA").
+  --skip-2fa-check  Do not require 2FA on the npm account.
   --help          Show this help.`);
 }
 
@@ -285,9 +284,9 @@ async function main() {
     if (check2fa && profile.ok && !tfa) {
       fail(
         'Two-factor authentication is not enabled on your npm account, and npm requires it to publish.\n' +
-          '  Enable it (authenticator app, "Authorization and writes"):\n' +
-          `  https://www.npmjs.com/settings/${whoami.out}/tfa  or  npm profile enable-2fa auth-and-writes\n` +
-          '  Publishing with a granular token that bypasses 2FA instead? Pass --skip-2fa-check.',
+          '  Add a security key (Touch ID, passkey or YubiKey); new authenticator-app (TOTP) setups are no longer allowed:\n' +
+          `  https://www.npmjs.com/settings/${whoami.out}/tfa\n` +
+          '  If 2FA is already on and this check is wrong, pass --skip-2fa-check.',
       );
     } else if (tfa) {
       ok(`2FA enabled (${tfa.mode ?? 'on'})`);
@@ -398,9 +397,10 @@ async function main() {
       console.log(yellow('Cancelled. Nothing was published.'));
       return;
     }
-    // npm only prompts for a one-time password with some login types; with a token it
-    // fails with E403 instead. Ask here, right before publishing, so the code is fresh.
-    const otpQuestion = `${bold('6-digit code from your authenticator app')} ${dim('(Enter to skip):')} `;
+    // Authenticator app: npm only prompts for its code with some login types (with a token
+    // it fails with E403), so ask here, right before publishing, while the code is fresh.
+    // Security key: leave it empty and npm prints a link to confirm the publish in the browser.
+    const otpQuestion = `${bold('6-digit code from your authenticator app')} ${dim('(press Enter if you use a security key):')} `;
     const retryQuestion = `${bold('Publish failed. Enter a new 6-digit code to retry')} ${dim('(Enter to abort):')} `;
     let otp = process.stdin.isTTY ? await ask(otpQuestion) : '';
     for (let attempt = 1; ; attempt += 1) {
