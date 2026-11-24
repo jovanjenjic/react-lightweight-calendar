@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, type JSX } from 'react';
 import '../../styles/styles.scss';
 import {
   formatFullDate,
@@ -249,9 +249,8 @@ const CalendarWrapper: React.FC<CalendarWrapperProps> = ({
           <div
             key={`${index}-${dateInfo.date}`}
             style={{
-              [!isDayReverseView
-                ? 'gridRow'
-                : 'gridColumn']: `${preparedDataItem.startMinute} / ${preparedDataItem.endMinute}`,
+              [!isDayReverseView ? 'gridRow' : 'gridColumn']:
+                `${preparedDataItem.startMinute} / ${preparedDataItem.endMinute}`,
               width: !isDayReverseView && preparedDataItem.width,
               left: !isDayReverseView && preparedDataItem.left,
               margin: !isDayReverseView && preparedDataItem.margin,

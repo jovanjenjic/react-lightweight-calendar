@@ -158,8 +158,9 @@ const MonthView: FC<MonthViewProps> = ({
             <div
               key={`${week[0].date}/${index}`}
               className="month-week-row"
-              // eslint-disable-next-line
-              ref={(el) => (weekRefs.current[index] = el!)}
+              ref={(el) => {
+                weekRefs.current[index] = el!;
+              }}
               data-week-index={index}
               data-cy="WeekRow"
             >

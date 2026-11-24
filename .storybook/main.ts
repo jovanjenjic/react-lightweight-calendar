@@ -1,19 +1,16 @@
-import type { StorybookConfig } from '@storybook/react-webpack5';
+import type { StorybookConfig } from '@storybook/react-vite';
+
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/preset-create-react-app',
-    '@storybook/addon-interactions',
-  ],
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  addons: ['@storybook/addon-links', '@storybook/addon-docs'],
   framework: {
-    name: '@storybook/react-webpack5',
+    name: '@storybook/react-vite',
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
-  },
-  staticDirs: ['..\\public'],
+  viteFinal: (viteConfig) => ({
+    ...viteConfig,
+    // Storybook's own preview runtime is a ~1 MB chunk; this only silences the size hint.
+    build: { ...viteConfig.build, chunkSizeWarningLimit: 1500 },
+  }),
 };
 export default config;
