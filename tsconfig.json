@@ -1,29 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES2020",
+    "lib": ["DOM", "DOM.Iterable", "ES2020"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
     "allowJs": true,
-    "moduleResolution": "node",
     "noImplicitAny": false,
+    "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "declaration": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "outDir": "dist",
+    "isolatedModules": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "jsx": "react-jsx",
+    "declaration": true,
+    "outDir": "dist",
+    "types": ["vite/client", "cypress", "node"]
   },
-  "include": [
-    "src",
-    "cypress",
-    "**/*.ts",
-    "cypress.config.js",
-    "lint-staged.config.js",
-    "findRelated.js",
-    "rollup.config.js"
-  ],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src", "cypress", ".storybook", "*.ts", "*.mts"],
+  "exclude": ["node_modules", "dist", "storybook-static"]
 }

@@ -1,4 +1,4 @@
-@import '../../styles/_mixins';
+@use '../../styles/_mixins' as *;
 
 .calendar {
   margin-top: var(--spacing);

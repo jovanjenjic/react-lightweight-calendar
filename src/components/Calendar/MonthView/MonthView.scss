@@ -1,5 +1,5 @@
-@import '../../../styles/_mixins';
-@import '../../../styles/_components';
+@use '../../../styles/_mixins' as *;
+@use '../../../styles/_components' as *;
 
 .month-view-inside {
   background-color: var(--gs-50);

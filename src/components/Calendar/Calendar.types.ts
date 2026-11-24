@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { Locale } from 'date-fns';
 
 export interface DateInfo {
@@ -138,6 +139,7 @@ export interface CalendarProps {
   timeDateFormat: TimeFormatModified;
   weekStartsOn: WeekStartsOn;
   locale: Locale;
+  todayLabel: string;
 }
 
 export interface CalendarWrapperProps {

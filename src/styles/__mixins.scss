@@ -1,7 +1,9 @@
-@import '_variables';
+@use 'sass:map';
+@forward '_variables';
+@use '_variables' as *;
 
 @mixin breakpoint($name) {
-  @media screen and (min-width: map-get($breakpoints, $name )) {
+  @media screen and (min-width: map.get($breakpoints, $name)) {
     @content;
   }
 }

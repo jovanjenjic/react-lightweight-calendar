@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import type { StoryFn } from '@storybook/react-vite';
 import { enUS } from 'date-fns/locale';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-twilight.css';
@@ -100,7 +100,7 @@ const codeSnippet = Prism.highlight(
   'javascript',
 );
 
-const Template: Story<CalendarWrapperProps> = (args) => {
+const Template: StoryFn<CalendarWrapperProps> = (args) => {
   const [argsData, setArgsData] = React.useState(args);
 
   React.useEffect(() => {
