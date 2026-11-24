@@ -41,8 +41,8 @@ class ReleaseError extends Error {}
 // ---------------------------------------------------------------------------
 // helpers
 
-function run(cmd, args, { env } = {}) {
-  console.log(dim(`$ ${cmd} ${args.join(' ')}`));
+function run(cmd, args, { env, display } = {}) {
+  console.log(dim(`$ ${display ?? `${cmd} ${args.join(' ')}`}`));
   const result = spawnSync(cmd, args, {
     cwd: ROOT,
     stdio: 'inherit',
@@ -50,7 +50,9 @@ function run(cmd, args, { env } = {}) {
     env: { ...process.env, ...env },
   });
   if (result.status !== 0) {
-    throw new ReleaseError(`"${cmd} ${args.join(' ')}" failed.`);
+    throw new ReleaseError(
+      `"${display ?? `${cmd} ${args.join(' ')}`}" failed.`,
+    );
   }
 }
 
@@ -124,6 +126,13 @@ function publishedVersions(name) {
   return (Array.isArray(versions) ? versions : [versions]).filter((v) =>
     /^\d+\.\d+\.\d+$/.test(v),
   );
+}
+
+async function ask(question) {
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+  const answer = await rl.question(question);
+  rl.close();
+  return answer.trim();
 }
 
 async function confirm(question) {
@@ -371,7 +380,34 @@ async function main() {
       console.log(yellow('Cancelled. Nothing was published.'));
       return;
     }
-    run('npm', ['publish'], { env: { [GUARD_ENV]: '1' } });
+    // npm only prompts for a one-time password with some login types; with a token it
+    // fails with E403 instead. Ask here, right before publishing, so the code is fresh.
+    for (let attempt = 1; ; attempt += 1) {
+      const otp = process.stdin.isTTY
+        ? await ask(
+            `${bold('One-time password from your authenticator')} ${dim('(Enter to skip):')} `,
+          )
+        : '';
+      if (otp && !/^\d{6,8}$/.test(otp)) {
+        warn('That does not look like a one-time password (6-8 digits).');
+        continue;
+      }
+      try {
+        run('npm', ['publish', ...(otp ? [`--otp=${otp}`] : [])], {
+          env: { [GUARD_ENV]: '1' },
+          display: `npm publish${otp ? ' --otp=******' : ''}`,
+        });
+        break;
+      } catch (error) {
+        const retry =
+          process.stdin.isTTY &&
+          attempt < 3 &&
+          (await confirm(
+            'Publish failed. Try again with a new one-time password?',
+          ));
+        if (!retry) throw error;
+      }
+    }
     publishedNow = true;
     ok(`Published ${pkg.name}@${next}`);
   } finally {
