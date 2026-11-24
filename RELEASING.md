@@ -9,6 +9,12 @@ npm login                     # once, or when the npm token expires
 npm run release -- patch      # or: minor, major
 ```
 
+npm requires two-factor authentication to publish. Enable it once on your npm
+account (authenticator app, mode "Authorization and writes"):
+https://www.npmjs.com/settings/~/tfa or `npm profile enable-2fa auth-and-writes`.
+When the script asks for a code, enter the 6-digit code from the authenticator
+app. The 8-digit code npm emails you at login does not work for publishing.
+
 Shortcuts: `npm run release:patch`, `npm run release:minor`, `npm run release:major`.
 
 ## What the script does
@@ -28,12 +34,13 @@ Shortcuts: `npm run release:patch`, `npm run release:minor`, `npm run release:ma
 
 ## Options
 
-| Option           | Effect                                                         |
-| ---------------- | -------------------------------------------------------------- |
-| `--dry-run`      | Runs everything with `npm publish --dry-run`; changes nothing. |
-| `--yes`          | Skips the confirmation prompt.                                 |
-| `--no-push`      | Commits and tags locally but does not push.                    |
-| `--skip-install` | Skips the clean `npm ci` install.                              |
+| Option             | Effect                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------- |
+| `--dry-run`        | Runs everything with `npm publish --dry-run`; changes nothing.                        |
+| `--yes`            | Skips the confirmation prompt.                                                        |
+| `--no-push`        | Commits and tags locally but does not push.                                           |
+| `--skip-install`   | Skips the clean `npm ci` install.                                                     |
+| `--skip-2fa-check` | Allows publishing without 2FA on the account, for a granular token with "bypass 2FA". |
 
 Example: `npm run release -- minor --dry-run`
 

@@ -155,6 +155,8 @@ Options:
   --yes           Do not ask for confirmation before publishing.
   --no-push       Publish, commit and tag, but do not push to ${REMOTE}.
   --skip-install  Skip the clean "npm ci" install.
+  --skip-2fa-check  Do not require 2FA on the npm account (for a granular token
+                  with "bypass 2FA").
   --help          Show this help.`);
 }
 
@@ -190,6 +192,7 @@ async function main() {
     '--yes',
     '--no-push',
     '--skip-install',
+    '--skip-2fa-check',
   ]);
   const unknown = args.filter((a) => !known.has(a));
   const types = args.filter((a) => BUMP_TYPES.includes(a));
@@ -206,6 +209,7 @@ async function main() {
   const autoYes = args.includes('--yes');
   const push = !args.includes('--no-push');
   const install = !args.includes('--skip-install');
+  const check2fa = !args.includes('--skip-2fa-check');
 
   // In a dry run, preflight problems are reported but do not stop the checks.
   const fail = (msg) => {
@@ -273,6 +277,20 @@ async function main() {
       fail(`npm user "${whoami.out}" is not an owner of ${pkg.name}.`);
     } else {
       ok(`npm user: ${whoami.out}`);
+    }
+    // npm refuses to publish without 2FA (unless the token bypasses it), and only
+    // reports that after all checks ran, so check it up front.
+    const profile = tryCapture('npm', ['profile', 'get', '--json']);
+    const tfa = profile.ok ? JSON.parse(profile.out).tfa : undefined;
+    if (check2fa && profile.ok && !tfa) {
+      fail(
+        'Two-factor authentication is not enabled on your npm account, and npm requires it to publish.\n' +
+          '  Enable it (authenticator app, "Authorization and writes"):\n' +
+          `  https://www.npmjs.com/settings/${whoami.out}/tfa  or  npm profile enable-2fa auth-and-writes\n` +
+          '  Publishing with a granular token that bypasses 2FA instead? Pass --skip-2fa-check.',
+      );
+    } else if (tfa) {
+      ok(`2FA enabled (${tfa.mode ?? 'on'})`);
     }
   }
 
@@ -382,14 +400,17 @@ async function main() {
     }
     // npm only prompts for a one-time password with some login types; with a token it
     // fails with E403 instead. Ask here, right before publishing, so the code is fresh.
+    const otpQuestion = `${bold('6-digit code from your authenticator app')} ${dim('(Enter to skip):')} `;
+    const retryQuestion = `${bold('Publish failed. Enter a new 6-digit code to retry')} ${dim('(Enter to abort):')} `;
+    let otp = process.stdin.isTTY ? await ask(otpQuestion) : '';
     for (let attempt = 1; ; attempt += 1) {
-      const otp = process.stdin.isTTY
-        ? await ask(
-            `${bold('One-time password from your authenticator')} ${dim('(Enter to skip):')} `,
-          )
-        : '';
-      if (otp && !/^\d{6,8}$/.test(otp)) {
-        warn('That does not look like a one-time password (6-8 digits).');
+      if (otp && !/^\d{6}$/.test(otp)) {
+        warn(
+          /^\d{8}$/.test(otp)
+            ? 'That is an 8-digit email login code; publishing needs the 6-digit code from your authenticator app.'
+            : 'A one-time password is 6 digits.',
+        );
+        otp = await ask(otpQuestion);
         continue;
       }
       try {
@@ -399,13 +420,9 @@ async function main() {
         });
         break;
       } catch (error) {
-        const retry =
-          process.stdin.isTTY &&
-          attempt < 3 &&
-          (await confirm(
-            'Publish failed. Try again with a new one-time password?',
-          ));
-        if (!retry) throw error;
+        otp =
+          process.stdin.isTTY && attempt < 3 ? await ask(retryQuestion) : '';
+        if (!otp) throw error;
       }
     }
     publishedNow = true;
