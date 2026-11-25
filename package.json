@@ -1,6 +1,6 @@
 {
   "name": "react-lightweight-calendar",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A lightweight, customizable React calendar: month, week, day and timeline views with Google Calendar style layout.",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
