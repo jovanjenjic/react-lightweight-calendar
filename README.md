@@ -1,260 +1,290 @@
-## React Lightweight Calendar Component Documentation
+# React Lightweight Calendar
 
-### Information
+A lightweight, customizable calendar for React. Give it an array of objects with dates
+and it lays them out the way Google Calendar does: a month grid, week and day
+timelines, a horizontal day timeline and hour-by-hour views.
 
-The `Calendar` component allows you to visualize entities. It provides various customization options to tailor the appearance and behavior of the calendar to your needs.
+[Documentation](https://www.calendar-react.com) ·
+[npm](https://www.npmjs.com/package/react-lightweight-calendar) ·
+[JavaScript example](https://github.com/jovanjenjic/react-lightweight-calendar-example-js) ·
+[TypeScript example](https://github.com/jovanjenjic/react-lightweight-calendar-example-ts)
 
-It can be customized for displaying various entities such as events, orders, activity calendars, reservations, bookings, rentals etc. It can be used for any entity that has at least one field in the ISO 8601 format. Each element on the calendar can be positioned based on a single field, based on any field that the data array contains, or based on any interval defined by separating two time date fields with a `-`.
+- **Seven views** with a built-in toolbar and view switcher.
+- **Google Calendar layout**: overlapping items share the width and cascade, multi-day
+  items sit in lanes that never overlap, busy days show "+N more".
+- **Render any part**: items, toolbar, day headers, day numbers, hour labels, "+N more",
+  cell content and the legend. The calendar does the layout, you render the content.
+- **Themeable** with a dozen CSS variables, plus light, dark and automatic themes.
+- **Responsive**: adapts to the width it gets, down to phones.
+- **No side effects on your page**: no global CSS, no outer margin or padding.
+- **TypeScript**, React 18 and 19, ESM and CommonJS, `date-fns` as the only date library.
 
-[Documentation](https://www.calendar-react.com)
+## Install
 
-[Storybook usage example](https://64a7f9553a2478c46491aea9-xzaakxuxzj.chromatic.com/?path=/story/ui-components-calendar--calendar)
-
-[CodeSandbox typescript example](https://codesandbox.io/s/react-lightweight-calendar-ts-yzxryp)
-
-[CodeSandbox javascript example](https://codesandbox.io/s/react-lightweight-calendar-nv8csq)
-
-The component is written in TypeScript and is covered by tests. The calendar was developed using pure html, css and js (ts). The only library the calendar relies on during development is `date-fns`. 
-The plan is to continue developing additional views and functionalities. The priority for developing other features is based on the emerging needs.
-
-### Images
-
-| WEEK_TIME | DAY | DAY_REVERSE | MONTH | WEEK  | WEEK_IN_PLACE | DAY_IN_PLACE |
-| :---:         |     :---:      |     :---:      |         :---: | :---: | :---:         | :---:         |
-| [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/a0ed5178-73d3-4e2f-ad10-b2fa7e1c0d31)   | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/130776e2-437a-4335-a759-ea94f5784a6c)     | [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/77787eb6-a256-45dd-81dd-e3eedc0d987d)    |   [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/6a1612b3-f5d3-494c-9776-2f0c791a1ff1)    |    [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/4648f562-8841-4751-b246-e06ffdb82020)           |     [IMAGE LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/17af45bb-1ef7-471b-bc64-6094d4849933)         | [IMAGE_LINK](https://github.com/jovanjenjic/react-lightweight-calendar/assets/57072437/cf27dfec-2b31-4dd5-9631-e61e3b5a7e58)
-
-### Props
-
-The `Calendar` component accepts the following props:
-
-- `data` (_REQUIRED_): An array of item (for example event) objects that will be displayed on the calendar. Each item object should have the following properties:
-  - `id`: A unique identifier for the item.
-  - `startTime`: The start time of the item in ISO 8601 format. (it doesn't have to be strictly called the _startTime_)
-  - `endTime`: The end time of the item in ISO 8601 format. (it doesn't have to be strictly called the _endTime_)
-  - `title`: The title or label for the item (optional).
-  - `bgColor`: The background color of the item (optional).
-  - `textColor`: The text color of the item (optional).
-
-- `currentView` _(DEFAULT: MONTH)_: A string indicating the current view of the calendar. It can be one of the following options:
-  - `WEEK_TIME`: Display the calendar in a week view with a timeline.
-  - `DAY`: Display the calendar in a day view with a timeline (The column is the day and the rows are the hours).
-  - `DAY_REVERSE`: Display the calendar in a day view with a timeline (Columns are hours and row is day).
-  - `MONTH`: Display the calendar in a month view with a timeline .
-  - `WEEK`: Display the calendar in a week view with a timeline (similar as `MONTH` view).
-  - `WEEK_IN_PLACE`: Display the calendar in a week view without a timeline. It is intended for grouping elements based on the start time interval. It can only be used to show the schedule of elements by hours
-  - `DAY_IN_PLACE`: Display the calendar in a day view without a timeline. It is intended for grouping elements based on the start time interval. It can only be used to show the schedule of elements by hours
-
-- `currentDate` _(REQUIRED, DEFAULT: now)_: The current date displayed on the calendar in the format 'YYYY-MM-DD'.
-
-- `setCurrentDate`: A callback function that is called when the current date is changed. It receives the new date as a parameter. If not sent, the **navigation** will not be visible. (In that case, you need to create your own navigation where only the _currentDate_ will be passed to the calendar)
-
-- `activeTimeDateField` _(required)_: The field based on which the events will be positioned on the calendar. It can be any time date field from the `data` array. It can also be an interval separated by a '-'. (`startTime`, `endTime`, `createdAt`, `updatedAt`, `startTime-endTime`, `createdAt-updated`...)
-
-- `weekStartsOn`: A number that regulates which day the week starts on. The numbers range from 0 to 6, where 0 represents Sunday, 1 represents Monday, and so on.
-
-- `renderItem`: A callback function for custom rendering of each element. It receives the item data and a boolean indicating if the element is currently being hovered over.
-
-- `renderItemText`: A callback function for custom rendering of the text content of each element. It receives the item data.
-
-- `renderHeaderItem`: A callback function for custom rendering of the header element in the `WEEK_TIME` and `DAY` views. It receives the header item data and additional information about the element's position.
-
-- `renderHeaderItemText`: A callback function for custom rendering of the text content of the header element in the `WEEK_TIME` and `DAY` views. It receives the header item data.
-
-- `disableHoverEffect`: A boolean value that determines whether a 'hovered' class name will be added to each hovered element. This can be used to apply custom styling to the hovered elements.
-
-- `colorDots`: An array of color dot objects that can be used to mark specific dates on the calendar. Each color dot object should have the following properties:
-  - `color`: The color of the dot.
-  - `text`: Information text associated with the dot.
-  - `date`: The date on which the dot will be positioned.
-
-- `timeDateFormat`: An object that defines the format of time units displayed on the calendar. More about acceptable formats: https://date-fns.org/v2.29.3/docs/format.
-  - `day`: The format for displaying the day in the calendar header.
-  - `hour`: The format for displaying the hour on the left side of the calendar.
-  - `monthYear`: The text for displaying the month and year in the navigation.
-
-- `onDayNumberClick`: A callback function that is called when a day number is clicked. It receives the clicked day and _event_ as a parameter.
-
-- `onDayStringClick`: A callback function that is called when a day text is clicked. It receives the clicked day and _event_ as a parameter.
-
-- `onHourClick`: A callback function that is called when an hour on the left side of the calendar is clicked. It receives the clicked hour and _event_ as a parameter.
-
-- `onColorDotClick`: A callback function that is called when a color dot is clicked. It receives the clicked color dot information and _event_ as a parameter.
-
-- `onItemClick`: A callback function that is called when an item is clicked. It receives the clicked item data and _event_ as a parameter.
-
-- `onCellClick`: A callback function that is called when a cell on the calendar is clicked. It receives the clicked cell date information and _event_ as a parameter.
-  
-- `onCellHeaderClick`: A callback function that is called when a cell header is clicked. It receives the clicked cell date information and _event_ as a parameter. It is the part to the left and right of the day number within cell. In the case of a MONTH and WEEK views, `onCellClick` method will be called instead of this one.
-
-- `locale` _(DEFAULT: enUS)_: Accepts a locale object from the `date-fns` library. It controls the language used for displaying the names of days and months in the calendar.
-
-- `cellDisplayMode`: An object that controls the display mode of the cells in the calendar. It should have the following structure:
-  - `[CURRENT_VIEW]`: The current view of the calendar (e.g., `WEEK_TIME`, `DAY`, `MONTH`, etc.).
-    - `inactiveCells`: An array of inactive cell dates that should be hidden.
-    - `state`: The state of the cell display mode. It can be one of the following options:
-      - `ALL_EXPANDED`: Show all cells expanded (default).
-      - `ALL_COLLAPSED`: Show all cells collapsed.
-      - `CUSTOM`: Use a custom display mode for cells.
-     
-### Custom Styling
-
-Access any component by **className** and apply whatever style you want
-
-```css
-/* CalendarCustomStyles.css */
-
-.week-time-header__number {
-    color: #205c97
-}
-
-.week-time-view-inside {
-  background-color: #f8faff;
-}
+```bash
+npm install react-lightweight-calendar
 ```
 
-```jsx
-    import './CalendarCustomStyles.css';
+The stylesheet is imported with the component. It is also available as
+`react-lightweight-calendar/styles.css`. In Jest, map `\.css$` to a stub with
+`moduleNameMapper`, as for any package that imports CSS.
 
-    ...
-
-    <Calendar
-      data={[
-        {
-          id: '1',
-          startTime: '2023-06-02T01:10:00Z',
-          endTime: '2023-06-02T03:10:00Z',
-          title: 'Conference',
-        },
-      ]}
-      currentView='WEEK_TIME'
-      currentDate='2023-06-01'
-      activeTimeDateField='startTime-endTime'
-    />
-
-  ...
-```
-
-### Usage Example
+## Quick start
 
 ```jsx
-import React from 'react';
+import { useState } from 'react';
 import Calendar from 'react-lightweight-calendar';
-import { enUS } from 'date-fns/locale';
 
-const MyCalendar = () => {
-  const [currentDate, setCurrentDate] = React.useState('2023-06-02');
+const events = [
+  {
+    id: 1,
+    title: 'Design review',
+    startTime: '2025-06-02T09:00:00Z',
+    endTime: '2025-06-02T10:30:00Z',
+  },
+  {
+    id: 2,
+    title: 'Conference',
+    startTime: '2025-06-03',
+    endTime: '2025-06-05',
+  },
+];
+
+export default function App() {
+  const [view, setView] = useState('WEEK_TIME');
+  const [date, setDate] = useState('2025-06-02');
+
   return (
-    <Calendar
-      data={[
-        {
-          id: '1',
-          startTime: '2023-06-02T01:10:00Z',
-          endTime: '2023-06-02T03:10:00Z',
-          title: 'Conference',
-        },
-        {
-          id: '2',
-          startTime: '2023-06-02T01:00:00Z',
-          endTime: '2023-06-02T02:00:00Z',
-          title: 'Meet up',
-        },
-        {
-          id: '3',
-          startTime: '2023-06-02T04:20:00Z',
-          endTime: '2023-06-02T05:20:00Z',
-          title: 'Codefair',
-          bgColor: 'rgb(129, 205, 242)',
-          textColor: 'white',
-        },
-      ]}
-      currentView='WEEK_TIME'
-      currentDate={currentDate}
-      setCurrentDate={setCurrentDate}
-      activeTimeDateField='startTime-endTime' // Or just startTime or just endTime
-      weekStartsOn={1} // Monday
-      // If you want additional customization, uncomment the code and make the appropriate changes
-      // renderItem={(data, isHovered) => {
-        // Custom rendering of event element
-        // return (
-              // <>
-                // <div>{data.title}</div>
-                // <div>{data.id}</div>
-              // </>
-          // )
-        // console.log(data, isHovered);
-      // }}
-      // renderItemText={(data) => {
-        // Custom rendering of event element text
-        // return <p>{data.title}</p>;
-      // }}
-      // renderHeaderItem={(data, extras) => {
-        // Custom rendering of header element
-        // return <div>{data.startTime}-{date.endTime}</div>;
-      // }}
-      // renderHeaderItemText={(data) => {
-        // Custom rendering of header element text
-        // return <p>{data.title}</p>;
-      // }}
-      enableHoverEffect={true}
-      colorDots={[
-        {
-          color: 'red',
-          text: 'Busy day',
-          date: '2023-06-02',
-        },
-      ]}
-      timeDateFormat={{
-        day: 'EEEE',
-        hour: 'hh a',
-        monthYear: 'LLLL yyyy',
-      }}
-      locale={enUS}
-      todayLabel="Go to today"
-      onDayNumberClick={(day) => {
-        // Handle day number click
-        console.log(day);
-      }}
-      onDayStringClick={(day) => {
-        // Handle day text click
-        console.log(day);
-      }}
-      onHourClick={(value) => {
-        // Handle hour click
-        console.log(value);
-      }}
-      onColorDotClick={(value) => {
-        // Handle color dot click
-        console.log(value);
-      }}
-      onItemClick={(item) => {
-        // Handle event item click
-        console.log(item);
-      }}
-      onCellClick={(value) => {
-        // Handle cell click
-        console.log(value);
-      }}
-      cellDisplayMode={{
-        WEEK_TIME: {
-          inactiveCells: ['2023-05-29'],
-          state: 'CUSTOM',
-        },
-      }}
-    />
+    <div style={{ height: 700 }}>
+      <Calendar
+        data={events}
+        activeTimeDateField="startTime-endTime"
+        currentView={view}
+        onViewChange={setView}
+        currentDate={date}
+        setCurrentDate={setDate}
+      />
+    </div>
   );
-};
-      
-export default MyCalendar;
+}
 ```
 
-### Licence
+Give the calendar a height, as above, to make it fill the space and let its timeline
+scroll. Without one, it takes the height of its content.
 
-The MIT License. Unauthorized copying is prohibited under the MIT License.
+## Views
 
-### Contact info
+| View            | Shows                                                                         |
+| --------------- | ----------------------------------------------------------------------------- |
+| `MONTH`         | The month in weeks. Bars for multi-day items, dots for timed ones, "+N more". |
+| `WEEK`          | One week of day cells.                                                        |
+| `WEEK_TIME`     | One week on an hour timeline with an all-day row.                             |
+| `DAY`           | One day on an hour timeline with an all-day row.                              |
+| `DAY_REVERSE`   | One day with hours running horizontally, items in lanes.                      |
+| `WEEK_IN_PLACE` | One week, a cell per hour listing the items that start in it.                 |
+| `DAY_IN_PLACE`  | The same for one day.                                                         |
 
-For more information or questions, you can contact me via:
+## Data
 
-- email: jovan.jenjic@gmail.com
-- Linkedin profile: https://www.linkedin.com/in/jovan-jenji%C4%87/
-     
+Each item needs a unique `id` and the date fields named by `activeTimeDateField`. Every
+other field is kept and passed back to you.
+
+| Field                  | Used for                                                                                |
+| ---------------------- | --------------------------------------------------------------------------------------- |
+| `id`                   | Telling items apart. Missing or duplicate ids still work.                               |
+| `title`                | Text of the default item.                                                               |
+| `bgColor`, `textColor` | Colors of the default item. With only `bgColor`, the text color is picked for contrast. |
+| `allDay`               | `true` shows the item as a whole-day bar.                                               |
+| your date fields       | Positioning: `activeTimeDateField="startTime"` or `"startTime-endTime"`.                |
+
+Dates are read as ISO 8601. Date-only values like `2025-06-02` are whole days in local
+time and include their end day (`start: '2025-06-02', end: '2025-06-05'` covers four
+days). An end with a time is exclusive, so an `allDay` item ending at `2025-06-05T00:00`
+covers three. Items of 24 hours or more and whole-day items go in the all-day row; shorter
+items that cross midnight are split across their days. The `data` array is never modified.
+
+## Props
+
+| Prop                   | Type                                                                                              | Default                                  |
+| ---------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| `data`                 | `T[]`                                                                                             | `[]`                                     |
+| `activeTimeDateField`  | `string`                                                                                          | —                                        |
+| `currentView`          | `'MONTH' \| 'WEEK' \| 'WEEK_TIME' \| 'DAY' \| 'DAY_REVERSE' \| 'WEEK_IN_PLACE' \| 'DAY_IN_PLACE'` | `'MONTH'`                                |
+| `currentDate`          | `string \| Date`                                                                                  | today                                    |
+| `setCurrentDate`       | `(date: string) => void`                                                                          | — (shows the toolbar's navigation)       |
+| `onViewChange`         | `(view) => void`                                                                                  | — (shows the view switcher)              |
+| `views`                | `CalendarView[]`                                                                                  | all seven                                |
+| `weekStartsOn`         | `0`–`6`                                                                                           | `1` (Monday)                             |
+| `locale`               | date-fns `Locale`                                                                                 | `enUS`                                   |
+| `timeDateFormat`       | `{ day?, narrowDay?, hour?, monthYear?, time? }`                                                  | `{ day: 'EEE', hour: 'h a', time: 'p' }` |
+| `labels`               | `{ today?, previous?, next?, allDay?, close?, viewSwitcher?, more?, views? }`                     | English                                  |
+| `todayLabel`           | `string`                                                                                          | `'Today'`                                |
+| `startHour`, `endHour` | `number`                                                                                          | `0`, `24`                                |
+| `scrollToHour`         | `number \| 'now'`                                                                                 | now on today's period, otherwise 8       |
+| `dayMaxItems`          | `number \| 'auto'`                                                                                | `3`                                      |
+| `colorDots`            | `{ color, text, date }[]`                                                                         | —                                        |
+| `showColorDotsLegend`  | `boolean`                                                                                         | `true`                                   |
+| `cellDisplayMode`      | `{ [view]: { state, inactiveCells? } }`                                                           | all expanded                             |
+| `disableHoverEffect`   | `boolean`                                                                                         | `false`                                  |
+| `theme`                | `'light' \| 'dark' \| 'auto'`                                                                     | `'light'`                                |
+| `className`, `style`   |                                                                                                   |                                          |
+
+### Callbacks
+
+| Prop                | Receives                                                        |
+| ------------------- | --------------------------------------------------------------- |
+| `onItemClick`       | `(item, event)`                                                 |
+| `onCellClick`       | `(dateInfo, event)`                                             |
+| `onCellHeaderClick` | `(dateInfo, event)`                                             |
+| `onDayNumberClick`  | `('yyyy-MM-dd', event)`                                         |
+| `onDayStringClick`  | `('yyyy-MM-dd' \| currentDate, event)`                          |
+| `onHourClick`       | `(hour, event)` in week views, `(dateInfo, event)` in day views |
+| `onColorDotClick`   | `(dot, event)`                                                  |
+| `onMoreClick`       | `(date, items, event)`; without it, a list of the day opens     |
+
+`dateInfo` is `{ date, timeDate, timeDateUTC, day, month, year, hour?, isCurrentDay, isCurrentMonth? }`.
+`timeDate` is the local key of the cell: `yyyy-MM-dd`, or `yyyy-MM-dd HH:mm:ss` in hour cells.
+
+### Render props
+
+| Prop                             | Renders                               | Arguments                                                                                |
+| -------------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `renderItem`                     | A whole item                          | `(item, isHovered, info)`                                                                |
+| `renderItemText`                 | The content of the default item       | `(item, info)`                                                                           |
+| `renderHeaderItem`               | An item in the all-day row            | `(item, { gridColumn, isFromPrevious, isFromNext, ...info })`                            |
+| `renderHeaderItemText`           | Its content                           | `(item, info)`                                                                           |
+| `renderNavigation`               | The toolbar                           | `{ title, goToToday, goToPrevious, goToNext, view, views, onViewChange, range, labels }` |
+| `renderDayHeader`                | Column headers of the hour views      | `{ date, weekdayLabel, dayNumber, isToday, colorDot, onWeekdayClick, onDayNumberClick }` |
+| `renderDayNumber`                | Day numbers in MONTH and WEEK         | `{ date, dayNumber, isToday, isCurrentMonth, colorDot }`                                 |
+| `renderHourLabel`                | Hour labels                           | `{ hour, label }`                                                                        |
+| `renderMoreLink`                 | "+N more"                             | `{ count, date, items }`                                                                 |
+| `renderCellContent`              | Extra content in MONTH and WEEK cells | `{ date, items, isToday, isCurrentMonth }`                                               |
+| `renderColorDot`, `renderLegend` | Color dots and their legend           | `(dot)`, `(dots)`                                                                        |
+
+`info` describes the piece being drawn: `start`, `end`, `timeLabel` (`9:00 AM – 10:30 AM`),
+`startTimeLabel` (`9:00 AM`), `isAllDay`, `isMultiDay`, `continuesBefore`,
+`continuesAfter`, `isCompact`, `isHovered`. Both time labels are empty for all-day items.
+
+## Theming
+
+Set any of these on the calendar (`className` or `style`) or on an element around it:
+
+| Variable                             | Default        |                                       |
+| ------------------------------------ | -------------- | ------------------------------------- |
+| `--rlc-primary`                      | `#1a73e8`      | Accent: today, active view, focus     |
+| `--rlc-bg`                           | `#ffffff`      | Background                            |
+| `--rlc-surface`                      | `#f1f3f4`      | Hovered controls                      |
+| `--rlc-border`                       | `#dadce0`      | Grid lines                            |
+| `--rlc-text`                         | `#1f1f1f`      | Text                                  |
+| `--rlc-text-muted`                   | `#5f6368`      | Weekdays, hours, other months         |
+| `--rlc-event-bg`                     | `#039be5`      | Default item color                    |
+| `--rlc-event-text`                   | `#ffffff`      | Default item text                     |
+| `--rlc-today-bg`, `--rlc-today-text` | primary, white | Today's date                          |
+| `--rlc-now-color`                    | `#ea4335`      | Current-time line                     |
+| `--rlc-radius`                       | `8px`          | Corner radius                         |
+| `--rlc-font-family`                  | inherited      | Font                                  |
+| `--rlc-font-size`                    | `14px`         | Base size; everything scales with it  |
+| `--rlc-hour-height`                  | `48px`         | An hour in the timelines              |
+| `--rlc-gutter-width`                 | `56px`         | The hour column                       |
+| `--rlc-item-height`                  | `22px`         | Items in month, week and all-day rows |
+| `--rlc-hour-width`                   | `88px`         | An hour in `DAY_REVERSE`              |
+
+```jsx
+<Calendar
+  theme="dark"
+  style={{ '--rlc-primary': '#7c3aed', '--rlc-radius': '16px' }}
+/>
+```
+
+Class names start with `rlc-` for anything the variables do not cover.
+
+## TypeScript
+
+Types, enums and helpers are exported. Pass your item type to get typed callbacks:
+
+```tsx
+import Calendar, { type CalendarProps } from 'react-lightweight-calendar';
+
+type Event = { id: string; title: string; start: string; end: string };
+
+<Calendar<Event>
+  data={events}
+  activeTimeDateField="start-end"
+  onItemClick={(event) => open(event.id)}
+  cellDisplayMode={{ MONTH: { state: 'CUSTOM', inactiveCells: [] } }}
+/>;
+```
+
+## Constants and helpers
+
+The defaults are exported, so your own controls can reuse or extend them:
+
+```tsx
+import { CALENDAR_VIEWS, DEFAULT_LABELS } from 'react-lightweight-calendar';
+
+const labels = {
+  ...DEFAULT_LABELS,
+  today: 'Danas',
+  more: (n: number) => `još ${n}`,
+};
+```
+
+| Constant                                    | Value                                                           |
+| ------------------------------------------- | --------------------------------------------------------------- |
+| `CALENDAR_VIEWS`, `WEEK_VIEWS`, `DAY_VIEWS` | All views, the one-week views, the one-day views                |
+| `DEFAULT_LABELS`                            | English texts of every label                                    |
+| `DEFAULT_FORMATS`                           | date-fns patterns for weekdays, hours and item times            |
+| `DEFAULT_VIEW`, `DEFAULT_WEEK_STARTS_ON`    | `'MONTH'`, `1` (Monday)                                         |
+| `DEFAULT_DAY_MAX_ITEMS`                     | Items per MONTH cell before "+N more" (`3`)                     |
+| `DEFAULT_SCROLL_HOUR`                       | Hour the timelines scroll to when today is not shown (`8`)      |
+| `MIN_ITEM_MINUTES`, `MOMENT_ITEM_MINUTES`   | Shortest drawn timeline item (`20`), item without an end (`30`) |
+| `COMPACT_ITEM_MINUTES`                      | Timeline items shorter than this are drawn on one line (`45`)   |
+
+The functions the calendar uses are exported too, for building your own views or
+controls. All of them are pure and never modify their arguments.
+
+| Group  | Functions                                                                                                                                                                                                                   |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dates  | `toDate`, `toDateKey`, `toDateTimeKey`, `isDateOnlyString`, `minutesFrom`, `getViewRange`, `shiftDate`, `getTitle`, `createDateInfo`, `normalizeView`, `normalizeWeekStartsOn`, `normalizeHours`, `isWeekView`, `isDayView` |
+| Items  | `normalizeItems`, `compareItems`, `parseActiveField`, `firstDayOf`, `lastDayOf`, `isMultiDay`, `belongsToAllDayRow`, `itemsOnDay`                                                                                           |
+| Layout | `layoutTimeGrid`, `layoutDayRow`, `layoutHorizontal`, `groupByStartHour`, `getCollapsedCells`                                                                                                                               |
+| Format | `formatItemTime`, `readableTextColor`                                                                                                                                                                                       |
+
+## Next.js
+
+The package is marked `'use client'`, so it can be rendered from Server Components.
+The calendar shows "today" and places items in the visitor's time zone, which the server
+cannot know; load it with `next/dynamic` and `{ ssr: false }` to avoid hydration
+differences.
+
+## Upgrading from 2.x
+
+The props and callbacks are the same. What changed:
+
+- **Styles**: new class names (`rlc-*`) and CSS variables (`--rlc-*`); the old ones are
+  gone. The calendar no longer resets margins on the whole page and has no outer margin.
+- **Layout**: overlapping items cascade like Google Calendar; month cells show
+  "+N more" after `dayMaxItems` (3) items; timed items in the month are dots.
+- **Dates**: `yyyy-MM-dd` strings are local dates everywhere (2.x read them as UTC,
+  which showed the wrong day west of UTC). `timeDateUTC` of whole-day cells is local
+  midnight. An item ending exactly at midnight no longer spills into the next day.
+- **Items**: callbacks receive your original objects; `data` is never sorted or changed.
+  Custom header items (`renderHeaderItem`) now call `onItemClick` too.
+- **Defaults**: hour labels use `h a` (`9 AM`), item times use the locale's short time.
+- **Package**: types and enums are exported; `cellDisplayMode` accepts plain strings.
+
+## Development
+
+```bash
+nvm use
+npm install
+npm start            # examples app on http://localhost:3000
+npm test             # unit tests (Vitest) and component tests (Cypress)
+npm run lint
+npm run build
+npm run release -- <patch|minor|major>   # see RELEASING.md
+```
+
+## License
+
+MIT

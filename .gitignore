@@ -1,28 +1,47 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# Dependencies
 /node_modules
 /.pnp
 .pnp.js
 
-# testing
-/coverage
-
-# production
+# Build output (npm run build, npm run build-storybook)
+/dist
 /build
+/storybook-static
+*.tgz
 
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Tests (Vitest coverage, Cypress artifacts)
+/coverage
+/cypress/screenshots
+/cypress/videos
+/cypress/downloads
 
+# Caches
+.eslintcache
+*.tsbuildinfo
+.vite
+node_modules/.cache
+
+# Logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
+# Environment and secrets
 .env
+.env.*
+!.env.example
+.npmrc
 
-# library build output (npm run build)
-/dist
+# Editors and OS
+.DS_Store
+Thumbs.db
+.idea
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+
+# Claude Code local settings
+.claude/settings.local.json
