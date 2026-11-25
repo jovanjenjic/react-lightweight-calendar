@@ -479,6 +479,13 @@
   clip-path: none;
 }
 
+/* What a render prop returns fills the item, in every variant. */
+.rlc-event--custom > * {
+  flex: 1 1 auto;
+  align-self: stretch;
+  min-width: 0;
+}
+
 /* "+N more" */
 .rlc-more {
   height: var(--_item-height);

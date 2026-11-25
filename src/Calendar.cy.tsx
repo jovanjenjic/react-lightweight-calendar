@@ -208,6 +208,33 @@ describe('Calendar', () => {
     cy.get('.rlc-popover').should('not.exist');
   });
 
+  it('fits more rows of smaller items with dayMaxItems="auto"', () => {
+    const busy = Array.from({ length: 10 }, (_, i) => ({
+      id: `busy-${i}`,
+      title: `Busy ${i + 1}`,
+      start: at(10, 8 + i),
+      end: at(10, 9 + i),
+    }));
+    const visibleOnBusyWeek = (itemHeight?: string) => {
+      cy.mount(
+        <Harness
+          initialView="MONTH"
+          data={busy}
+          dayMaxItems="auto"
+          style={
+            (itemHeight
+              ? { '--rlc-item-height': itemHeight }
+              : {}) as React.CSSProperties
+          }
+        />,
+      );
+      return cy.get('.rlc-event').its('length');
+    };
+    visibleOnBusyWeek().then((regular) => {
+      visibleOnBusyWeek('12px').should('be.greaterThan', regular);
+    });
+  });
+
   it('calls onMoreClick instead of opening the list when given', () => {
     const onMoreClick = cy.stub().as('more');
     const busy = Array.from({ length: 5 }, (_, i) => ({
@@ -319,6 +346,24 @@ describe('Calendar', () => {
       .should('have.text', 'June 2025')
       .click()
       .should('have.text', 'July 2025');
+  });
+
+  it('stretches custom content over the whole item', () => {
+    cy.mount(
+      <Harness
+        renderHeaderItem={(item) => (
+          <div className="custom-bar">{item.title}</div>
+        )}
+      />,
+    );
+    cy.get('.custom-bar')
+      .first()
+      .then(($bar) => {
+        const item = $bar.parent()[0].getBoundingClientRect();
+        const content = $bar[0].getBoundingClientRect();
+        expect(content.width).to.be.closeTo(item.width, 1);
+        expect(content.height).to.be.closeTo(item.height, 1);
+      });
   });
 
   it('renders custom day headers and hour labels', () => {
