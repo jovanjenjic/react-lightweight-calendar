@@ -1,0 +1,325 @@
+/* Styles of the local examples app only; the calendar brings its own. */
+:root {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+body {
+  margin: 0;
+}
+.pg {
+  --pg-bg: #f8f9fa;
+  --pg-panel: #ffffff;
+  --pg-text: #1f1f1f;
+  --pg-muted: #5f6368;
+  --pg-border: #e0e3e7;
+  --pg-accent: #1a73e8;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  min-height: 100vh;
+  background: var(--pg-bg);
+  color: var(--pg-text);
+}
+.pg--dark {
+  --pg-bg: #131314;
+  --pg-panel: #1f1f1f;
+  --pg-text: #e3e3e3;
+  --pg-muted: #9aa0a6;
+  --pg-border: #3c4043;
+  --pg-accent: #a8c7fa;
+  color-scheme: dark;
+}
+.pg-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px 16px;
+  border-right: 1px solid var(--pg-border);
+  background: var(--pg-panel);
+}
+.pg-sidebar h1 {
+  margin: 0;
+  font-size: 15px;
+}
+.pg-sidebar h2 {
+  margin: 20px 0 6px;
+  color: var(--pg-muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pg-sidebar a {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: inherit;
+  font-size: 14px;
+  text-decoration: none;
+}
+.pg-sidebar a:hover {
+  background: color-mix(in srgb, var(--pg-text) 6%, transparent);
+}
+.pg-sidebar a.is-active {
+  background: color-mix(in srgb, var(--pg-accent) 18%, transparent);
+  font-weight: 600;
+}
+.pg-main {
+  min-width: 0;
+  padding: 24px 28px 48px;
+}
+.pg-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.pg-header h2 {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+.pg-header p {
+  max-width: 70ch;
+  margin: 0;
+  color: var(--pg-muted);
+}
+.pg-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pg-segmented {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--pg-border);
+  border-radius: 999px;
+}
+.pg-segmented button,
+.pg-controls button,
+.pg-external button,
+.pg-custom-nav button {
+  padding: 6px 12px;
+  border: 0;
+  background: var(--pg-panel);
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.pg-segmented button + button {
+  border-left: 1px solid var(--pg-border);
+}
+.pg-segmented button.is-active {
+  background: color-mix(in srgb, var(--pg-accent) 22%, var(--pg-panel));
+  font-weight: 600;
+}
+.pg-stage {
+  margin: 0 auto;
+  padding: 16px;
+  border: 1px solid var(--pg-border);
+  border-radius: 16px;
+  background: var(--pg-panel);
+  transition: max-width 0.2s;
+}
+.pg-frame {
+  min-height: 0;
+}
+.pg-controls,
+.pg-external {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: flex-end;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+.pg-controls button,
+.pg-external button {
+  border: 1px solid var(--pg-border);
+  border-radius: 8px;
+}
+.pg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pg-field span {
+  color: var(--pg-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.pg-field select,
+.pg-field input,
+.pg-external select {
+  padding: 5px 8px;
+  border: 1px solid var(--pg-border);
+  border-radius: 8px;
+  background: var(--pg-panel);
+  color: inherit;
+  font: inherit;
+}
+.pg-muted {
+  color: var(--pg-muted);
+}
+.pg-code {
+  font-size: 12px;
+  word-break: break-all;
+}
+.pg-spacer {
+  flex: 1;
+}
+.pg-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 16px;
+}
+@media (max-width: 1000px) {
+  .pg-split {
+    grid-template-columns: 1fr;
+  }
+}
+.pg-log {
+  margin: 0;
+  padding: 12px 12px 12px 32px;
+  border: 1px solid var(--pg-border);
+  border-radius: 12px;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 12px;
+}
+.pg-log li + li {
+  margin-top: 6px;
+}
+.pg-widths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+.pg-width {
+  flex: none;
+  max-width: 100%;
+}
+.pg-width__label {
+  margin-bottom: 6px;
+  color: var(--pg-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Custom rendering example */
+.pg-custom-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.pg-custom-nav button {
+  border: 1px solid var(--pg-border);
+  border-radius: 6px;
+  text-transform: capitalize;
+}
+.pg-custom-nav button.is-active {
+  border-color: var(--pg-accent);
+  color: var(--pg-accent);
+}
+.pg-dayhead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+}
+.pg-dayhead b {
+  font-size: 18px;
+}
+.pg-dayhead.is-today b {
+  color: #d50000;
+}
+.pg-daynum {
+  position: relative;
+  font-size: 12px;
+  font-weight: 700;
+}
+.pg-daynum.is-today {
+  color: #d50000;
+}
+.pg-daynum i {
+  position: absolute;
+  top: -2px;
+  right: -8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.pg-hour {
+  font-family: ui-monospace, Menlo, monospace;
+}
+.pg-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  height: 100%;
+  padding: 4px 6px;
+  overflow: hidden;
+  border-left: 4px solid var(--c);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--c) 18%, var(--pg-panel));
+  color: var(--pg-text);
+  font-size: 11px;
+}
+.pg-card span {
+  color: var(--pg-muted);
+}
+.pg-allday {
+  height: 100%;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--c);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pg-more {
+  font-weight: 700;
+}
+.pg-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+}
+.pg-legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+.pg-price {
+  color: #188038;
+  font-weight: 600;
+}
+@media (max-width: 760px) {
+  .pg {
+    grid-template-columns: 1fr;
+  }
+  .pg-sidebar {
+    position: static;
+    height: auto;
+  }
+  .pg-main {
+    padding: 16px 12px 32px;
+  }
+  .pg-stage {
+    padding: 8px;
+  }
+}

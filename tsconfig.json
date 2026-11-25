@@ -17,6 +17,6 @@
     "outDir": "dist",
     "types": ["vite/client", "cypress", "node"]
   },
-  "include": ["src", "cypress", ".storybook", "*.ts", "*.mts"],
+  "include": ["src", "playground", "cypress", ".storybook", "*.ts", "*.mts"],
   "exclude": ["node_modules", "dist", "storybook-static"]
 }

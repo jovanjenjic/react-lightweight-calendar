@@ -349,7 +349,7 @@ async function main() {
     pkg.types,
     pkg.module,
     ...exportTargets(pkg.exports),
-    'dist/styles/styles.css',
+    'dist/styles.css',
   ]
     .filter((p) => p && !p.includes('*') && !p.endsWith('package.json'))
     .map((p) => p.replace(/^\.\//, ''));
