@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- Content from `renderItem` and `renderHeaderItem` shrank to its own width in bars,
+  dots and chips. It now fills the item, as it already did on the timelines.
+- `dayMaxItems="auto"` counted rows as 24px high whatever the item height, so smaller
+  items (`--rlc-item-height`, or phone widths) showed only "+N more".
+
 ## 3.0.0
 
 A rewrite of the rendering, with the same props and callbacks.
